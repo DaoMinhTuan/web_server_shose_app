@@ -1,26 +1,23 @@
 <?php
 
 namespace App\Http\Controllers\api;
-use App\Models\User;
+
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Hash;
 
-
-
-class UserController extends Controller
+class RoleController extends Controller
 {
-   /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $users = User::select()
-    ->join('roles', 'roles.id', '=', 'users.role_id')
-    ->get();
-        return response()->json($users); 
+        $roles = Role::all();
+        return response()->json($roles); 
     }
 
     /**
@@ -41,15 +38,14 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-       $users = new User();
-       $users->fill($request->all());
-       $users->password = Hash::make($request->password);
-       $users->save();
-
-       return response()->json([
-        'status' => '200',
-        'message' => "creat user successfully"
-       ]);
+        $roles = new Role();
+        $roles->fill($request->all());
+        $roles->save();
+ 
+        return response()->json([
+         'status' => '200',
+         'message' => "creat role successfully"
+        ]);
     }
 
     /**
@@ -71,18 +67,18 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $users = User::find($id);
+        $roles = Role::find($id);
 
-        if($users == null){
+        if($roles == null){
             return response()->json([
                'status' => '404',
-               'message' => 'User not found'
+               'message' => 'Role not found'
             ]);
         } 
 
         return response()->json([
            'status' => '200',
-           'data' => $users
+           'data' => $roles
             
         ]);
     }
@@ -96,23 +92,21 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $users = User::find($id);
+        $roles = Role::find($id);
 
-        if($users == null){
+        if($roles == null){
             return response()->json([
               'status' => '404',
-              'message' => 'User not found'
+              'message' => 'Role not found'
             ]);
         } 
-
-        $users->fill($request->all());
-        $users->Password = Hash::make($request->Password);
-        $users->save();
+        $roles->fill($request->all());
+        $roles->save();
 
         return response()->json([
           'status' => '200',
-          'message' => "update user successfully",
-          'data' => $users
+          'message' => "update role successfully",
+          'data' => $roles
         ]);
     }
 
@@ -124,18 +118,18 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $users = User::find($id);
+        $roles = Role::find($id);
 
-        if( $users == null ){
+        if( $roles == null ){
             return response()->json([
                'status' => '404',
-               'message' => "user not found"
+               'message' => "Role not found"
             ]);
         }else{
-            $users->delete();
+            $roles->delete();
             return response()->json([
               'status' => '200',
-              'message' => "user deleted successfully"
+              'message' => "Role deleted successfully"
             ]);
         } 
     }

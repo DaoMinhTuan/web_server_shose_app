@@ -1,26 +1,24 @@
 <?php
 
 namespace App\Http\Controllers\api;
-use App\Models\User;
+use App\Models\Oder;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Hash;
 
-
-
-class UserController extends Controller
+class OderController extends Controller
 {
-   /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $users = User::select()
-    ->join('roles', 'roles.id', '=', 'users.role_id')
-    ->get();
-        return response()->json($users); 
+        $oders = Oder::select()
+        ->join('users', 'users.id', '=', 'oders.user_id')
+        ->get();
+        return response()->json($oders);
     }
 
     /**
@@ -41,15 +39,14 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-       $users = new User();
-       $users->fill($request->all());
-       $users->password = Hash::make($request->password);
-       $users->save();
-
-       return response()->json([
-        'status' => '200',
-        'message' => "creat user successfully"
-       ]);
+        $oders = new Oder();
+        $oders->fill($request->all());
+        $oders->save();
+ 
+        return response()->json([
+         'status' => '200',
+         'message' => "creat oder successfully"
+        ]);
     }
 
     /**
@@ -71,18 +68,18 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $users = User::find($id);
+        $oders = Oder::find($id);
 
-        if($users == null){
+        if($oders == null){
             return response()->json([
                'status' => '404',
-               'message' => 'User not found'
+               'message' => 'Oders not found'
             ]);
         } 
 
         return response()->json([
            'status' => '200',
-           'data' => $users
+           'data' => $oders
             
         ]);
     }
@@ -96,23 +93,22 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $users = User::find($id);
+        $oders = Oder::find($id);
 
-        if($users == null){
+        if($oders == null){
             return response()->json([
               'status' => '404',
-              'message' => 'User not found'
+              'message' => 'Oder not found'
             ]);
         } 
 
-        $users->fill($request->all());
-        $users->Password = Hash::make($request->Password);
-        $users->save();
+        $oders->fill($request->all());
+        $oders->save();
 
         return response()->json([
           'status' => '200',
-          'message' => "update user successfully",
-          'data' => $users
+          'message' => "update oder successfully",
+          'data' => $oders
         ]);
     }
 
@@ -124,18 +120,18 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $users = User::find($id);
+        $oders = Oder::find($id);
 
-        if( $users == null ){
+        if( $oders == null ){
             return response()->json([
                'status' => '404',
-               'message' => "user not found"
+               'message' => "Oder not found"
             ]);
         }else{
-            $users->delete();
+            $oders->delete();
             return response()->json([
               'status' => '200',
-              'message' => "user deleted successfully"
+              'message' => "Oder deleted successfully"
             ]);
         } 
     }

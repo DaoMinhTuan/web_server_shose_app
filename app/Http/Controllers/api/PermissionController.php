@@ -1,26 +1,22 @@
 <?php
 
 namespace App\Http\Controllers\api;
-use App\Models\User;
+use App\Models\Permission;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Hash;
 
-
-
-class UserController extends Controller
+class PermissionController extends Controller
 {
-   /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $users = User::select()
-    ->join('roles', 'roles.id', '=', 'users.role_id')
-    ->get();
-        return response()->json($users); 
+        $permissions = Permission::all();
+        return response()->json($permissions); 
     }
 
     /**
@@ -41,14 +37,13 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-       $users = new User();
-       $users->fill($request->all());
-       $users->password = Hash::make($request->password);
-       $users->save();
+        $permissions = new Permission();
+       $permissions->fill($request->all());
+       $permissions->save();
 
        return response()->json([
         'status' => '200',
-        'message' => "creat user successfully"
+        'message' => "creat permission successfully"
        ]);
     }
 
@@ -71,9 +66,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $users = User::find($id);
+        $permissions = Permission::find($id);
 
-        if($users == null){
+        if($permissions == null){
             return response()->json([
                'status' => '404',
                'message' => 'User not found'
@@ -82,7 +77,7 @@ class UserController extends Controller
 
         return response()->json([
            'status' => '200',
-           'data' => $users
+           'data' => $permissions
             
         ]);
     }
@@ -96,23 +91,19 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $users = User::find($id);
+        $permissions = Permission::find($id);
 
-        if($users == null){
+        if($permissions == null){
             return response()->json([
-              'status' => '404',
-              'message' => 'User not found'
+               'status' => '404',
+               'message' => 'User not found'
             ]);
         } 
 
-        $users->fill($request->all());
-        $users->Password = Hash::make($request->Password);
-        $users->save();
-
         return response()->json([
-          'status' => '200',
-          'message' => "update user successfully",
-          'data' => $users
+           'status' => '200',
+           'data' => $permissions
+            
         ]);
     }
 
@@ -124,19 +115,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $users = User::find($id);
-
-        if( $users == null ){
-            return response()->json([
-               'status' => '404',
-               'message' => "user not found"
-            ]);
-        }else{
-            $users->delete();
-            return response()->json([
-              'status' => '200',
-              'message' => "user deleted successfully"
-            ]);
-        } 
+        //
     }
 }

@@ -1,26 +1,23 @@
 <?php
 
 namespace App\Http\Controllers\api;
-use App\Models\User;
+
+use App\Models\Brand;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Hash;
 
-
-
-class UserController extends Controller
+class BrandController extends Controller
 {
-   /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $users = User::select()
-    ->join('roles', 'roles.id', '=', 'users.role_id')
-    ->get();
-        return response()->json($users); 
+        $brands = Brand::all();
+        return response()->json($brands); 
     }
 
     /**
@@ -41,15 +38,14 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-       $users = new User();
-       $users->fill($request->all());
-       $users->password = Hash::make($request->password);
-       $users->save();
-
-       return response()->json([
-        'status' => '200',
-        'message' => "creat user successfully"
-       ]);
+        $brands = new Brand();
+        $brands->fill($request->all());
+        $brands->save();
+ 
+        return response()->json([
+         'status' => '200',
+         'message' => "creat brand successfully"
+        ]);
     }
 
     /**
@@ -71,18 +67,18 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $users = User::find($id);
+        $brands = Brand::find($id);
 
-        if($users == null){
+        if($brands == null){
             return response()->json([
                'status' => '404',
-               'message' => 'User not found'
+               'message' => 'Brand not found'
             ]);
         } 
 
         return response()->json([
            'status' => '200',
-           'data' => $users
+           'data' => $brands
             
         ]);
     }
@@ -96,23 +92,22 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $users = User::find($id);
+        $brands = Brand::find($id);
 
-        if($users == null){
+        if($brands == null){
             return response()->json([
               'status' => '404',
-              'message' => 'User not found'
+              'message' => 'Brand not found'
             ]);
         } 
 
-        $users->fill($request->all());
-        $users->Password = Hash::make($request->Password);
-        $users->save();
+        $brands->fill($request->all());
+        $brands->save();
 
         return response()->json([
           'status' => '200',
-          'message' => "update user successfully",
-          'data' => $users
+          'message' => "update brand successfully",
+          'data' => $brands
         ]);
     }
 
@@ -124,19 +119,19 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $users = User::find($id);
+        $brands = Brand::find($id);
 
-        if( $users == null ){
+        if( $brands == null ){
             return response()->json([
                'status' => '404',
-               'message' => "user not found"
+               'message' => "brand not found"
             ]);
         }else{
-            $users->delete();
+            $brands->delete();
             return response()->json([
               'status' => '200',
-              'message' => "user deleted successfully"
+              'message' => "brand deleted successfully"
             ]);
-        } 
+        }
     }
 }

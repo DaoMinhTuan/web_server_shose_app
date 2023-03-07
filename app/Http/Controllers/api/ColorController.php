@@ -1,26 +1,22 @@
 <?php
 
 namespace App\Http\Controllers\api;
-use App\Models\User;
+use App\Models\Color;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Hash;
 
-
-
-class UserController extends Controller
+class ColorController extends Controller
 {
-   /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $users = User::select()
-    ->join('roles', 'roles.id', '=', 'users.role_id')
-    ->get();
-        return response()->json($users); 
+        $colors = Color::all();
+        return response()->json($colors); 
     }
 
     /**
@@ -41,15 +37,14 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-       $users = new User();
-       $users->fill($request->all());
-       $users->password = Hash::make($request->password);
-       $users->save();
-
-       return response()->json([
-        'status' => '200',
-        'message' => "creat user successfully"
-       ]);
+        $colors = new Color();
+        $colors->fill($request->all());
+        $colors->save();
+ 
+        return response()->json([
+         'status' => '200',
+         'message' => "creat color successfully"
+        ]);
     }
 
     /**
@@ -71,18 +66,18 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $users = User::find($id);
+        $colors = Color::find($id);
 
-        if($users == null){
+        if($colors == null){
             return response()->json([
                'status' => '404',
-               'message' => 'User not found'
+               'message' => 'Color not found'
             ]);
         } 
 
         return response()->json([
            'status' => '200',
-           'data' => $users
+           'data' => $colors
             
         ]);
     }
@@ -96,23 +91,22 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $users = User::find($id);
+        $colors = Color::find($id);
 
-        if($users == null){
+        if($colors == null){
             return response()->json([
               'status' => '404',
-              'message' => 'User not found'
+              'message' => 'Color not found'
             ]);
         } 
 
-        $users->fill($request->all());
-        $users->Password = Hash::make($request->Password);
-        $users->save();
+        $colors->fill($request->all());
+        $colors->save();
 
         return response()->json([
           'status' => '200',
-          'message' => "update user successfully",
-          'data' => $users
+          'message' => "update color successfully",
+          'data' => $colors
         ]);
     }
 
@@ -124,18 +118,18 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $users = User::find($id);
+        $colors = Color::find($id);
 
-        if( $users == null ){
+        if( $colors == null ){
             return response()->json([
                'status' => '404',
-               'message' => "user not found"
+               'message' => "Color not found"
             ]);
         }else{
-            $users->delete();
+            $colors->delete();
             return response()->json([
               'status' => '200',
-              'message' => "user deleted successfully"
+              'message' => "Color deleted successfully"
             ]);
         } 
     }
