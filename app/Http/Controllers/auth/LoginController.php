@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\auth;
 
+use App\Http\Requests\LoginRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -19,7 +20,7 @@ class LoginController extends Controller
 
         ]); 
     }
-    public function Login(Request $request)
+    public function Login(LoginRequest $request)
     {
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             if (Auth::user()->role_id != 2) {
