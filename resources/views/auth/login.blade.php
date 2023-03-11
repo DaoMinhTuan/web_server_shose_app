@@ -1,74 +1,146 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('content')
-    <div class="container position-sticky z-index-sticky top-0">
-        <div class="row">
-            <div class="col-12">
-                @include('layouts.navbars.guest.navbar')
-            </div>
-        </div>
-    </div>
-    <main class="main-content  mt-0">
-        <section>
-            <div class="page-header min-vh-100">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
-                            <div class="card card-plain">
-                                <div class="card-header pb-0 text-start">
-                                    <h4 class="font-weight-bolder">Sign In</h4>
-                                    <p class="mb-0">Enter your email and password to sign in</p>
-                                </div>
-                                <div class="card-body">
-                                    <form role="form" method="POST" action="{{ route('login.perform') }}">
-                                        @csrf
-                                        @method('post')
-                                        <div class="flex flex-col mb-3">
-                                            <input type="email" name="email" class="form-control form-control-lg" value="{{ old('email') ?? 'admin@argon.com' }}" aria-label="Email">
-                                            @error('email') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
-                                        </div>
-                                        <div class="flex flex-col mb-3">
-                                            <input type="password" name="password" class="form-control form-control-lg" aria-label="Password" value="secret" >
-                                            @error('password') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
-                                        </div>
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" name="remember" type="checkbox" id="rememberMe">
-                                            <label class="form-check-label" for="rememberMe">Remember me</label>
-                                        </div>
-                                        <div class="text-center">
-                                            <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Sign in</button>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="card-footer text-center pt-0 px-lg-2 px-1">
-                                    <p class="mb-1 text-sm mx-auto">
-                                        Forgot you password? Reset your password
-                                        <a href="{{ route('reset-password') }}" class="text-primary text-gradient font-weight-bold">here</a>
-                                    </p>
-                                </div>
-                                <div class="card-footer text-center pt-0 px-lg-2 px-1">
-                                    <p class="mb-4 text-sm mx-auto">
-                                        Don't have an account?
-                                        <a href="{{ route('register') }}" class="text-primary text-gradient font-weight-bold">Sign up</a>
-                                    </p>
-                                </div>
-                            </div>
+<!-- Mirrored from seantheme.com/studio/page_login.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 Mar 2023 05:07:30 GMT -->
+
+<head>
+    <meta charset="utf-8" />
+    <title>Studio | Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <link href="{{ asset('assets/css/vendor.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" />
+
+</head>
+
+<body>
+
+    <div id="app" class="app app-full-height app-without-header">
+
+        <div class="login">
+
+            <div class="login-content">
+                <form action="https://seantheme.com/studio/index.html" method="POST" name="login_form">
+                    <h1 class="text-center">Sign In</h1>
+                    <div class="text-muted text-center mb-4">
+                        For your protection, please verify your identity.
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email Address</label>
+                        <input type="text" class="form-control form-control-lg fs-15px" value=""
+                            placeholder="username@address.com" />
+                    </div>
+                    <div class="mb-3">
+                        <div class="d-flex">
+                            <label class="form-label">Password</label>
+                            <a href="#" class="ms-auto text-muted">Forgot password?</a>
                         </div>
-                        <div
-                            class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
-                            <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden"
-                                style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/signin-ill.jpg');
-              background-size: cover;">
-                                <span class="mask bg-gradient-primary opacity-6"></span>
-                                <h4 class="mt-5 text-white font-weight-bolder position-relative">"Attention is the new
-                                    currency"</h4>
-                                <p class="text-white position-relative">The more effortless the writing looks, the more
-                                    effort the writer actually put into the process.</p>
-                            </div>
+                        <input type="password" class="form-control form-control-lg fs-15px" value=""
+                            placeholder="Enter your password" />
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="customCheck1" />
+                            <label class="form-check-label fw-500" for="customCheck1">Remember me</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg d-block w-100 fw-500 mb-3">Sign In</button>
+                    <div class="text-center text-muted">
+                        Don't have an account yet? <a href="{{ route('register') }}">Sign up</a>.
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+
+        <a href="#" data-click="scroll-top" class="btn-scroll-top fade"><i class="fa fa-arrow-up"></i></a>
+
+
+        <div class="theme-panel">
+            <a href="javascript:;" data-click="theme-panel-expand" class="theme-collapse-btn"><i
+                    class="fa fa-cog"></i></a>
+            <div class="theme-panel-content">
+                <ul class="theme-list clearfix">
+                    <li><a href="javascript:;" class="bg-red" data-theme="theme-red" data-click="theme-selector"
+                            data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body"
+                            data-bs-title="Red" data-original-title="" title="">&nbsp;</a></li>
+                    <li><a href="javascript:;" class="bg-pink" data-theme="theme-pink" data-click="theme-selector"
+                            data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body"
+                            data-bs-title="Pink" data-original-title="" title="">&nbsp;</a></li>
+                    <li><a href="javascript:;" class="bg-orange" data-theme="theme-orange" data-click="theme-selector"
+                            data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body"
+                            data-bs-title="Orange" data-original-title="" title="">&nbsp;</a></li>
+                    <li><a href="javascript:;" class="bg-yellow" data-theme="theme-yellow" data-click="theme-selector"
+                            data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body"
+                            data-bs-title="Yellow" data-original-title="" title="">&nbsp;</a></li>
+                    <li><a href="javascript:;" class="bg-lime" data-theme="theme-lime" data-click="theme-selector"
+                            data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body"
+                            data-bs-title="Lime" data-original-title="" title="">&nbsp;</a></li>
+                    <li><a href="javascript:;" class="bg-green" data-theme="theme-green" data-click="theme-selector"
+                            data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body"
+                            data-bs-title="Green" data-original-title="" title="">&nbsp;</a></li>
+                    <li><a href="javascript:;" class="bg-teal" data-theme="theme-teal" data-click="theme-selector"
+                            data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body"
+                            data-bs-title="Teal" data-original-title="" title="">&nbsp;</a></li>
+                    <li><a href="javascript:;" class="bg-cyan" data-theme="theme-cyan" data-click="theme-selector"
+                            data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body"
+                            data-bs-title="Aqua" data-original-title="" title="">&nbsp;</a></li>
+                    <li class="active"><a href="javascript:;" class="bg-blue" data-theme=""
+                            data-click="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover"
+                            data-bs-container="body" data-bs-title="Default" data-original-title=""
+                            title="">&nbsp;</a></li>
+                    <li><a href="javascript:;" class="bg-purple" data-theme="theme-purple"
+                            data-click="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover"
+                            data-bs-container="body" data-bs-title="Purple" data-original-title=""
+                            title="">&nbsp;</a></li>
+                    <li><a href="javascript:;" class="bg-indigo" data-theme="theme-indigo"
+                            data-click="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover"
+                            data-bs-container="body" data-bs-title="Indigo" data-original-title=""
+                            title="">&nbsp;</a></li>
+                    <li><a href="javascript:;" class="bg-gray-600" data-theme="theme-gray-600"
+                            data-click="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover"
+                            data-bs-container="body" data-bs-title="Gray" data-original-title=""
+                            title="">&nbsp;</a></li>
+                </ul>
+                <hr class="mb-0" />
+                <div class="row mt-10px pt-3px">
+                    <div class="col-9 control-label text-dark fw-bold">
+                        <div>Dark Mode <span class="badge bg-primary ms-1 position-relative py-4px px-6px"
+                                style="top: -1px">NEW</span></div>
+                        <div class="lh-14 fs-13px">
+                            <small class="text-dark opacity-50">
+                                Adjust the appearance to reduce glare and give your eyes a break.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-3 d-flex">
+                        <div class="form-check form-switch ms-auto mb-0 mt-2px">
+                            <input type="checkbox" class="form-check-input" name="app-theme-dark-mode"
+                                id="appThemeDarkMode" value="1" />
+                            <label class="form-check-label" for="appThemeDarkMode">&nbsp;</label>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-    </main>
-@endsection
+        </div>
+
+    </div>
+
+
+    <script src="{{ asset('assets/js/vendor.min.js') }}" type="118d14d8ff5b60d91709b675-text/javascript"></script>
+    <script src="{{ asset('assets/js/app.min.js') }}" type="118d14d8ff5b60d91709b675-text/javascript"></script>
+
+    <script src="{{ asset('cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js') }}"
+        data-cf-settings="118d14d8ff5b60d91709b675-|49" defer=""></script>
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vaafb692b2aea4879b33c060e79fe94621666317369993"
+        integrity="sha512-0ahDYl866UMhKuYcW078ScMalXqtFJggm7TmlUtp0UlD4eQk0Ixfnm5ykXKvGJNFjLMoortdseTfsRT8oCfgGA=="
+        data-cf-beacon='{"rayId":"7a5b6de44c330435","version":"2023.2.0","r":1,"token":"4db8c6ef997743fda032d4f73cfeff63","si":100}'
+        crossorigin="anonymous"></script>
+</body>
+
+<!-- Mirrored from seantheme.com/studio/page_login.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 Mar 2023 05:07:30 GMT -->
+
+</html>
