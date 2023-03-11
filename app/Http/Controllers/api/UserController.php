@@ -19,6 +19,7 @@ class UserController extends Controller
     {
         $users = User::select()
     ->join('roles', 'roles.id', '=', 'users.role_id')
+    ->join('address', 'address.id', '=', 'users.address_id')
     ->get();
         return response()->json($users); 
     }
@@ -41,15 +42,22 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-       $users = new User();
-       $users->fill($request->all());
-       $users->password = Hash::make($request->password);
-       $users->save();
-
-       return response()->json([
-        'status' => '200',
-        'message' => "creat user successfully"
-       ]);
+      try {
+        $users = new User();
+        $users->fill($request->all());
+        $users->password = Hash::make($request->password);
+        $users->save();
+ 
+        return response()->json([
+         'status' => '200',
+         'message' => "creat user successfully"
+        ]);
+      } catch (\Exception $err) {
+          return response()->json([
+            'status' => '400',
+            'message' => "creat at user not successfully"
+          ]);
+      }
     }
 
     /**
@@ -106,7 +114,7 @@ class UserController extends Controller
         } 
 
         $users->fill($request->all());
-        $users->Password = Hash::make($request->Password);
+        $users->password = Hash::make($request->password);
         $users->save();
 
         return response()->json([

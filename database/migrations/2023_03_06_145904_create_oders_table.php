@@ -16,7 +16,7 @@ class CreateOdersTable extends Migration
         Schema::create('oders', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->integer('permissions_id');
+            $table->integer('productDetail_id');
             $table->string('total');
             $table->string('note');
             $table->integer('paymentAmount');

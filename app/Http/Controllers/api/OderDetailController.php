@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\api;
 
-use App\Http\Controllers\Controller;
+use App\Models\OderDetail;
+use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 
 class OderDetailController extends Controller
@@ -14,7 +15,10 @@ class OderDetailController extends Controller
      */
     public function index()
     {
-        //
+        $oderdetail = OderDetail::select()
+        ->join('oders', 'oders.id', '=', 'oderdetail.oder_id')
+        ->get();
+        return response()->json($oderdetail);
     }
 
     /**

@@ -17,6 +17,7 @@ class OderController extends Controller
     {
         $oders = Oder::select()
         ->join('users', 'users.id', '=', 'oders.user_id')
+        ->join('product_detail', 'product_detail.id', '=', 'oders.productDetail_id')
         ->get();
         return response()->json($oders);
     }

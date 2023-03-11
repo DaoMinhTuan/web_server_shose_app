@@ -16,11 +16,10 @@ class CreateOderdetailTable extends Migration
         Schema::create('oderdetail', function (Blueprint $table) {
             $table->id();
             $table->integer('oder_id');
-            $table->integer('product_id');
-            $table->string('size_id');
-            $table->string('color_id');
-            $table->integer('paymentAmount');
+            $table->integer('quantity');
+            $table->integer('price');
             $table->integer('status');
+            $table->longText('attributes');
             $table->timestamps();
         });
     }
