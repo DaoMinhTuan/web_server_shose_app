@@ -22,14 +22,15 @@
         <div class="login">
 
             <div class="login-content">
-                <form action="https://seantheme.com/studio/index.html" method="POST" name="login_form">
+                <form action="{{ route('login_web') }}" method="POST" name="login_form">
                     <h1 class="text-center">Sign In</h1>
+                    @csrf
                     <div class="text-muted text-center mb-4">
                         For your protection, please verify your identity.
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Email Address</label>
-                        <input type="text" class="form-control form-control-lg fs-15px" value=""
+                        <input type="text" name="email" class="form-control form-control-lg fs-15px" value=""
                             placeholder="username@address.com" />
                     </div>
                     <div class="mb-3">
@@ -37,7 +38,7 @@
                             <label class="form-label">Password</label>
                             <a href="#" class="ms-auto text-muted">Forgot password?</a>
                         </div>
-                        <input type="password" class="form-control form-control-lg fs-15px" value=""
+                        <input type="password" name="password" class="form-control form-control-lg fs-15px" value=""
                             placeholder="Enter your password" />
                     </div>
                     <div class="mb-3">
@@ -46,7 +47,7 @@
                             <label class="form-check-label fw-500" for="customCheck1">Remember me</label>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-lg d-block w-100 fw-500 mb-3">Sign In</button>
+                    <button type="submit" class="btn btn-primary btn-lg d-block w-100 fw-500 mb-3">Sign In</button>      
                     <div class="text-center text-muted">
                         Don't have an account yet? <a href="{{ route('register') }}">Sign up</a>.
                     </div>
