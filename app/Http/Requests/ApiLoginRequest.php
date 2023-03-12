@@ -42,10 +42,34 @@ class ApiLoginRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'email' => 'required|email',
-            'password' => 'required',
-        ];
+        $rules = [];
+        $currentAction = $this->route()->getActionMethod();
+
+        switch ($this->method()):
+            case 'POST':
+                switch ($currentAction) {
+                    case 'Login':
+                        $rules = [
+                            'email' => 'required|email',
+                            'password' => 'required',
+                        ];
+                        break;
+                    case 'api_register':
+                        $rules = [
+                            'name' => 'required', 
+                            'phoneNumber' => 'required|unique:users,phoneNumber', 
+                            'email' => 'required|email|unique:users,email',
+                            'password' => 'required', 
+                        ];
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            default:
+                break;
+        endswitch;
+        return $rules;
     }
 
     public function messages() : array
@@ -53,7 +77,9 @@ class ApiLoginRequest extends FormRequest
         return [
             'email.required' => 'Email không được để trống',
             'email.email' => 'Email chưa đúng định dạng',
+            'email.unique' => 'Email đã tồn tại ',
             'password.required' => 'password không được để trống',
+            'name.required' => 'Tên không được để trống'
         ];
     }
 }

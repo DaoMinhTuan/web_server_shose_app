@@ -2,35 +2,46 @@
 
 namespace App\Http\Controllers\auth;
 
+use App\Http\Requests\ApiLoginRequest;
+use App\Http\Requests\LoginRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
-    public function get_register()
-    {
+    public function get_register_web (){
+        return view('auth.register');
+    }
+
+    public function register_web (LoginRequest $request){
+
+        return view('auth.login');
+    }
+
+    public function get_api_register (){
         return response()->json([
             'status' => '230',
             'message' => "User not login acccount"
 
         ]);
     }
-    public function Register(Request $request)
-    {
+    public function api_register ( ApiLoginRequest $request){
+           
+        $validated = $request->safe()->merge([
+            'address_id' => 0,
+            'role_id' => 1,
+            'status' => 0,
+            'password' => Hash::make($request->password),
+        ]);
         try {
             $users = new User;
-            $users->fill($request->all);
-            $users->address_id = 0;
-            $users->roule_id = 2;
-            $users->password = Hash::make($request->password);
+            $users->fill($validated->all()); 
             $users->save();
             return response()->json([
                 'status' => '200',
-                'message' => "creat user successfully"
+                'message' => $users
             ]);
         } catch (\Exception $err) {
             return response()->json([
@@ -39,13 +50,4 @@ class RegisterController extends Controller
             ]);
         }
     }
-
-    public function get_register_web(){
-        return view('auth.register');
-    }
-
-   public  function web_register(Request $request)
-   {
-      dd($request);
-   }
 }

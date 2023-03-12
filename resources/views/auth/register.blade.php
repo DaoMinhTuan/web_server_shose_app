@@ -20,7 +20,7 @@
         <div class="register">
 
             <div class="register-content">
-                <form action="{{ route('Register') }}" method="POST" name="register_form">
+                <form action="{{ route('post_register_web') }}" method="POST" name="register_form">
                     @csrf
                     <h1 class="text-center">Sign Up</h1>
                     <p class="text-muted text-center">One Admin ID is all you need to access all the Admin services.</p>
@@ -34,15 +34,17 @@
                         <input type="text" name="email"  class="form-control form-control-lg fs-15px"
                             placeholder="username@address.com" value="" />
                     </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Phone number <span class="text-danger">*</span></label>
+                        <input type="number" name="password" class="form-control form-control-lg fs-15px" value="" />
+                    </div>
                     <div class="mb-3">
                         <label class="form-label">Password <span class="text-danger">*</span></label>
                         <input type="password" name="password" class="form-control form-control-lg fs-15px" value="" />
                     </div>
 
-                    <div class="mb-3" hidden>
-                        <label class="form-label">Password <span class="text-danger">*</span></label>
-                        <input type="password" name="password" class="form-control form-control-lg fs-15px" value="" />
-                    </div>
+                   
                     <div class="mb-3">
                         <label class="form-label">Confirm Password <span class="text-danger">*</span></label>
                         <input type="password" class="form-control form-control-lg fs-15px" value="" />
