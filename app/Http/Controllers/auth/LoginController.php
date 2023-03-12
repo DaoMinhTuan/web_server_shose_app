@@ -12,12 +12,13 @@ use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
-    public function get_login(){
+    public function get_login()
+    {
         return response()->json([
             'status' => '230',
             'message' => "User not login acccount"
 
-        ]); 
+        ]);
     }
     public function Login(Request $request)
     {
@@ -27,29 +28,44 @@ class LoginController extends Controller
                     'status' => '200',
                     'message' => " admin login successfully"
 
-                ]); 
+                ]);
             } else {
                 return response()->json([
                     'status' => '202',
                     'message' => " user login succsetfully"
 
-                ]); 
+                ]);
             }
         } else {
             return response()->json([
                 'status' => '203',
                 'message' => "login not successfully"
 
-            ]); 
+            ]);
         }
     }
 
-    public function logout(){
+    public function logout()
+    {
         if (Auth::user()) {
             Auth::logout();
             return redirect()->route('get_login')->with('logout', 'abc');
         } else {
             abort(404);
         }
+    }
+
+    public function login_web(Request $request)
+    {
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            if (Auth::user()->role_id != 2) {
+                return view('layouts.app');
+            };
+        }
+    }
+
+    public function get_login_web()
+    {
+        return view('auth.login');
     }
 }

@@ -85,7 +85,7 @@
                             Up</button>
                     </div>
                     <div class="text-muted text-center">
-                        Already have an Admin ID? <a href="{{ route('login') }}">Sign In</a>
+                        Already have an Admin ID? <a href="{{ route('login_web') }}">Sign In</a>
                     </div>
                 </form>
             </div>

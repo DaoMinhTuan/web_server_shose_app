@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\auth\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,10 +18,9 @@ Route::get('/', function () {
     return view('layouts.app');
 });
 
-
-Route::get('/login', function () {
-    return view('auth.login');
-})->name('login');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/login',[LoginController::class,'get_login_web'])->name('login_web');
+});
 
 
 Route::get('/register', function () {
