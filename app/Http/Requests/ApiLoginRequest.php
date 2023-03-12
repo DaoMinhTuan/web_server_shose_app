@@ -2,8 +2,13 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
-class LoginRequest extends FormRequest
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Validation\ValidationException;
+
+
+class ApiLoginRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,7 +20,20 @@ class LoginRequest extends FormRequest
         return true;
     }
 
-    
+    protected function failedValidation(Validator $validator)
+    {
+        $err = $validator->errors();
+        foreach ($err as  $key => $value) {
+             $value;
+        }
+
+        $json = [
+            'result' => false,
+            'message' => $err,
+        ];
+        $response = response( $json );
+        throw new ValidationException($validator, $response);
+    }
 
     /**
      * Get the validation rules that apply to the request.

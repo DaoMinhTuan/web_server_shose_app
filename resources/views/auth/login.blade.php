@@ -22,14 +22,15 @@
         <div class="login">
 
             <div class="login-content">
-                <form action="https://seantheme.com/studio/index.html" method="POST" name="login_form">
+                <form action="{{ route('login_web') }}" method="POST" name="login_form">
                     <h1 class="text-center">Sign In</h1>
+                    @csrf
                     <div class="text-muted text-center mb-4">
                         For your protection, please verify your identity.
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Email Address</label>
-                        <input type="text" class="form-control form-control-lg fs-15px" value=""
+                        <input type="text" name="email" class="form-control form-control-lg fs-15px" value=""
                             placeholder="username@address.com" />
                     </div>
                     <div class="mb-3">
@@ -37,7 +38,7 @@
                             <label class="form-label">Password</label>
                             <a href="#" class="ms-auto text-muted">Forgot password?</a>
                         </div>
-                        <input type="password" class="form-control form-control-lg fs-15px" value=""
+                        <input type="password" name="password" class="form-control form-control-lg fs-15px" value=""
                             placeholder="Enter your password" />
                     </div>
                     <div class="mb-3">

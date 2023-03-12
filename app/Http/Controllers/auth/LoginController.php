@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\auth;
 
+use App\Http\Requests\ApiLoginRequest;
 use App\Http\Requests\LoginRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -21,9 +22,11 @@ class LoginController extends Controller
 
         ]);
     }
-    public function Login(LoginRequest $request)
+    public function Login(ApiLoginRequest $request)
     {
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+     
+        $validated = $request->safe()->only(['email','password']);
+        if (Auth::attempt(['email' =>$validated['email'], 'password' => $validated['password']])) {
             if (Auth::user()->role_id != 2) {
                 return response()->json([
                     'status' => '200',
@@ -56,13 +59,16 @@ class LoginController extends Controller
         }
     }
 
-    public function login_web(Request $request)
-    {
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+    public function login_web(LoginRequest $request)
+    {  
+        $validated = $request->safe()->only(['name', 'email']);
+        if (Auth::attempt(['email' => $validated['email'], 'password' => $validated['password'] ])) {
             if (Auth::user()->role_id != 2) {
                 return view('layouts.app');
             };
         }
+
+        return back()->with('alert','account not found');
     }
 
     public function get_login_web()
