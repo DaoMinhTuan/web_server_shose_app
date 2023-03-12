@@ -22,6 +22,7 @@ class LoginController extends Controller
     }
     public function Login(LoginRequest $request)
     {
+        
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             if (Auth::user()->role_id != 2) {
                 return response()->json([
