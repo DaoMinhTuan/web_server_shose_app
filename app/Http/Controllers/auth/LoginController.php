@@ -61,7 +61,7 @@ class LoginController extends Controller
 
     public function login_web(LoginRequest $request)
     {  
-        $validated = $request->safe()->only(['name', 'email']);
+        $validated = $request->safe()->only(['password', 'email']);
         if (Auth::attempt(['email' => $validated['email'], 'password' => $validated['password'] ])) {
             if (Auth::user()->role_id != 2) {
                 return view('layouts.app');
