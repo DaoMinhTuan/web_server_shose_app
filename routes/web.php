@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\auth\LoginController;
+use App\Http\Controllers\mail\Mailcontroller;
+use App\Http\Controllers\auth\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +28,9 @@ Route::get('/login',[LoginController::class,'get_login_web'])->name('get_login_w
 Route::post('/login',[LoginController::class,'login_web'])->name('login_web');
 
 
-Route::get('/register', function () {
-    return view('auth.register');
-})->name('register');
+Route::get('/register',[RegisterController::class,'get_register_web'])->name('get_web_register');
+Route::post('/register',[RegisterController::class,'web_register'])->name('pos_web_register');
+
+
+
+Route::get('/send',[Mailcontroller::class,'index'])->name('index');

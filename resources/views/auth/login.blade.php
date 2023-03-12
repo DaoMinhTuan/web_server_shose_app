@@ -47,10 +47,9 @@
                             <label class="form-check-label fw-500" for="customCheck1">Remember me</label>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-lg d-block w-100 fw-500 mb-3">Sign In</button>
-                    
+                    <button type="submit" class="btn btn-primary btn-lg d-block w-100 fw-500 mb-3">Sign In</button>      
                     <div class="text-center text-muted">
-                        {{-- Don't have an account yet? <a href="{{ route('register') }}">Sign up</a>. --}}
+                        Don't have an account yet? <a href="{{ route('register') }}">Sign up</a>.
                     </div>
                 </form>
             </div>

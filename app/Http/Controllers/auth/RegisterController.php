@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
-
+use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
@@ -24,6 +24,7 @@ class RegisterController extends Controller
         try {
             $users = new User;
             $users->fill($request->all);
+            $users->address_id = 0;
             $users->roule_id = 2;
             $users->password = Hash::make($request->password);
             $users->save();
@@ -38,4 +39,13 @@ class RegisterController extends Controller
             ]);
         }
     }
+
+    public function get_register_web(){
+        return view('auth.register');
+    }
+
+   public  function web_register(Request $request)
+   {
+      dd($request);
+   }
 }

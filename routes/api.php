@@ -40,8 +40,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('address', AddressController::class)->names('Address');
 });
 //login and register
-Route::post('/login', [LoginController::class, 'Login'])->name('Login');
 Route::get('/login', [LoginController::class, 'get_login'])->name('get_login');
-
+Route::post('/login', [LoginController::class, 'Login'])->name('Login');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
-Route::post('/register', [RegisterController::class, 'Register'])->name('Register');
+
+// Route::get('/register', [RegisterController::class, 'get_register'])->name('get_register');
+// Route::post('/register', [RegisterController::class, 'Register'])->name('Register');
