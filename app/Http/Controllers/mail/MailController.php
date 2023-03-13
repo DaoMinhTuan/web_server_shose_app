@@ -16,8 +16,8 @@ class MailController extends Controller
         ];
 
      
-            Mail::to('tuandmph16005@fpt.edu.vn')->send(new MailNotify($data));
-            return response()->json(['Great check your mail box']);
+        Mail::to('tuandmph16005@fpt.edu.vn')->send(new MailNotify($data));
+        return response()->json(['Great check your mail box']);
        
     }
 }

@@ -64,13 +64,12 @@ class LoginController extends Controller
     {  
        
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password ])) {
-
-            if (Auth::user()->role_id != 2) {
-                return view('layouts.app');
-            };
+            if (Auth::user()->role_id!= 2) {
+                return view('page.dashboard');
+            }
         }
 
-        return back()->with('alert','account not found');
+        return $request;
     }
 
     public function get_login_web()

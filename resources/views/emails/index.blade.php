@@ -8,5 +8,13 @@
 </head>
 <body>
     <p>{{$data['body']}}</p>
+     
+    <form action="{{ route('confrim_account') }}"  method="POST" >
+        <div hidden>
+            <input type="text"  name="toke" value="{{ $data['token'] }}">
+        </div>
+        <button> xác minh tài khoản</button>
+    </form>
+    
 </body>
 </html>

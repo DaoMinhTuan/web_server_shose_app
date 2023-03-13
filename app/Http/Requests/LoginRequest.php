@@ -3,6 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Validation\ValidationException;
+
 class LoginRequest extends FormRequest
 {
     /**
@@ -30,7 +33,7 @@ class LoginRequest extends FormRequest
         switch ($this->method()):
             case 'POST':
                 switch ($currentAction) {
-                    case 'Login_web':
+                    case 'login_web':
                         $rules = [
                             'email' => 'required|email',
                             'password' => 'required',

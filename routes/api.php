@@ -46,3 +46,4 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/register', [RegisterController::class, 'get_api_register'])->name('get_api_register');
 Route::post('/register', [RegisterController::class, 'api_register'])->name('api_register');
+Route::post('/confrim_account',[RegisterController::class, 'confrim_account'])->name('confrim_account');

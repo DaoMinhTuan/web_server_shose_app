@@ -30,16 +30,29 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Email Address</label>
-                        <input type="text" name="email" class="form-control form-control-lg fs-15px" value=""
-                            placeholder="username@address.com" />
+                        <input type="text" name="email"
+                            class="form-control 
+                        @error('email') is-invalid @enderror 
+                        is-valid  form-control-lg fs-15px"
+                            value="" placeholder="username@address.com" />
+                        @error('email')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+
+
                     </div>
                     <div class="mb-3">
                         <div class="d-flex">
                             <label class="form-label">Password</label>
                             <a href="#" class="ms-auto text-muted">Forgot password?</a>
                         </div>
-                        <input type="password" name="password" class="form-control form-control-lg fs-15px" value=""
-                            placeholder="Enter your password" />
+                        <input type="password" name="password"
+                            class="form-control @error('password') is-invalid @enderror 
+                        is-valid form-control-lg fs-15px"
+                            value="" placeholder="Enter your password" />
+                        @error('password')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <div class="form-check">
@@ -47,7 +60,7 @@
                             <label class="form-check-label fw-500" for="customCheck1">Remember me</label>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-lg d-block w-100 fw-500 mb-3">Sign In</button>      
+                    <button type="submit" class="btn btn-primary btn-lg d-block w-100 fw-500 mb-3">Sign In</button>
                     <div class="text-center text-muted">
                         Don't have an account yet? <a href="{{ route('register_web') }}">Sign up</a>.
                     </div>

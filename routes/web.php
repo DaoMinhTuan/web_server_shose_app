@@ -16,20 +16,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('page.dashboard');
-});
 
 Route::middleware(['auth'])->group(function () {
+
+    Route::get('/', function () {
+        return view('page.dashboard');
+    });
 });
-
-
-Route::get('/login',[LoginController::class,'get_login_web'])->name('get_login_web');
-Route::post('/login',[LoginController::class,'login_web'])->name('login_web');
-
-
-Route::get('/register',[RegisterController::class,'get_register_web'])->name('register_web');
-
-Route::post('/register',[RegisterController::class,'register_web'])->name('post_register_web');
-
-Route::get('/send',[Mailcontroller::class,'index'])->name('index');
+Route::get('/login', [LoginController::class, 'get_login_web'])->name('get_login_web');
+Route::post('/login', [LoginController::class, 'login_web'])->name('login_web');
+Route::get('/register', [RegisterController::class, 'get_register_web'])->name('register_web');
+Route::post('/register', [RegisterController::class, 'register_web'])->name('post_register_web');
