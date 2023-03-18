@@ -28,17 +28,18 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::middleware(['auth'])->group(function () {
-    // Route::resource('users', UserController::class)->names('Users');
-    // Route::resource('products', ProductController::class)->names('Products');
-    // Route::resource('sizes', SizeController::class)->names('Sizes');
-    // Route::resource('brands', BrandController::class)->names('Brands');
-    // Route::resource('product_detail', ProductDetailController::class)->names('Product_Detail');
-    // Route::resource('oders', OderController::class)->names('Oders');
-    // Route::resource('roles', RoleController::class)->names('Roles');
-    // Route::resource('colors', ColorController::class)->names('Colors');
-    // Route::resource('oderdetail', OderDetailController::class)->names('Oderdetail');
-    // Route::resource('address', AddressController::class)->names('Address');
+    Route::resource('users', UserController::class)->names('Users');
+    Route::resource('products', ProductController::class)->names('Products');
+    Route::resource('sizes', SizeController::class)->names('Sizes');
+    Route::resource('brands', BrandController::class)->names('Brands');
+    Route::resource('product_detail', ProductDetailController::class)->names('Product_Detail');
+    Route::resource('oders', OderController::class)->names('Oders');
+    Route::resource('roles', RoleController::class)->names('Roles');
+    Route::resource('colors', ColorController::class)->names('Colors');
+    Route::resource('oderdetail', OderDetailController::class)->names('Oderdetail');
+    Route::resource('address', AddressController::class)->names('Address');
 });
+
 //login and register
 Route::get('/login', [LoginController::class, 'get_login'])->name('get_login');
 Route::post('/login', [LoginController::class, 'Login'])->name('Login');

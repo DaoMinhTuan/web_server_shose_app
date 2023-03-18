@@ -26,8 +26,8 @@ class LoginController extends Controller
     {
      
         $validated = $request->safe()->only(['email','password']);
-        
-        if (Auth::attempt(['email' =>$validated['email'], 'password' => $validated['password']])) {
+        $pass = Hash::make($validated['password']);
+        if (Auth::attempt(['email' =>$validated['email'], 'password' => $pass])) {
             if (Auth::user()->role_id != 2) {
                 return response()->json([
                     'status' => '200',
@@ -68,7 +68,6 @@ class LoginController extends Controller
                 return view('page.dashboard');
             }
         }
-
         return $request;
     }
 

@@ -24,6 +24,7 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 Route::get('/login', [LoginController::class, 'get_login_web'])->name('get_login_web');
+Route::get('/', [LoginController::class, 'get_login_web']);
 Route::post('/login', [LoginController::class, 'login_web'])->name('login_web');
 Route::get('/register', [RegisterController::class, 'get_register_web'])->name('register_web');
 Route::post('/register', [RegisterController::class, 'register_web'])->name('post_register_web');

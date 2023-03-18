@@ -57,11 +57,12 @@ class RegisterController extends Controller
             'status' => 0,
             'token' => md5(uniqid(rand(), true)),
             'avatar' => " no avatar available",
+            'phoneNumber' => 0000,
             'password' => Hash::make($request->password),
         ]);
         
 
-       try{
+    //    try{
             $users = new User;
             $users->fill($validated->all());
             $users->save();
@@ -77,11 +78,11 @@ class RegisterController extends Controller
                 'status' => '200',
                 'message' => 'created successfully'
             ]);
-        } catch (\Exception $err) {
-            return response()->json([
-                'status' => '400',
-                'message' => "creat at user not successfully"
-            ]);
-        }
+        // } catch (\Exception $err) {
+        //     return response()->json([
+        //         'status' => '400',
+        //         'message' => "creat at user not successfully"
+        //     ]);
+        // }
     }
 }

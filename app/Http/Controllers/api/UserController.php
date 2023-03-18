@@ -17,10 +17,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::select()
-    ->join('roles', 'roles.id', '=', 'users.role_id')
-    ->join('address', 'address.id', '=', 'users.address_id')
-    ->get();
+     $users = User::all();
         return response()->json($users); 
     }
 
