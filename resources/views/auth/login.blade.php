@@ -16,11 +16,11 @@
 </head>
 
 <body>
+    @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
 
     <div id="app" class="app app-full-height app-without-header">
-
+       
         <div class="login">
-
             <div class="login-content">
                 <form action="{{ route('login_web') }}" method="POST" name="login_form">
                     <h1 class="text-center">Sign In</h1>
@@ -34,7 +34,7 @@
                             class="form-control 
                         @error('email') is-invalid @enderror 
                         is-valid  form-control-lg fs-15px"
-                            value="" placeholder="username@address.com" />
+                            value="{{ old('email') }}" placeholder="username@address.com" />
                         @error('email')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

@@ -12,6 +12,7 @@
 
     <link href="{{ asset('assets/css/vendor.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/plugins/summernote/dist/summernote-lite.css') }}" rel="stylesheet" />
 
 </head>
 
@@ -112,11 +113,11 @@
                 <div class="menu-item dropdown">
                     <a href="#" data-bs-toggle="dropdown" data-display="static" class="menu-link">
                         <div class="menu-img online">
-                            <img src="assets/img/user/user.jpg" alt=""
+                            <img src="{{ asset('assets/img/user/user.jpg') }}" alt=""
                                 class="ms-100 mh-100 rounded-circle" />
                         </div>
                         <div class="menu-text"><span class="__cf_email__"
-                                data-cfemail="a3c9cccbcdd0cecad7cbe3d0d7d6c7cacc8dc0ccce">[email&#160;protected]</span>
+                                data-cfemail="">{{ Auth::user()->email ?? 'tài khoản người dùng' }}</span>
                         </div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right me-lg-3">
@@ -129,7 +130,7 @@
                         <a class="dropdown-item d-flex align-items-center" href="settings.html">Setting <i
                                 class="fa fa-wrench fa-fw ms-auto text-dark text-opacity-50"></i></a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item d-flex align-items-center" href="page_login.html">Log Out <i
+                        <a class="dropdown-item d-flex align-items-center" href="{{ route('logout') }}">Log Out <i
                                 class="fa fa-toggle-off fa-fw ms-auto text-dark text-opacity-50"></i></a>
                     </div>
                 </div>
@@ -139,7 +140,7 @@
 
         @include('layouts.slide_bar.slide_bar')
 
-       @yield('content')
+        @yield('content')
 
 
         <a href="#" data-click="scroll-top" class="btn-scroll-top fade"><i class="fa fa-arrow-up"></i></a>
@@ -218,7 +219,8 @@
     </div>
 
 
-    <script data-cfasync="false" src="{{ asset('cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js') }}"></script>
+    <script data-cfasync="false" src="{{ asset('cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js') }}">
+    </script>
     <script src="{{ asset('assets/js/vendor.min.js') }}" type="ada8f3424ecaa494fed35b53-text/javascript"></script>
     <script src="{{ asset('assets/js/app.min.js') }}" type="ada8f3424ecaa494fed35b53-text/javascript"></script>
 
@@ -232,6 +234,9 @@
         integrity="sha512-0ahDYl866UMhKuYcW078ScMalXqtFJggm7TmlUtp0UlD4eQk0Ixfnm5ykXKvGJNFjLMoortdseTfsRT8oCfgGA=="
         data-cf-beacon='{"rayId":"7a5b6de61b5be692","version":"2023.2.0","r":1,"token":"4db8c6ef997743fda032d4f73cfeff63","si":100}'
         crossorigin="anonymous"></script>
+
+    <script src="{{ asset('assets/plugins/summernote/dist/summernote-lite.min.js') }}"></script>
+    
 </body>
 
 <!-- Mirrored from seantheme.com/studio/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 Mar 2023 05:07:31 GMT -->
