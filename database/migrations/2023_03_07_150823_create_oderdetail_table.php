@@ -18,6 +18,7 @@ class CreateOderdetailTable extends Migration
             $table->integer('oder_id');
             $table->integer('quantity');
             $table->integer('price');
+            $table->integer('product_id');
             $table->integer('status');
             $table->longText('attributes');
             $table->timestamps();
