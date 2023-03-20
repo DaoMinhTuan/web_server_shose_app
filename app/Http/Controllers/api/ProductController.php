@@ -15,7 +15,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::get()->where('status', 1);
+        $products = new Product ;
+      $data = $products->join('product_details', 'products.id', '=', 'product_details.product_id')
+       ->select()->where([['products.status','=',1]])
+       ->get();
         return response()->json($products); 
     }
 
