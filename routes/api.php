@@ -43,7 +43,7 @@ Route::middleware(['auth'])->group(function () {
 //login and register
 Route::get('/login', [LoginController::class, 'get_login'])->name('get_login');
 Route::post('/login', [LoginController::class, 'Login'])->name('Login');
-Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
 
 Route::get('/register', [RegisterController::class, 'get_api_register'])->name('get_api_register');
 Route::post('/register', [RegisterController::class, 'api_register'])->name('api_register');
