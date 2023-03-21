@@ -15,8 +15,12 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
-        return response()->json($products); 
+        $products = new Product ;
+        $data = $products->join('product_details', 'products.id', '=', 'product_details.product_id')
+       ->join('brands', 'products.brandID', '=', 'brands.id')
+       ->select('brands.brandName as branch')->where([['products.status','=',1]])
+       ->get();
+        return response()->json($data); 
     }
 
     /**
@@ -71,7 +75,6 @@ class ProductController extends Controller
         if($products == null){
             return response()->json([
                'status' => '404',
-               'message' => 'Product not found'
             ]);
         } 
 
@@ -133,4 +136,35 @@ class ProductController extends Controller
             ]);
         } 
     }
+
+    public function get_brach_products($id) {
+      $products = new Product ;
+      $data = $products->join('brands', 'products.brandID', '=', 'brands.id')
+       ->select('products.*', 'brands.brandName as branch')->where([
+        ['products.brandID','=', $id],
+        ['products.status','=',1]])
+       ->get();
+
+       return response()->json([
+        'status' => '202',
+        'message' => 'get product branch successfully',
+        'data' => $data
+       ]);
+    }
+
+    public function get_products_name($name){
+    $products = new Product ;
+      $data = $products->join('product_details', 'products.id', '=', 'product_details.product_id')
+       ->select()->where([
+        ['products.name','like', '%'.$name.'%'],
+        ['products.status','=',1]])
+       ->get();
+
+       return response()->json([
+        'status' => '202',
+        'message' => 'get product branch successfully',
+        'data' => $data
+       ]);
+    }
+
 }

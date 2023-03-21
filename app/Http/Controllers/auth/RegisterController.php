@@ -43,8 +43,10 @@ class RegisterController extends Controller
         $users->status = 1;
         $users->save();
 
-        return redirect()->route('get_login_web');
-
+        return response()->json([
+                "status" => 202,
+                "message" => "register successfully "
+        ]);
 
     }
 
