@@ -16,10 +16,11 @@ class ProductController extends Controller
     public function index()
     {
         $products = new Product ;
-      $data = $products->join('product_details', 'products.id', '=', 'product_details.product_id')
-       ->select()->where([['products.status','=',1]])
+        $data = $products->join('product_details', 'products.id', '=', 'product_details.product_id')
+       ->join('brands', 'products.brandID', '=', 'brands.id')
+       ->select('brands.brandName as branch')->where([['products.status','=',1]])
        ->get();
-        return response()->json($products); 
+        return response()->json($data); 
     }
 
     /**

@@ -57,7 +57,6 @@ class ApiLoginRequest extends FormRequest
                     case 'api_register':
                         $rules = [
                             'name' => 'required', 
-                            'phoneNumber' => 'required|unique:users,phoneNumber', 
                             'email' => 'required|email|unique:users,email',
                             'password' => 'required', 
                         ];

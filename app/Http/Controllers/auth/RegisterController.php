@@ -43,11 +43,10 @@ class RegisterController extends Controller
         $users->status = 1;
         $users->save();
 
-        return response()->json(
-            [
-                 
-            ]
-        );
+        return response()->json([
+                "status" => 202,
+                "message" => "register successfully "
+        ]);
 
     }
 

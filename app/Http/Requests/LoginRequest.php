@@ -42,7 +42,6 @@ class LoginRequest extends FormRequest
                     case 'post_register_web':
                         $rules = [
                             'name' => 'required', 
-                            'phoneNumber' => 'required|unique:users,phoneNumber', 
                             'email' => 'required|email|unique:users,email',
                             'password' => 'required', 
                         ];

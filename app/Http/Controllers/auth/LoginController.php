@@ -28,16 +28,19 @@ class LoginController extends Controller
         $validated = $request->safe()->only(['email','password']);
         
         if (Auth::attempt(['email' =>$validated['email'], 'password' => $validated['password']])) {
-            if (Auth::user()->role_id != 2) {
+            $data = Auth::user();
+            if (Auth::user()->role_id == 2) {
                 return response()->json([
                     'status' => '200',
-                    'message' => " admin login successfully"
-
+                    'message' => " admin login successfully",
+                    'data' => $data
                 ]);
             } else {
+                $data = Auth::user();
                 return response()->json([
                     'status' => '202',
-                    'message' => " user login succsetfully"
+                    'message' => " user login succsetfully",
+                    'data' => $data
 
                 ]);
             }
