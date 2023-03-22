@@ -20,7 +20,7 @@ use App\Http\Controllers\auth\RegisterController;
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/', function () {
+    Route::get('/dashboard', function () {
         return view('page.dashboard');
     })->name('dashboard');
 
