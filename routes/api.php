@@ -28,24 +28,25 @@ use Illuminate\Support\Facades\Route;
 
 
 
-    Route::resource('users', UserController::class)->names('Users');
-    Route::resource('products', ProductController::class)->names('Products');
-    Route::get('products/branch/{id}',[ProductController::class,'get_brach_products'])->name('branch_products');
-    Route::get('products/seach/{name}',[ProductController::class,'get_products_name'])->name('name_product');
+    // Route::resource('users', UserController::class)->names('Users');
+    // Route::resource('products', ProductController::class)->names('Products');
+    // Route::get('products/branch/{id}',[ProductController::class,'get_brach_products'])->name('branch_products');
+    // Route::get('products/seach/{name}',[ProductController::class,'get_products_name'])->name('name_product');
     
-    Route::resource('sizes', SizeController::class)->names('Sizes');
-    Route::resource('brands', BrandController::class)->names('Brands');
-    Route::resource('product_detail', ProductDetailController::class)->names('Product_Detail');
-    Route::resource('oders', OderController::class)->names('Oders');
-    Route::resource('roles', RoleController::class)->names('Roles');
-    Route::resource('colors', ColorController::class)->names('Colors');
-    Route::resource('oderdetail', OderDetailController::class)->names('Oderdetail');
-    Route::resource('address', AddressController::class)->names('Address');
+    // Route::resource('sizes', SizeController::class)->names('Sizes');
+    // Route::resource('brands', BrandController::class)->names('Brands');
+    // Route::resource('product_detail', ProductDetailController::class)->names('Product_Detail');
+    // Route::resource('oders', OderController::class)->names('Oders');
+    // Route::resource('roles', RoleController::class)->names('Roles');
+    // Route::resource('colors', ColorController::class)->names('Colors');
+    // Route::resource('oderdetail', OderDetailController::class)->names('Oderdetail');
+    // Route::resource('address', AddressController::class)->names('Address');
 //login and register
-Route::get('/login', [LoginController::class, 'get_login'])->name('get_login');
-Route::post('/login', [LoginController::class, 'Login'])->name('Login');
+
+// Route::get('/login', [LoginController::class, 'get_login'])->name('get_login');
+// Route::post('/login', [LoginController::class, 'Login'])->name('Login');
 
 
-Route::get('/register', [RegisterController::class, 'get_api_register'])->name('get_api_register');
-Route::post('/register', [RegisterController::class, 'api_register'])->name('api_register');
-Route::post('/confrim_account',[RegisterController::class, 'confrim_account'])->name('confrim_account');
+// Route::get('/register', [RegisterController::class, 'get_api_register'])->name('get_api_register');
+// Route::post('/register', [RegisterController::class, 'api_register'])->name('api_register');
+// Route::post('/confrim_account',[RegisterController::class, 'confrim_account'])->name('confrim_account');
