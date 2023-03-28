@@ -13,7 +13,10 @@
     <link href="{{ asset('assets/css/vendor.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/plugins/summernote/dist/summernote-lite.css') }}" rel="stylesheet" />
-
+    <link href="{{ asset('assets/plugins/blueimp-file-upload/css/jquery.fileupload.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/plugins/summernote/dist/summernote-lite.css') }}" rel="stylesheet" />
+    
+    
 </head>
 
 <body>
@@ -38,7 +41,7 @@
                     </button>
                 </div>
                 <a href="#" class="brand-logo">
-                    <img src="assets/img/logo.png" alt="" height="20" />
+                    <img src="{{ asset('assets/img/logo.png') }}" alt="" height="20" />
                 </a>
             </div>
 
@@ -83,7 +86,7 @@
                         </a>
                         <a href="#" class="dropdown-notification-item">
                             <div class="dropdown-notification-icon">
-                                <img src="assets/img/icon/android.svg" alt="" width="26" />
+                                <img src="{{ asset('assets/img/icon/android.svg') }}" alt="" width="26" />
                             </div>
                             <div class="dropdown-notification-info">
                                 <div class="title">Your android application has been approved</div>
@@ -95,7 +98,7 @@
                         </a>
                         <a href="#" class="dropdown-notification-item">
                             <div class="dropdown-notification-icon">
-                                <img src="assets/img/icon/paypal.svg" alt="" width="26" />
+                                <img src="{{ asset('assets/img/icon/paypal.svg') }}" alt="" width="26" />
                             </div>
                             <div class="dropdown-notification-info">
                                 <div class="title">Paypal payment method has been enabled for your store</div>
@@ -219,24 +222,158 @@
     </div>
 
 
-    <script data-cfasync="false" src="{{ asset('cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js') }}">
+    {{-- <script data-cfasync="false" src="{{ asset('cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js') }}">
     </script>
-    <script src="{{ asset('assets/js/vendor.min.js') }}" type="ada8f3424ecaa494fed35b53-text/javascript"></script>
-    <script src="{{ asset('assets/js/app.min.js') }}" type="ada8f3424ecaa494fed35b53-text/javascript"></script>
+    <script src="{{ asset('assets/js/vendor.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('assets/js/app.min.js') }}" type="text/javascript"></script>
 
 
-    <script src="{{ asset('assets/plugins/apexcharts/dist/apexcharts.min.js') }}" type="ada8f3424ecaa494fed35b53-text/javascript"></script>
-    <script src="{{ asset('assets/js/demo/dashboard.demo.js') }}" type="ada8f3424ecaa494fed35b53-text/javascript"></script>
-
-    <script src="{{ asset('cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js') }}"
-        data-cf-settings="ada8f3424ecaa494fed35b53-|49" defer=""></script>
-    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vaafb692b2aea4879b33c060e79fe94621666317369993"
-        integrity="sha512-0ahDYl866UMhKuYcW078ScMalXqtFJggm7TmlUtp0UlD4eQk0Ixfnm5ykXKvGJNFjLMoortdseTfsRT8oCfgGA=="
-        data-cf-beacon='{"rayId":"7a5b6de61b5be692","version":"2023.2.0","r":1,"token":"4db8c6ef997743fda032d4f73cfeff63","si":100}'
-        crossorigin="anonymous"></script>
-
+    <script src="{{ asset('assets/plugins/apexcharts/dist/apexcharts.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('assets/js/demo/dashboard.demo.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('assets/plugins/blueimp-file-upload/js/vendor/jquery.ui.widget.js') }}"></script>
+    <script src="{{ asset('assets/plugins/blueimp-tmpl/js/tmpl.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/blueimp-load-image/js/load-image.all.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/blueimp-canvas-to-blob/js/canvas-to-blob.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/blueimp-gallery/js/jquery.blueimp-gallery.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/blueimp-file-upload/js/jquery.iframe-transport.js') }}"></script>
+    <script src="{{ asset('assets/plugins/blueimp-file-upload/js/jquery.fileupload.js') }}"></script>
+    <script src="{{ asset('assets/plugins/blueimp-file-upload/js/jquery.fileupload-process.js') }}"></script>
+    <script src="{{ asset('assets/plugins/blueimp-file-upload/js/jquery.fileupload-image.js') }}"></script>
+    <script src="{{ asset('assets/plugins/blueimp-file-upload/js/jquery.fileupload-audio.js') }}"></script>
+    <script src="{{ asset('assets/plugins/blueimp-file-upload/js/jquery.fileupload-video.js') }}"></script>
+    <script src="{{ asset('assets/plugins/blueimp-file-upload/js/jquery.fileupload-validate.js') }}"></script>
+    <script src="{{ asset('assets/plugins/blueimp-file-upload/js/jquery.fileupload-ui.js') }}"></script>
+    <script src="{{ asset('cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js') }}" defer=""></script>
     <script src="{{ asset('assets/plugins/summernote/dist/summernote-lite.min.js') }}"></script>
-    
+    <script  src="https://static.cloudflareinsights.com/beacon.min.js/vaafb692b2aea4879b33c060e79fe94621666317369993"></script>
+    <script>
+        $('#fileupload').fileupload({
+          url: '--- your url here ---',
+          dataType: 'json',
+          sequentialUploads: true,
+          done: function(e, data) {
+            //console.log(data.result);
+          }
+        });
+        $('#fileupload').on('fileuploadadd', function (e, data) {
+          data.submit();
+        });
+      </script> --}}
+
+      
+
+<script data-cfasync="false" src="../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script id="template-upload" type="text/x-tmpl">
+	{% for (var i=0, file; file=o.files[i]; i++) { %}
+		<tr class="template-upload">
+			<td>
+				<span class="preview d-flex justify-content-center flex-align-center" style="height: 80px"></span>
+			</td>
+			<td>
+				<p class="name mb-1">{%=file.name%}</p>
+				<strong class="error text-danger"></strong>
+			</td>
+			<td>
+				<p class="size mb-2">Processing...</p>
+				<div class="progress progress-sm mb-0 h-10px progress-striped active"><div class="progress-bar progress-bar-primary" style="min-width: 2em; width:0%;"></div></div>
+			</td>
+			<td nowrap>
+				{% if (!i && !o.options.autoUpload) { %}
+					<button class="btn btn-primary btn-sm d-block w-100 start" disabled>
+						<span>Start</span>
+					</button>
+				{% } %}
+				{% if (!i) { %}
+					<button class="btn btn-default btn-sm d-block w-100 cancel mt-2">
+						<span>Cancel</span>
+					</button>
+				{% } %}
+			</td>
+		</tr>
+	{% } %}
+	</script>
+
+
+<script id="template-download" type="text/x-tmpl">
+	{% for (var i=0, file; file=o.files[i]; i++) { %}
+		<tr class="template-download">
+			<td>
+				<span class="preview d-flex justify-content-center flex-align-center" style="height: 80px">
+					{% if (file.thumbnailUrl) { %}
+						<a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img src="{%=file.thumbnailUrl%}"></a>
+					{% } %}
+				</span>
+			</td>
+			<td>
+				<p class="name">
+					{% if (file.url) { %}
+						<a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
+					{% } else { %}
+						<span>{%=file.name%}</span>
+					{% } %}
+				</p>
+				{% if (file.error) { %}
+					<div><span class="label label-danger">Error</span> {%=file.error%}</div>
+				{% } %}
+			</td>
+			<td>
+				<span class="size">{%=o.formatFileSize(file.size)%}</span>
+			</td>
+			<td nowrap>
+				{% if (file.deleteUrl) { %}
+					<button class="btn btn-danger btn-sm btn-block delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
+						<span>Delete</span>
+					</button>
+					<div class="form-check mt-2">
+						<input type="checkbox" id="{%=file.deleteUrl%}" name="delete" value="1" class="form-check-input toggle" />
+						<label for="{%=file.deleteUrl%}" class="form-check-label"></label>
+					</div>
+				{% } else { %}
+					<button class="btn btn-default btn-sm d-block w-100 cancel">
+						<span>Cancel</span>
+					</button>
+				{% } %}
+			</td>
+		</tr>
+	{% } %}
+	</script>
+
+
+<script src="assets/js/vendor.min.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="assets/js/app.min.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+
+
+<script src="assets/plugins/jquery-migrate/dist/jquery-migrate.min.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="assets/plugins/moment/min/moment.min.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="assets/plugins/bootstrap-daterangepicker/daterangepicker.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="assets/plugins/bootstrap-slider/dist/bootstrap-slider.min.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="assets/plugins/jquery-typeahead/dist/jquery.typeahead.min.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="assets/plugins/jquery.maskedinput/src/jquery.maskedinput.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="assets/plugins/tag-it/js/tag-it.min.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="assets/plugins/blueimp-file-upload/js/vendor/jquery.ui.widget.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="assets/plugins/blueimp-tmpl/js/tmpl.min.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="assets/plugins/blueimp-load-image/js/load-image.all.min.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="assets/plugins/blueimp-canvas-to-blob/js/canvas-to-blob.min.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="assets/plugins/blueimp-gallery/js/jquery.blueimp-gallery.min.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="assets/plugins/blueimp-file-upload/js/jquery.iframe-transport.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="assets/plugins/blueimp-file-upload/js/jquery.fileupload.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="assets/plugins/blueimp-file-upload/js/jquery.fileupload-process.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="assets/plugins/blueimp-file-upload/js/jquery.fileupload-image.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="assets/plugins/blueimp-file-upload/js/jquery.fileupload-audio.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="assets/plugins/blueimp-file-upload/js/jquery.fileupload-video.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="assets/plugins/blueimp-file-upload/js/jquery.fileupload-validate.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="assets/plugins/blueimp-file-upload/js/jquery.fileupload-ui.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="assets/plugins/summernote/dist/summernote-lite.min.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="assets/plugins/spectrum-colorpicker2/dist/spectrum.min.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="assets/plugins/select-picker/dist/picker.min.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="assets/plugins/%40highlightjs/cdn-assets/highlight.min.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="assets/js/demo/highlightjs.demo.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="assets/js/demo/form-plugins.demo.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+
+<script src="../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="3d10fa42bb1888bfad37ca38-|49" defer=""></script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/vaafb692b2aea4879b33c060e79fe94621666317369993" integrity="sha512-0ahDYl866UMhKuYcW078ScMalXqtFJggm7TmlUtp0UlD4eQk0Ixfnm5ykXKvGJNFjLMoortdseTfsRT8oCfgGA==" data-cf-beacon='{"rayId":"7a5b6e03cad3e692","version":"2023.2.0","r":1,"token":"4db8c6ef997743fda032d4f73cfeff63","si":100}' crossorigin="anonymous"></script>
+
+
 </body>
 
 <!-- Mirrored from seantheme.com/studio/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 Mar 2023 05:07:31 GMT -->
