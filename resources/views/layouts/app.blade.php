@@ -338,8 +338,8 @@
 	</script>
 
 
-<script src="assets/js/vendor.min.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
-<script src="assets/js/app.min.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="{{ asset('assets/js/vendor.min.js') }}" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="{{ asset('assets/js/app.min.js') }}" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
 
 
 <script src="assets/plugins/jquery-migrate/dist/jquery-migrate.min.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
@@ -371,7 +371,7 @@
 <script src="assets/js/demo/highlightjs.demo.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
 <script src="assets/js/demo/form-plugins.demo.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
 
-<script src="../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="3d10fa42bb1888bfad37ca38-|49" defer=""></script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/vaafb692b2aea4879b33c060e79fe94621666317369993" integrity="sha512-0ahDYl866UMhKuYcW078ScMalXqtFJggm7TmlUtp0UlD4eQk0Ixfnm5ykXKvGJNFjLMoortdseTfsRT8oCfgGA==" data-cf-beacon='{"rayId":"7a5b6e03cad3e692","version":"2023.2.0","r":1,"token":"4db8c6ef997743fda032d4f73cfeff63","si":100}' crossorigin="anonymous"></script>
+<script src="{{ asset('cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js') }}" data-cf-settings="3d10fa42bb1888bfad37ca38-|49" defer=""></script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/vaafb692b2aea4879b33c060e79fe94621666317369993" integrity="sha512-0ahDYl866UMhKuYcW078ScMalXqtFJggm7TmlUtp0UlD4eQk0Ixfnm5ykXKvGJNFjLMoortdseTfsRT8oCfgGA==" data-cf-beacon='{"rayId":"7a5b6e03cad3e692","version":"2023.2.0","r":1,"token":"4db8c6ef997743fda032d4f73cfeff63","si":100}' crossorigin="anonymous"></script>
 
 
 </body>
