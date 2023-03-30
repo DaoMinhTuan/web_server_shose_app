@@ -10,6 +10,6 @@ class ProductDetail extends Model
     use HasFactory;
     
     protected $fillable = [
-        'color_id','size_id','product_id','quantity','price'
+        'color','size','product_id','quantity'
     ];
 }

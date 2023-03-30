@@ -15,12 +15,23 @@
     <link href="{{ asset('assets/plugins/summernote/dist/summernote-lite.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/plugins/blueimp-file-upload/css/jquery.fileupload.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/plugins/summernote/dist/summernote-lite.css') }}" rel="stylesheet" />
+
+    <link href="{{ asset('assets/plugins/tag-it/css/jquery.tagit.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/plugins/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/plugins/bootstrap-slider/dist/css/bootstrap-slider.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/plugins/blueimp-file-upload/css/jquery.fileupload.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/plugins/summernote/dist/summernote-lite.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/plugins/spectrum-colorpicker2/dist/spectrum.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/plugins/select-picker/dist/picker.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/plugins/jquery-typeahead/dist/jquery.typeahead.min.css') }}" rel="stylesheet" />
     
     
 </head>
 
 <body>
-
+    @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
     <div id="app" class="app">
 
         <div id="header" class="app-header">
@@ -262,7 +273,7 @@
 
       
 
-<script data-cfasync="false" src="../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script id="template-upload" type="text/x-tmpl">
+<script data-cfasync="false" src="{{ asset('cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js') }}"></script><script id="template-upload" type="text/x-tmpl">
 	{% for (var i=0, file; file=o.files[i]; i++) { %}
 		<tr class="template-upload">
 			<td>
@@ -342,37 +353,36 @@
 <script src="{{ asset('assets/js/app.min.js') }}" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
 
 
-<script src="assets/plugins/jquery-migrate/dist/jquery-migrate.min.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
-<script src="assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
-<script src="assets/plugins/moment/min/moment.min.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
-<script src="assets/plugins/bootstrap-daterangepicker/daterangepicker.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
-<script src="assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
-<script src="assets/plugins/bootstrap-slider/dist/bootstrap-slider.min.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
-<script src="assets/plugins/jquery-typeahead/dist/jquery.typeahead.min.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
-<script src="assets/plugins/jquery.maskedinput/src/jquery.maskedinput.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
-<script src="assets/plugins/tag-it/js/tag-it.min.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
-<script src="assets/plugins/blueimp-file-upload/js/vendor/jquery.ui.widget.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
-<script src="assets/plugins/blueimp-tmpl/js/tmpl.min.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
-<script src="assets/plugins/blueimp-load-image/js/load-image.all.min.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
-<script src="assets/plugins/blueimp-canvas-to-blob/js/canvas-to-blob.min.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
-<script src="assets/plugins/blueimp-gallery/js/jquery.blueimp-gallery.min.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
-<script src="assets/plugins/blueimp-file-upload/js/jquery.iframe-transport.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
-<script src="assets/plugins/blueimp-file-upload/js/jquery.fileupload.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
-<script src="assets/plugins/blueimp-file-upload/js/jquery.fileupload-process.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
-<script src="assets/plugins/blueimp-file-upload/js/jquery.fileupload-image.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
-<script src="assets/plugins/blueimp-file-upload/js/jquery.fileupload-audio.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
-<script src="assets/plugins/blueimp-file-upload/js/jquery.fileupload-video.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
-<script src="assets/plugins/blueimp-file-upload/js/jquery.fileupload-validate.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
-<script src="assets/plugins/blueimp-file-upload/js/jquery.fileupload-ui.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
-<script src="assets/plugins/summernote/dist/summernote-lite.min.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
-<script src="assets/plugins/spectrum-colorpicker2/dist/spectrum.min.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
-<script src="assets/plugins/select-picker/dist/picker.min.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
-<script src="assets/plugins/%40highlightjs/cdn-assets/highlight.min.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
-<script src="assets/js/demo/highlightjs.demo.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
-<script src="assets/js/demo/form-plugins.demo.js" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="{{ asset('assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="{{ asset('assets/plugins/moment/min/moment.min.js') }}" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+
+<script src="{{ asset('assets/plugins/bootstrap-daterangepicker/daterangepicker.js') }}" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="{{ asset('assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js') }}" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="{{ asset('assets/plugins/bootstrap-slider/dist/bootstrap-slider.min.js') }}" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="{{ asset('assets/plugins/jquery-typeahead/dist/jquery.typeahead.min.js') }}" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="{{ asset('assets/plugins/jquery.maskedinput/src/jquery.maskedinput.js') }}" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="{{ asset('assets/plugins/tag-it/js/tag-it.min.js') }}" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="{{ asset('assets/plugins/blueimp-file-upload/js/vendor/jquery.ui.widget.js') }}" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="{{ asset('assets/plugins/blueimp-tmpl/js/tmpl.min.js') }}" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="{{ asset('assets/plugins/blueimp-load-image/js/load-image.all.min.js') }}" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="{{ asset('assets/plugins/blueimp-canvas-to-blob/js/canvas-to-blob.min.js') }}" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="{{ asset('assets/plugins/blueimp-gallery/js/jquery.blueimp-gallery.min.js') }}" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="{{ asset('assets/plugins/blueimp-file-upload/js/jquery.iframe-transport.js') }}" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="{{ asset('assets/plugins/blueimp-file-upload/js/jquery.fileupload.js') }}" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="{{ asset('assets/plugins/blueimp-file-upload/js/jquery.fileupload-process.js') }}" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="{{ asset('assets/plugins/blueimp-file-upload/js/jquery.fileupload-image.js') }}" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="{{ asset('assets/plugins/blueimp-file-upload/js/jquery.fileupload-audio.js') }}" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="{{ asset('assets/plugins/blueimp-file-upload/js/jquery.fileupload-video.js') }}" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="{{ asset('assets/plugins/blueimp-file-upload/js/jquery.fileupload-validate.js') }}" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="{{ asset('assets/plugins/blueimp-file-upload/js/jquery.fileupload-ui.js') }}" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="{{ asset('assets/plugins/summernote/dist/summernote-lite.min.js') }}" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="{{ asset('assets/plugins/spectrum-colorpicker2/dist/spectrum.min.js') }}" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="{{ asset('assets/plugins/select-picker/dist/picker.min.js') }}" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="{{ asset('assets/plugins/%40highlightjs/cdn-assets/highlight.min.js') }}" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="{{ asset('assets/js/demo/highlightjs.demo.js') }}" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
+<script src="{{ asset('assets/js/demo/form-plugins.demo.js') }}" type="3d10fa42bb1888bfad37ca38-text/javascript"></script>
 
 <script src="{{ asset('cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js') }}" data-cf-settings="3d10fa42bb1888bfad37ca38-|49" defer=""></script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/vaafb692b2aea4879b33c060e79fe94621666317369993" integrity="sha512-0ahDYl866UMhKuYcW078ScMalXqtFJggm7TmlUtp0UlD4eQk0Ixfnm5ykXKvGJNFjLMoortdseTfsRT8oCfgGA==" data-cf-beacon='{"rayId":"7a5b6e03cad3e692","version":"2023.2.0","r":1,"token":"4db8c6ef997743fda032d4f73cfeff63","si":100}' crossorigin="anonymous"></script>
-
 
 </body>
 

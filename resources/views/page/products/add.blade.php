@@ -26,101 +26,128 @@
         </div>
         <div class="card">
 
-            <form class="was-validated m-1 ">
+            <form class="was-validated m-1 " action="{{ route('product.store') }}" method="POST"
+                enctype="multipart/form-data">
                 <div class="row d-flex justify-content-center m-3">
+                    @csrf
+
+                    <div class="col-xl-3 col-12">
+                        <div class="form-group mb-3">
+                            <label class="form-label" for="">Name</label>
+                            <input type="text" name="name" class="form-control " id=""
+                                placeholder="Nhập tên sản phẩm">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label" for="exampleFormControlInput1">Price</label>
+                            <input type="text" name="price" class="form-control" id="exampleFormControlInput1"
+                                placeholder="Nhập giá sản phẩm">
+                        </div>
+
+
+                    </div>
+
+                    <div class="col-xl-3 col-12">
+                        <div class="form-group mb-3">
+                            <label class="form-label" for="">Sale</label>
+                            <input type="text" name="sale" class="form-control " id=""
+                                placeholder="Nhập tên sản phẩm">
+                        </div>
+                        <div class="form-group mb-3">
+                            <div class="form-group mb-3">
+                                <label class="form-label" for="exampleFormControlInput1">Status</label>
+                                <select class="form-control" name="status">
+                                    <option value="">Chọn trạng thái sản phẩm</option>
+                                    <option value="1">Còn Hàng</option>
+                                    <option value="2">Hết Hàng</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="col-xl-3 col-12">
+                        <div class="form-group mb-3">
+                            <label class="form-label" for="exampleFormControlInput1">Color</label>
+                            <input type="text" name="color" class="form-control is-invalid"
+                                id="exampleFormControlInput1" placeholder="Nhập màu sản phẩm">
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="form-label" for="exampleFormControlInput1">Min size</label>
+                            <input type="number" name="misize" class="form-control is-invalid"
+                            id="exampleFormControlInput1" placeholder="Nhập kích thước nhỏ nhất">
+                        </div>
+
+                        
+
+
+                    </div>
+
+                    <div class="col-xl-3 col-12">
+                        <div class="form-group mb-3">
+                            <label class="form-label" for="exampleFormControlInput1">Quantity</label>
+                            <input type="number" name="quantity" class="form-control is-invalid"
+                                id="exampleFormControlInput1" placeholder="Nhập số lượng sản phẩm">
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="form-label" for="exampleFormControlInput1">Max size</label>
+                            <input type="number" name="msize" class="form-control is-invalid"
+                            id="exampleFormControlInput1" placeholder="Nhập kích thước lớn nhất">
+                        </div>
+
+
+                    </div>
+
+
+                {{-- image and branch --}}
+                    <div class="col-xl-6 col-12">
+                        <div class="mb-3">
+                            <label class="form-label" for="defaultFile">Image Products</label>
+                            <input type="file" name="file_image[]" class="form-control" multiple id="multipleFile" />
+                        </div>
+                       
+
+                    </div>
+                    <div class="col-xl-6 col-12">
+                        
+                        <div class="mb-3">
+                            <label class="form-label" for="defaultFile">Product Brnach</label>
+                            <select class="form-control" name="brandID">
+                                <option value="">Chọn hãng cho sản phẩm</option>
+                                <option value="1">q</option>
+                                <option value="2">q</option>
+                                <option value="3">q</option>
+                                <option value="4">q</option>
+                                <option value="1">q</option>
+                                <option value="">q</option>
+                            </select>
+                        </div>
+
+                    </div>
+                  
+                  
+                    {{-- text arena--}}
                     <div class="col-xl-6 col-12">
                         <div class="form-group mb-3">
-                            <label class="form-label" for="exampleFormControlInput1">Email address</label>
-                            <input type="email" class="form-control is-invalid" id="exampleFormControlInput1"
-                                placeholder="name@example.com">
+                            <label class="form-label" for="exampleFormControlInput1">Conten</label>
+                            <textarea name="content" class="summernote" id="contents" title="Contents"></textarea>
                         </div>
+                    </div>        
+                    <div class="col-xl-6 col-12">
                         <div class="form-group mb-3">
-                            <label class="form-label" for="exampleFormControlInput1">Email address</label>
-                            <input type="email" class="form-control is-invalid" id="exampleFormControlInput1"
-                                placeholder="name@example.com">
-                        </div>
-                    </div>
-
-                    <div class="col-xl-3 col-12">
-                        <div class="form-group mb-3">
-                            <label class="form-label" for="exampleFormControlInput1">Email address</label>
-                            <input type="email" class="form-control is-invalid" id="exampleFormControlInput1"
-                                placeholder="name@example.com">
-                        </div>
-                        <div class="form-group mb-3">
-                            <label class="form-label" for="exampleFormControlInput1">Email address</label>
-                            <input type="email" class="form-control is-invalid" id="exampleFormControlInput1"
-                                placeholder="name@example.com">
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-12">
-                        <div class="form-group mb-3">
-                            <label class="form-label" for="exampleFormControlInput1">Email address</label>
-                            <input type="email" class="form-control is-invalid" id="exampleFormControlInput1"
-                                placeholder="name@example.com">
-                        </div>
-                        <div class="form-group mb-3">
-                            <label class="form-label" for="exampleFormControlInput1">Email address</label>
-                            <input type="email" class="form-control is-invalid" id="exampleFormControlInput1"
-                                placeholder="name@example.com">
+                            <label class="form-label" for="exampleFormControlInput1">description</label>
+                            <textarea name="desc" class="summernote" id="contents" title="Contents"></textarea>
                         </div>
                     </div>
 
 
-                    <div id="jQueryFileUpload" class="mb-5">
-                       
-                            <div class="card">
-                                <div class="card-body pb-2">
-                                    <div class="fileupload-buttonbar mb-2">
-                                        <div class="d-block d-lg-flex align-items-center">
-                                            <span class="btn btn-primary fileinput-button me-2 mb-1">
-                                                <i class="fa fa-fw fa-plus"></i>
-                                                <span>Add files...</span>
-                                                <input type="file" name="files[]" multiple>
-                                            </span>
-                                            <button type="submit" class="btn btn-default me-2 mb-1 start">
-                                                <i class="fa fa-fw fa-upload"></i>
-                                                <span>Start upload</span>
-                                            </button>
-                                            <button type="reset" class="btn btn-default me-2 mb-1 cancel">
-                                                <i class="fa fa-fw fa-ban"></i>
-                                                <span>Cancel upload</span>
-                                            </button>
-                                            <button type="button" class="btn btn-default me-2 mb-1 delete">
-                                                <i class="fa fa-fw fa-trash"></i>
-                                                <span>Delete</span>
-                                            </button>
-                                            <div class="form-check ms-2 mb-1">
-                                                <input type="checkbox" id="toggle-delete"
-                                                    class="form-check-input toggle" />
-                                                <label for="toggle-delete" class="form-check-label">Select Files</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="error-msg"></div>
-                                </div>
-                                <table class="table table-card mb-0 fs-13px">
-                                    <thead>
-                                        <tr class="fs-12px">
-                                            <th class="pt-2 pb-2 w-25">PREVIEW</th>
-                                            <th class="pt-2 pb-2 w-25">FILENAME</th>
-                                            <th class="pt-2 pb-2 w-25">SIZE</th>
-                                            <th class="pt-2 pb-2 w-25">ACTION</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="files">
-                                        <tr class="empty-row">
-                                            <td colspan="4" class="text-center p-3">
-                                                <div class="text-gray-300 mb-2"><i class="fa fa-file-archive fa-3x"></i>
-                                                </div>
-                                                No file uploaded
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                               
 
 
+
+
+                    <div> <button type="submit" class="btn btn-primary"> Add </button> </div>
 
             </form>
         </div>

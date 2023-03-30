@@ -41,13 +41,13 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $products = new Product();
-        $products->fill($request->all());
-        $products->save();
+     $products = new Product();
+  $products->fill($request->all());
+     $products->save();
  
         return response()->json([
          'status' => '200',
-         'message' => "creat product successfully"
+         'message' => "creat product successfully",
         ]);
     }
 

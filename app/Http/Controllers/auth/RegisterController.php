@@ -59,7 +59,6 @@ class RegisterController extends Controller
             'status' => 0,
             'token' => md5(uniqid(rand(), true)),
             'avatar' => " no avatar available",
-            'phoneNumber' => 0000,
             'password' => Hash::make($request->password),
         ]);
         
