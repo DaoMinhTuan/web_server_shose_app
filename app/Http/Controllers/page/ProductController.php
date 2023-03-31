@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\page;
 
+use App\Models\Brand;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\ProductDetail;
@@ -28,7 +29,12 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('page.products.add');
+        $branch = new Brand();
+
+       $data = $branch->select()->get();
+        return view('page.products.add',[
+            'branch'=> $data
+        ]);
     }
 
     /**

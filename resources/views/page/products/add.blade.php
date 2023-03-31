@@ -116,12 +116,10 @@
                             <label class="form-label" for="defaultFile">Product Brnach</label>
                             <select class="form-control" name="brandID">
                                 <option value="">Chọn hãng cho sản phẩm</option>
-                                <option value="1">q</option>
-                                <option value="2">q</option>
-                                <option value="3">q</option>
-                                <option value="4">q</option>
-                                <option value="1">q</option>
-                                <option value="">q</option>
+                                @foreach ($branch as $item)
+                                <option value="{{$item->id}}">{{$item->brandName}}</option>
+
+                                @endforeach
                             </select>
                         </div>
 
