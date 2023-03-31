@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\api;
+
+use App\Models\Brand;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -16,10 +18,19 @@ class ProductController extends Controller
     public function index()
     {
         $products = new Product ;
-        $data = $products->join('product_details', 'products.id', '=', 'product_details.product_id')
-       ->join('brands', 'products.brandID', '=', 'brands.id')
-       ->select('brands.brandName as branch')->where([['products.status','=',1]])
-       ->get();
+        $data = $products
+        ->join('product_details', 'products.id', '=', 'product_details.product_id')
+        ->join('brands', 'products.brandID', '=', 'brands.id')
+        ->select('products.*','product_details.color','product_details.size','product_details.quantity','brands.brandName as branch')->where([['products.status','=',1]])
+        ->get();
+
+        $count = count($data);
+        for ($i=0; $i < $count ; $i++) { 
+            $data[$i]['image'] = json_decode($data[$i]['image'], true);
+            $data[$i]['size'] = json_decode($data[$i]['size'], true);
+
+        }
+
         return response()->json($data); 
     }
 
@@ -42,7 +53,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
      $products = new Product();
-  $products->fill($request->all());
+     $products->fill($request->all());
      $products->save();
  
         return response()->json([
@@ -139,12 +150,18 @@ class ProductController extends Controller
 
     public function get_brach_products($id) {
       $products = new Product ;
+      
       $data = $products->join('brands', 'products.brandID', '=', 'brands.id')
        ->select('products.*', 'brands.brandName as branch')->where([
         ['products.brandID','=', $id],
         ['products.status','=',1]])
        ->get();
 
+       $count = count($data);
+       for ($i=0; $i < $count ; $i++) { 
+           $data[$i]['image'] = json_decode($data[$i]['image'], true);
+
+       }
        return response()->json([
         'status' => '202',
         'message' => 'get product branch successfully',
@@ -159,7 +176,12 @@ class ProductController extends Controller
         ['products.name','like', '%'.$name.'%'],
         ['products.status','=',1]])
        ->get();
+       $count = count($data);
+       for ($i=0; $i < $count ; $i++) { 
+           $data[$i]['image'] = json_decode($data[$i]['image'], true);
+           $data[$i]['size'] = json_decode($data[$i]['size'], true);
 
+       }
        return response()->json([
         'status' => '202',
         'message' => 'get product branch successfully',

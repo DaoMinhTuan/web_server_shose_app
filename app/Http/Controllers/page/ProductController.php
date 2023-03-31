@@ -41,16 +41,19 @@ class ProductController extends Controller
     {
         $products = new Product();
         $product_detali = new ProductDetail();
-        try {
+         try {
             $files = [];
             $sizes = [];
-            if ($request->file('file_image')){
-                foreach($request->file('file_image') as $key => $file)
-                {
-                    $fileName = time().rand(1,99).'.'.$file->extension();  
-                    $file->move(public_path('uploads'), $fileName);
-                    $files[$key]['name'] = asset('uploads', $fileName);
-                    $files[$key]['id'] = $key+1;
+            if($request->hasfile('file_image'))
+            {  
+                $id = 0;
+                foreach($request->file('file_image') as $file)
+                {   
+                    $url = asset('uploads');
+                    $name = $url."/".time().rand(1,100).'.'.$file->extension();
+                    $file->move(public_path('uploads'), $name);  
+                    $files[$id+1]['name'] =  $name;
+                    $files[$id+1]['id'] = $id+=1;
                 }
             }
 
@@ -60,10 +63,11 @@ class ProductController extends Controller
                     $sizes[$i]["size"] = $i;
                     $sizes[$i]["id"] = $ids+=1;
                 }
-            }else{
-                
             }
+                
+            
             $products->image = json_encode($files);
+            
             $products->fill($request->all());
             $products->save();
             
