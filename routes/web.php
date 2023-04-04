@@ -26,6 +26,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('Products', pageProduct::class)->names('product');
 
+    Route::get('/get_sizes/{id}',[pageProduct::class,'get_size'])->name('get_sizes');
+    Route::post('/get_sizes',[pageProduct::class,'update_size'])->name('update_size');
     
 });
 
