@@ -29,6 +29,7 @@ use Illuminate\Support\Facades\Route;
 
 
     Route::resource('users', UserController::class)->names('Users');
+    
     Route::resource('products', ProductController::class)->names('Products');
     Route::get('products/branch/{id}',[ProductController::class,'get_brach_products'])->name('branch_products');
     Route::get('products/seach/{name}',[ProductController::class,'get_products_name'])->name('name_product');

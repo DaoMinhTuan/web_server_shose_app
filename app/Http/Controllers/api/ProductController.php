@@ -28,7 +28,7 @@ class ProductController extends Controller
         $count = count($data);
         for ($i = 0; $i < $count; $i++) {
             $data[$i]['image'] = json_decode($data[$i]['image']);
-            $data[$i]['size'] =  array(json_decode($data[$i]['size']));
+            $data[$i]['size'] =  json_decode($data[$i]['size']);
         }
 
         return response()->json($data);
@@ -70,7 +70,24 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $products = new Product;
+        $data = $products
+            ->join('product_details', 'products.id', '=', 'product_details.product_id')
+            ->join('brands', 'products.brandID', '=', 'brands.id')
+            ->select('products.*', 'product_details.color', 'product_details.size', 'product_details.quantity', 'brands.brandName as branch')
+            ->where([
+                ['products.status', '=', 1],
+                ['products.id', '=', $id]
+             ])
+            ->get();
+
+        $count = count($data);
+        for ($i = 0; $i < $count; $i++) {
+            $data[$i]['image'] = json_decode($data[$i]['image']);
+            $data[$i]['size'] =  json_decode($data[$i]['size']);
+        }
+
+        return response()->json($data);
     }
 
     /**
@@ -183,8 +200,6 @@ class ProductController extends Controller
 
         return response()->json([
             'products' => $data,
-            'id' => $id,
-            'size' => $one_size
         ]);
 
     }

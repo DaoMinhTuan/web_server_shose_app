@@ -140,12 +140,10 @@
                         </div>
                     </div>
 
-
-
-
-
-
-                    <div> <button type="submit" class="btn btn-primary"> Add </button> </div>
+                    <div> 
+                        <button type="submit" class="btn btn-primary"> Add </button>
+                        <a href="{{ route('product.index')}}"  class="btn btn-gray"> Back </a>
+                   </div>
 
             </form>
         </div>

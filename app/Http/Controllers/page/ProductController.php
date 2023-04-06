@@ -22,7 +22,27 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('page.products.list');
+        $products = new Product();
+        
+        $data = $products
+        ->join('product_details', 'products.id', '=', 'product_details.product_id')
+        ->join('brands', 'products.brandID', '=', 'brands.id')
+        ->select('products.*', 'product_details.color', 'product_details.size', 'product_details.quantity', 'brands.brandName as branch')
+        ->where([['products.status', '=', 1]])
+        ->paginate(5);
+
+        $count = count($data);
+        for ($i = 0; $i < $count; $i++) {
+            $data[$i]['image'] = json_decode($data[$i]['image']);
+            $data[$i]['size'] =  json_decode($data[$i]['size']);
+        }
+
+        
+      
+        // // return $data;
+        return view('page.products.list',[
+            'data' => $data
+        ]);
     }
 
     public function get_size($id)
@@ -191,12 +211,12 @@ class ProductController extends Controller
                     $url = asset('uploads');
                     $name = $url . "/" . time() . rand(1, 100) . '.' . $file->extension();
                     $file->move(public_path('uploads'), $name);
-                    $files[$id + 1]['name'] =  $name;
-                    $files[$id + 1]['id'] = $id += 1;
+                    $files['image'.$id+1]['name'] =  $name;
+                    $files['image'.$id+1]['id'] = $id += 1;
                 }
             }
-            $products->image = json_encode(array($file));
-
+            $products->image = json_encode(array($files));
+            // dd(json_decode($products->image));
             /**
              * Fill the model with an array of attributes, then save it to the database.
              *
@@ -221,11 +241,13 @@ class ProductController extends Controller
              * @param  int  $id
              * @return array
              */
+
+             
             if ($request->misize != 0 and $request->msize != 0) {
                 $ids = 0;
                 for ($i = $request->misize; $i <= $request->msize; $i++) {
-                    $sizes[$i]["size"] = $i;
-                    $sizes[$i]["id"] = $ids += 1;
+                    $sizes['size_'.$i]["size"] = $i;
+                    $sizes['size_'.$i]["id"] = $ids += 1;
                     $sizes_table[] = [
                         'size' => $i,
                         'product_id' => $id
@@ -264,7 +286,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**

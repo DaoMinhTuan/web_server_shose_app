@@ -33,12 +33,12 @@
         <ul class="nav nav-tabs nav-tabs-v2 px-4">
             <li class="nav-item me-3"><a href="#allTab" class="nav-link active px-2"
                     data-bs-toggle="tab">All</a></li>
-            <li class="nav-item me-3"><a href="#publishedTab" class="nav-link px-2"
+            {{-- <li class="nav-item me-3"><a href="#publishedTab" class="nav-link px-2"
                     data-bs-toggle="tab">Published</a></li>
             <li class="nav-item me-3"><a href="#expiredTab" class="nav-link px-2"
                     data-bs-toggle="tab">Expired</a></li>
             <li class="nav-item me-3"><a href="#deletedTab" class="nav-link px-2"
-                    data-bs-toggle="tab">Deleted</a></li>
+                    data-bs-toggle="tab">Deleted</a></li> --}}
         </ul>
         <div class="tab-content p-4">
             <div class="tab-pane fade show active" id="allTab">
@@ -73,10 +73,11 @@
                                 <th class="pt-0 pb-2">Product</th>
                                 <th class="pt-0 pb-2">Inventory</th>
                                 <th class="pt-0 pb-2">Type</th>
-                                <th class="pt-0 pb-2">Vendor</th>
+                                <th class="pt-0 pb-2">Color</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($data as $item)
                             <tr>
                                 <td class="w-10px align-middle">
                                     <div class="form-check">
@@ -88,222 +89,20 @@
                                     <div class="d-flex align-items-center">
                                         <div
                                             class="w-60px h-60px bg-gray-100 d-flex align-items-center justify-content-center">
-                                            <img class="mw-100 mh-100" src="assets/img/product/product-6.jpg" />
+                                            <img class="mw-100 mh-100" src="{{$item->image[0]->image1->name}}" />
                                         </div>
                                         <div class="ms-3">
-                                            <a href="#">Force Majeure White T Shirt</a>
+                                            <a href="#">{{$item->name}}</a>
                                         </div>
                                     </div>
                                 </td>
-                                <td class="align-middle">83 in stock for 3 variants</td>
+                                <td class="align-middle">{{ $item->quantity }} in stock for {{ count(get_object_vars($item->size[0])) }} Sizes</td>
                                 <td class="align-middle">Cotton</td>
-                                <td class="align-middle">Force Majeure</td>
+                                <td class="align-middle">{{$item->color}}</td>
                             </tr>
-                            <tr>
-                                <td class="w-10px align-middle">
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="product2">
-                                        <label class="form-check-label" for="product2"></label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div
-                                            class="w-60px h-60px bg-gray-100 d-flex align-items-center justify-content-center">
-                                            <img class="mw-100 mh-100" src="assets/img/product/product-7.jpg" />
-                                        </div>
-                                        <div class="ms-3">
-                                            <a href="#">Eco-friendly fashion, organic cotton, slow fashion polo
-                                                shirts</a>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="align-middle">79 in stock for 3 variants</td>
-                                <td class="align-middle">Cotton</td>
-                                <td class="align-middle">Polo</td>
-                            </tr>
-                            <tr>
-                                <td class="w-10px align-middle">
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="product3">
-                                        <label class="form-check-label" for="product3"></label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div
-                                            class="w-60px h-60px bg-gray-100 d-flex align-items-center justify-content-center">
-                                            <img class="mw-100 mh-100" src="assets/img/product/product-8.jpg" />
-                                        </div>
-                                        <div class="ms-3">
-                                            <a href="#">Nike Shoes (Red Color)</a>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="align-middle">19 in stock for 1 variants</td>
-                                <td class="align-middle">Sports</td>
-                                <td class="align-middle">Nike</td>
-                            </tr>
-                            <tr>
-                                <td class="w-10px align-middle">
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="product4">
-                                        <label class="form-check-label" for="product4"></label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div
-                                            class="w-60px h-60px bg-gray-100 d-flex align-items-center justify-content-center">
-                                            <img class="mw-100 mh-100" src="assets/img/product/product-9.jpg" />
-                                        </div>
-                                        <div class="ms-3">
-                                            <a href="#">Nike Air Max (Blue Color)</a>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="align-middle">19 in stock for 1 variants</td>
-                                <td class="align-middle">Sports</td>
-                                <td class="align-middle">Nike</td>
-                            </tr>
-                            <tr>
-                                <td class="w-10px align-middle">
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="product5">
-                                        <label class="form-check-label" for="product5"></label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div
-                                            class="w-60px h-60px bg-gray-100 d-flex align-items-center justify-content-center">
-                                            <img class="mw-100 mh-100"
-                                                src="assets/img/product/product-10.jpg" />
-                                        </div>
-                                        <div class="ms-3">
-                                            <a href="#">Skate Sneaker (Orange Color)</a>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="align-middle">19 in stock for 1 variants</td>
-                                <td class="align-middle">Sports</td>
-                                <td class="align-middle">Skate</td>
-                            </tr>
-                            <tr>
-                                <td class="w-10px align-middle">
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="product6">
-                                        <label class="form-check-label" for="product6"></label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div
-                                            class="w-60px h-60px bg-gray-100 d-flex align-items-center justify-content-center">
-                                            <img class="mw-100 mh-100"
-                                                src="assets/img/product/product-11.jpg" />
-                                        </div>
-                                        <div class="ms-3">
-                                            <a href="#">Teen Fashion T-shirt (Black)</a>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="align-middle">30 in stock for 4 variants</td>
-                                <td class="align-middle">T-Shirt</td>
-                                <td class="align-middle">Tulsa</td>
-                            </tr>
-                            <tr>
-                                <td class="w-10px align-middle">
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="product7">
-                                        <label class="form-check-label" for="product7"></label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div
-                                            class="w-60px h-60px bg-gray-100 d-flex align-items-center justify-content-center">
-                                            <img class="mw-100 mh-100"
-                                                src="assets/img/product/product-12.jpg" />
-                                        </div>
-                                        <div class="ms-3">
-                                            <a href="#">Levis Blue Jeans</a>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="align-middle">49 in stock for 8 variants</td>
-                                <td class="align-middle">Jeans</td>
-                                <td class="align-middle">Levis</td>
-                            </tr>
-                            <tr>
-                                <td class="w-10px align-middle">
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="product8">
-                                        <label class="form-check-label" for="product8"></label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div
-                                            class="w-60px h-60px bg-gray-100 d-flex align-items-center justify-content-center">
-                                            <img class="mw-100 mh-100"
-                                                src="assets/img/product/product-13.jpg" />
-                                        </div>
-                                        <div class="ms-3">
-                                            <a href="#">Boots (White Color)</a>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="align-middle">19 in stock for 1 variants</td>
-                                <td class="align-middle">Sports</td>
-                                <td class="align-middle">Nike</td>
-                            </tr>
-                            <tr>
-                                <td class="w-10px align-middle">
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="product9">
-                                        <label class="form-check-label" for="product9"></label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div
-                                            class="w-60px h-60px bg-gray-100 d-flex align-items-center justify-content-center">
-                                            <img class="mw-100 mh-100"
-                                                src="assets/img/product/product-14.jpg" />
-                                        </div>
-                                        <div class="ms-3">
-                                            <a href="#">Hiking Boots</a>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="align-middle">94 in stock for 1 variants</td>
-                                <td class="align-middle">Sports</td>
-                                <td class="align-middle">Skate</td>
-                            </tr>
-                            <tr>
-                                <td class="w-10px align-middle">
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="product5">
-                                        <label class="form-check-label" for="product5"></label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div
-                                            class="w-60px h-60px bg-gray-100 d-flex align-items-center justify-content-center">
-                                            <img class="mw-100 mh-100"
-                                                src="assets/img/product/product-15.jpg" />
-                                        </div>
-                                        <div class="ms-3">
-                                            <a href="#">Dress (Pink)</a>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="align-middle">23 in stock for 5 variants</td>
-                                <td class="align-middle">Dress</td>
-                                <td class="align-middle">Sktoe</td>
-                            </tr>
+                            @endforeach
+                            
+                        
                         </tbody>
                     </table>
                 </div>
@@ -313,14 +112,7 @@
                         Showing 1 to 10 of 57 entries
                     </div>
                     <ul class="pagination mb-0 justify-content-center">
-                        <li class="page-item disabled"><a class="page-link">Previous</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                        <li class="page-item"><a class="page-link" href="#">5</a></li>
-                        <li class="page-item"><a class="page-link" href="#">6</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                        {{ $data->links() }}
                     </ul>
                 </div>
             </div>
