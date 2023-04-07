@@ -78,7 +78,7 @@ class ProductController extends Controller
             ->where([
                 ['products.status', '=', 1],
                 ['products.id', '=', $id]
-             ])
+            ])
             ->get();
 
         $count = count($data);
@@ -167,10 +167,12 @@ class ProductController extends Controller
 
     public function get_brach_products($id)
     {
-        $products = new Product;
-
-        $data = $products->join('brands', 'products.brandID', '=', 'brands.id')
-            ->select('products.*', 'brands.brandName as branch')->where([
+        $products = new Product();
+        $data = $products
+            ->join('product_details', 'products.id', '=', 'product_details.product_id')
+            ->join('brands', 'products.brandID', '=', 'brands.id')
+            ->select('products.*', 'product_details.color', 'product_details.size', 'product_details.quantity', 'brands.brandName as branch')
+            ->where([
                 ['products.brandID', '=', $id],
                 ['products.status', '=', 1]
             ])
@@ -178,30 +180,30 @@ class ProductController extends Controller
 
         $count = count($data);
         for ($i = 0; $i < $count; $i++) {
-            $data[$i]['image'] = json_decode($data[$i]['image'], true);
+            $data[$i]['image'] = json_decode($data[$i]['image']);
+            $data[$i]['size'] =  json_decode($data[$i]['size']);
         }
-        return response()->json([
-            'status' => '202',
-            'message' => 'get product branch successfully',
-            'data' => $data
-        ]);
-    }
-
-    public function get_products_size($one_size,$id){
-        $size = new Size();
-
-        $data = $size->join('products','products.id','=','sizes.product_id')
-        ->select()
-        ->where([
-            ['sizes.size','=', $one_size],
-            ['sizes.product_id','=', $id],
-        ])
-        ->get();
 
         return response()->json([
             'products' => $data,
         ]);
+    }
 
+    public function get_products_size($one_size, $id)
+    {
+        $size = new Size();
+
+        $data = $size->join('products', 'products.id', '=', 'sizes.product_id')
+            ->select()
+            ->where([
+                ['sizes.size', '=', $one_size],
+                ['sizes.product_id', '=', $id],
+            ])
+            ->get();
+
+        return response()->json([
+            'products' => $data,
+        ]);
     }
 
 

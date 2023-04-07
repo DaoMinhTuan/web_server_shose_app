@@ -36,6 +36,8 @@ use Illuminate\Support\Facades\Route;
     Route::get('products/{size}/{id}',[ProductController::class,'get_products_size'])->name('get_products_size');
     
     Route::resource('sizes', SizeController::class)->names('Sizes');
+    Route::get('sizes/product/{id}',[SizeController::class,'size_product'])->name('size_product');
+
     Route::resource('brands', BrandController::class)->names('Brands');
     Route::resource('product_detail', ProductDetailController::class)->names('Product_Detail');
     Route::resource('oders', OderController::class)->names('Oders');

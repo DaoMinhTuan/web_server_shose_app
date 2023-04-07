@@ -142,7 +142,7 @@
 
                     <div> 
                         <button type="submit" class="btn btn-primary"> Add </button>
-                        <a href="{{ route('product.index')}}"  class="btn btn-gray"> Back </a>
+                        <a href="{{ route('product.index')}}"  class="btn btn-warning"> Back </a>
                    </div>
 
             </form>

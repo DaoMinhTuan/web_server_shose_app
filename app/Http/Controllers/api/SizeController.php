@@ -91,4 +91,17 @@ class SizeController extends Controller
     {
         //
     }
+
+    public function size_product($id){
+        $sizes = new Size();
+        $data = $sizes->select('size','quantity')
+        ->where([
+            ['product_id','=',$id]
+        ])->get();
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $data
+        ]);
+    }
 }
