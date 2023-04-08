@@ -1,19 +1,20 @@
 <?php
 
-use App\Http\Controllers\api\AddressController;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\api\OderController;
+use App\Http\Controllers\api\RoleController;
+use App\Http\Controllers\api\SizeController;
+use App\Http\Controllers\api\UserController;
 use App\Http\Controllers\api\BrandController;
 use App\Http\Controllers\api\ColorController;
-use App\Http\Controllers\api\OderController;
-use App\Http\Controllers\api\OderDetailController;
-use App\Http\Controllers\api\ProductController;
-use App\Http\Controllers\api\UserController;
-use App\Http\Controllers\api\SizeController;
-use App\Http\Controllers\api\ProductDetailController;
-use App\Http\Controllers\api\RoleController;
 use App\Http\Controllers\auth\LoginController;
+use App\Http\Controllers\api\AddressController;
+use App\Http\Controllers\api\ProductController;
 use App\Http\Controllers\auth\RegisterController;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\api\OderDetailController;
+use App\Http\Controllers\api\ProductDetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,12 +46,16 @@ use Illuminate\Support\Facades\Route;
     Route::resource('colors', ColorController::class)->names('Colors');
     Route::resource('oderdetail', OderDetailController::class)->names('Oderdetail');
     Route::resource('address', AddressController::class)->names('Address');
-//login and register
+
+    Route::resource('carts',cartController::class)->names('carts');
+    Route::get('get-cars/{user}',[cartController::class,'get_cart_user'])->name('get_carts');
+
+// //login and register
 
 Route::get('/login', [LoginController::class, 'get_login'])->name('get_login');
 Route::post('/login', [LoginController::class, 'Login'])->name('Login');
 
 
-Route::get('/register', [RegisterController::class, 'get_api_register'])->name('get_api_register');
-Route::post('/register', [RegisterController::class, 'api_register'])->name('api_register');
-Route::post('/confrim_account',[RegisterController::class, 'confrim_account'])->name('confrim_account');
+Route::get('/register', [RegisterController::class,'get_api_register'])->name('get_api_register');
+Route::post('/register', [RegisterController::class,'api_register'])->name('api_register');
+Route::get('/confrim_account/{token}',[RegisterController::class, 'confrim_account'])->name('confrim_account');

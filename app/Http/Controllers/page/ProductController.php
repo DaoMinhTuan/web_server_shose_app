@@ -137,7 +137,7 @@ class ProductController extends Controller
          * @param  string|null  $title
          * @return \Illuminate\Http\RedirectResponse
          */
-        Alert::success(' successfully ', 'thêm sản phẩm thành công');
+        Alert::success(' successfully ', 'cập nhật số lượng sản phẩm thành công');
         return back();
     }
     /**

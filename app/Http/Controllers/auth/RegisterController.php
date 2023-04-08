@@ -33,21 +33,21 @@ class RegisterController extends Controller
         ]);
     }
 
-    public function confrim_account(Request $request){
-        
+    public function confrim_account($token)
+    {
+
         $data = new User;
-        $user = $data->where('token',$request->toke)->first();
+        try {
+            $user = $data->where('token', $token)->first();
 
-        $users = User::find($user->id);
-        $users->token = "activation";
-        $users->status = 1;
-        $users->save();
-
-        return response()->json([
-                "status" => 202,
-                "message" => "register successfully "
-        ]);
-
+            $users = User::find($user->id);
+            $users->token = "activation";
+            $users->status = 1;
+            $users->save();
+        } catch (\Exception $err) {
+            return redirect('https://mail.google.com/mail/u/0/#inbox');
+        }
+        return redirect('https://mail.google.com/mail/u/0/#inbox');
     }
 
     public function api_register(ApiLoginRequest $request)
@@ -61,13 +61,13 @@ class RegisterController extends Controller
             'avatar' => " no avatar available",
             'password' => Hash::make($request->password),
         ]);
-        
 
-       try{
+
+        try {
             $users = new User;
             $users->fill($validated->all());
             $users->save();
-            
+
             $data = [
                 'subject' => 'Shose App',
                 'body' => 'Welcome to Shose App',

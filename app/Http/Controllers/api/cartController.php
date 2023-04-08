@@ -2,33 +2,28 @@
 
 namespace App\Http\Controllers\api;
 
-use App\Models\Oder;
-use App\Models\OderDetail;
-use Illuminate\Routing\Controller;
+use App\Models\Carts;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Routing\Controller;
 
-class OderDetailController extends Controller
+class cartController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    protected $oder_detail,$oders;
 
-    public  function __construct()
+    protected $cart;
+    public function __construct()
     {
-       $this->oder_detail = new OderDetail(); 
-       $this->oders = new Oder(); 
+        $this->cart = new Carts();
     }
 
     public function index()
     {
-       $data = $this->oder_detail
-       ->join('oders','oders.id','=','oderdetail.oder_id')
-       ->join('products','products.id','=','oderdetail.product_id')
-       ->join('product_details','product_details.product_id','=','oderdetail.product_id')
-       ->select()->get();
+        
     }
 
     /**
@@ -49,16 +44,8 @@ class OderDetailController extends Controller
      */
     public function store(Request $request)
     {
-        $this->oder_detail->fill($request->all());
-        $this->oder_detail->save();
-
-        $id =  $this->oder_detail->select("id")->orderBy('id', 'desc')->first()->id;
-        
-        $this->oders->fill($request->all());
-        $this->oders->product_id = $id;
-        $this->oders->save();
-
-
+        $this->cart->fill($request->all());
+        $this->cart->save();
     }
 
     /**
@@ -69,7 +56,7 @@ class OderDetailController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -104,5 +91,34 @@ class OderDetailController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function get_cart_user($user){
+
+        $told = 0;
+
+        $data = $this->cart
+        ->join('products','products.id', '=','carts.id_product')
+        ->join('product_details', 'carts.id_product', '=', 'product_details.product_id')
+        ->join('users', 'users.id', '=','carts.id_user')
+        ->select('products.id as product_id','products.name as product_name','products.price','products.sale','products.image','product_details.color')
+        ->where([
+            ['carts.id_user','=',$user]
+        ])->get();
+        $count = count($data);
+
+        for ($i = 0; $i < $count; $i++) {
+            $data[$i]['image'] = json_decode($data[$i]['image']);
+        }
+
+        for ($i = 0; $i < $count; $i++) {
+            $told += $data[$i]['price'];
+        }
+
+
+        return response()->json([
+            'carts' => $data,
+            'total' => $told
+        ]);
     }
 }
