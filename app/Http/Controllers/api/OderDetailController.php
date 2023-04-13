@@ -26,9 +26,18 @@ class OderDetailController extends Controller
     {
        $data = $this->oder_detail
        ->join('oders','oders.id','=','oderdetail.oder_id')
-       ->join('products','products.id','=','oderdetail.product_id')
-       ->join('product_details','product_details.product_id','=','oderdetail.product_id')
        ->select()->get();
+
+       $count = count($data);
+       for ($i = 0; $i < $count; $i++) {
+           $data[$i]['products'] =  json_decode($data[$i]['products']);
+           $data[$i]['products'] =  json_decode($data[$i]['products']);
+       }
+
+       return response()->json([
+        'status' => '202',
+        'data' => $data
+       ]);
     }
 
     /**
@@ -49,16 +58,21 @@ class OderDetailController extends Controller
      */
     public function store(Request $request)
     {
+        $this->oders->fill($request->all());
+        $this->oders->save();
+
+        $id =  $this->oders->select("id")->orderBy('id', 'desc')->first()->id;
+
+        $this->oder_detail->oder_id = $id;
+        $this->oder_detail->products = json_encode($request->products);
         $this->oder_detail->fill($request->all());
         $this->oder_detail->save();
 
-        $id =  $this->oder_detail->select("id")->orderBy('id', 'desc')->first()->id;
-        
-        $this->oders->fill($request->all());
-        $this->oders->product_id = $id;
-        $this->oders->save();
 
-
+        return response()->json([
+            'status' => 'success',
+            'message' => 'oders successfully'
+        ]);
     }
 
     /**
@@ -104,5 +118,28 @@ class OderDetailController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function history_oder($user){
+        $data = $this->oder_detail
+        ->join('oders','oders.id','=','oderdetail.oder_id')
+        ->select()
+        ->where([
+            ['oderdetail.status','=',1],
+            ['oders.user_id','=',$user]
+        ])
+        ->get();
+
+        $count = count($data);
+       for ($i = 0; $i < $count; $i++) {
+           $data[$i]['products'] =  json_decode($data[$i]['products']);
+           $data[$i]['products'] =  json_decode($data[$i]['products']);
+       }
+
+        return response()->json([
+            'status' => '202',
+            'data' => $data
+        ]);
+ 
     }
 }

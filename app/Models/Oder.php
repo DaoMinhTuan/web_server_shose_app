@@ -9,6 +9,12 @@ class Oder extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'user_id','total','note','paymentAmount','status',
+        'user_id',
+        'address_id',
+        'number',
+        'total',
+        'note',
+        'paymentAmount',
+        'status'
     ];
 }

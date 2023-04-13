@@ -11,6 +11,7 @@ use App\Http\Controllers\api\BrandController;
 use App\Http\Controllers\api\ColorController;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\api\AddressController;
+use App\Http\Controllers\api\cartController;
 use App\Http\Controllers\api\ProductController;
 use App\Http\Controllers\auth\RegisterController;
 use App\Http\Controllers\api\OderDetailController;
@@ -44,10 +45,15 @@ use App\Http\Controllers\api\ProductDetailController;
     Route::resource('oders', OderController::class)->names('Oders');
     Route::resource('roles', RoleController::class)->names('Roles');
     Route::resource('colors', ColorController::class)->names('Colors');
+
     Route::resource('oderdetail', OderDetailController::class)->names('Oderdetail');
+    Route::get('history/{user}', [OderDetailController::class,'history_oder'])->name('history_oder');
+
+
+
     Route::resource('address', AddressController::class)->names('Address');
 
-    Route::resource('carts',cartController::class)->names('carts');
+    Route::resource('carts', cartController::class)->names('carts');
     Route::get('get-cars/{user}',[cartController::class,'get_cart_user'])->name('get_carts');
 
 // //login and register

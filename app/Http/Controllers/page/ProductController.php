@@ -25,9 +25,9 @@ class ProductController extends Controller
         $products = new Product();
         
         $data = $products
-        ->join('product_details', 'products.id', '=', 'product_details.product_id')
+        ->join('product_detail', 'products.id', '=', 'product_detail.product_id')
         ->join('brands', 'products.brandID', '=', 'brands.id')
-        ->select('products.*', 'product_details.color', 'product_details.size', 'product_details.quantity', 'brands.brandName as branch')
+        ->select('products.*', 'product_detail.color', 'product_detail.size', 'product_detail.quantity', 'brands.brandName as branch')
         ->where([['products.status', '=', 1]])
         ->paginate(5);
 

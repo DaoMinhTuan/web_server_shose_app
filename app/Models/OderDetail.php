@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class OderDetail extends Model
 {
     use HasFactory;
+    protected $table = 'oderdetail';
     protected $fillable = [
         'oder_id','product_id','quantity','price','status','attributes'
     ];
