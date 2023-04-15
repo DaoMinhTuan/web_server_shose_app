@@ -14,30 +14,30 @@ class OderDetailController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    protected $oder_detail,$oders;
+    protected $oder_detail, $oders;
 
     public  function __construct()
     {
-       $this->oder_detail = new OderDetail(); 
-       $this->oders = new Oder(); 
+        $this->oder_detail = new OderDetail();
+        $this->oders = new Oder();
     }
 
     public function index()
     {
-       $data = $this->oder_detail
-       ->join('oders','oders.id','=','oderdetail.oder_id')
-       ->select()->get();
+        $data = $this->oder_detail
+            ->join('oders', 'oders.id', '=', 'oderdetail.oder_id')
+            ->select()->get();
 
-       $count = count($data);
-       for ($i = 0; $i < $count; $i++) {
-           $data[$i]['products'] =  json_decode($data[$i]['products']);
-           $data[$i]['products'] =  json_decode($data[$i]['products']);
-       }
+        $count = count($data);
+        for ($i = 0; $i < $count; $i++) {
+            $data[$i]['products'] =  json_decode($data[$i]['products']);
+            $data[$i]['products'] =  json_decode($data[$i]['products']);
+        }
 
-       return response()->json([
-        'status' => '202',
-        'data' => $data
-       ]);
+        return response()->json([
+            'status' => '202',
+            'data' => $data
+        ]);
     }
 
     /**
@@ -71,7 +71,8 @@ class OderDetailController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'oders successfully'
+            'message' => 'oders successfully',
+            'id_oder' =>  $id
         ]);
     }
 
@@ -94,7 +95,6 @@ class OderDetailController extends Controller
      */
     public function edit($id)
     {
-        //
     }
 
     /**
@@ -106,7 +106,17 @@ class OderDetailController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        
+        $oder = $this->oders->find($id);
+        $oder->fill($request->all());
+        $oder_detail = $this->oder_detail->find($oder->id);
+        $oder_detail->fill($request->all());
+        $oder->save();
+        $oder_detail->save();
+    
+
+        
     }
 
     /**
@@ -120,26 +130,26 @@ class OderDetailController extends Controller
         //
     }
 
-    public function history_oder($user){
+    public function history_oder($user,$status)
+    {
         $data = $this->oder_detail
-        ->join('oders','oders.id','=','oderdetail.oder_id')
-        ->select()
-        ->where([
-            ['oderdetail.status','=',1],
-            ['oders.user_id','=',$user]
-        ])
-        ->get();
+            ->join('oders', 'oders.id', '=', 'oderdetail.oder_id')
+            ->select()
+            ->where([
+                ['oderdetail.status', '=', $status],
+                ['oders.user_id', '=', $user]
+            ])
+            ->get();
 
         $count = count($data);
-       for ($i = 0; $i < $count; $i++) {
-           $data[$i]['products'] =  json_decode($data[$i]['products']);
-           $data[$i]['products'] =  json_decode($data[$i]['products']);
-       }
+        for ($i = 0; $i < $count; $i++) {
+            $data[$i]['products'] =  json_decode($data[$i]['products']);
+            $data[$i]['products'] =  json_decode($data[$i]['products']);
+        }
 
         return response()->json([
             'status' => '202',
             'data' => $data
         ]);
- 
     }
 }
