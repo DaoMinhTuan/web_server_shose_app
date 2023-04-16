@@ -20,7 +20,7 @@ class CreateOdersTable extends Migration
             $table->string('number');
             $table->string('total');
             $table->string('note');
-            $table->integer('paymentAmount');
+            $table->string('paymentAmount');
             $table->integer('status');
             $table->timestamps();
         });

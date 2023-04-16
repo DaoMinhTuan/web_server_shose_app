@@ -99,9 +99,9 @@ class cartController extends Controller
 
         $data = $this->cart
         ->join('products','products.id', '=','carts.id_product')
-        ->join('product_details', 'carts.id_product', '=', 'product_details.product_id')
+        ->join('product_detail', 'carts.id_product', '=', 'product_detail.product_id')
         ->join('users', 'users.id', '=','carts.id_user')
-        ->select('products.id as product_id','products.name as product_name','products.price','products.sale','products.image','product_details.color')
+        ->select('products.id as product_id','products.name as product_name','products.price','products.sale','products.image','product_detail.color')
         ->where([
             ['carts.id_user','=',$user]
         ])->get();

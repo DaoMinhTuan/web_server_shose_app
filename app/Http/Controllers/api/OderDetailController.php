@@ -106,17 +106,34 @@ class OderDetailController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        
         $oder = $this->oders->find($id);
-        $oder->fill($request->all());
-        $oder_detail = $this->oder_detail->find($oder->id);
-        $oder_detail->fill($request->all());
-        $oder->save();
-        $oder_detail->save();
-    
 
-        
+        if ($oder != null) {
+            $detail_id = $this->oder_detail->select('id')->where('oder_id', $oder->id)->first()->id;
+            $oder_detail = $this->oder_detail->find($detail_id);
+        } else {
+            $oder_detail = null;
+        }
+
+        if ($oder_detail == null or $oder == null) {
+
+            return response()->json([
+                'status' => '400',
+                'error' => 'oder not found'
+            ]);
+        } else {
+
+            $oder->fill($request->all());
+            $oder_detail->fill($request->all());
+
+            $oder->save();
+            $oder_detail->save();
+
+            return response()->json([
+                'status' => '202',
+                'message' => ' oder update successful'
+            ]);
+        }
     }
 
     /**
@@ -127,10 +144,35 @@ class OderDetailController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $oder = $this->oders->find($id);;
+
+        if ($oder == null) {
+            $oder_detail = null;
+        } else {
+            $detail_id = $this->oder_detail->select('id')->where('oder_id', $oder->id)->first()->id;
+            $oder_detail = $this->oder_detail->find($detail_id); 
+        }
+
+
+        if ($oder_detail == null or $oder == null) {
+
+            return response()->json([
+                'status' => '400',
+                'error' => 'oder not found'
+            ]);
+        } else {
+            $oder->delete();
+            $oder_detail->delete();
+
+            return response()->json([
+                'status' => '202',
+                'message' => ' oder delete successful'
+            ]);
+        }
+
     }
 
-    public function history_oder($user,$status)
+    public function history_oder($user, $status)
     {
         $data = $this->oder_detail
             ->join('oders', 'oders.id', '=', 'oderdetail.oder_id')
