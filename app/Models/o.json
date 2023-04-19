@@ -1,0 +1,20 @@
+[
+    {
+        "product_id": "1",
+        "name": "nike arfor 1",
+        "image": "https://shoseapp.click/uploads/168144231429.jpg",
+        "quantity": 10,
+        "price": 1000000,
+        "attributes": "trang-xanh, 30"
+    },
+    {
+        "product_id": "1",
+        "name": "nike ar",
+        "image": "https://shoseapp.click/uploads/168144231429.jpg",
+        "quantity": 10,
+        "price": 1000000,
+        "attributes": "trang-xanh, 39"
+    }
+]
+
+ 

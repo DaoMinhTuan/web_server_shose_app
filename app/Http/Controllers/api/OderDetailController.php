@@ -31,7 +31,6 @@ class OderDetailController extends Controller
         $count = count($data);
         for ($i = 0; $i < $count; $i++) {
             $data[$i]['products'] =  json_decode($data[$i]['products']);
-            $data[$i]['products'] =  json_decode($data[$i]['products']);
         }
 
         return response()->json([
