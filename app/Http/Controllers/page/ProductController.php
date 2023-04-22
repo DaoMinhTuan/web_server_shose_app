@@ -51,67 +51,48 @@ class ProductController extends Controller
         $data = $sizes->select()->where("product_id", $id)->get();
         return view('page.products.sizes', [
             'size' => $data
+            
         ]);
     }
     public function update_size(Request $request)
     {
         $sizes = new Size();
         try {
-
             $id = [];
             $size = [];
             $values =  [];
+            $quantity = 0;
 
-
-            /**
-             * Loops through the size array in the request object and adds each size to the $size array.
-             *
-             * @param  Request  $request
-             * @return array
-             */
             foreach ($request->size as $key => $s) {
                 $size[] = $s;
             };
 
-            /**
-             * Loops through the 'id' values in the request and adds them to an array.
-             *
-             * @param  Request  $request
-             * @return array
-             */
+            
             foreach ($request->id as $value) {
                 $id[] = $value;
             }
 
-            /**
-             * Loops through the quantity array of the request and creates an array of values containing the id, size, and quantity of each item.
-             *
-             * @param  array  $request->quantity
-             * @param  array  $id
-             * @param  array  $size
-             * @return array
-             */
-            /**
-             * Update the sizes in the database based on the given values.
-             *
-             * @param  array  $values
-             * @return void
-             */
             foreach ($request->quantity as $key => $q) {
                 $values[] =  [
                     'id' => $id[$key],
                     'size' => $size[$key],
                     'quantity' => $q
                 ];
+                $quantity += $q;
+                
             }
 
-            /**
-             * Update the sizes in the database based on the given values.
-             *
-             * @param  array  $values
-             * @return void
-             */
-            // dd($values);
+            $pro_id = $sizes->where('id', $request->id)->first()->product_id;
+            
+            $old_product = ProductDetail::where('product_id', $pro_id)->first();
+
+            if($old_product != null){
+                $new_product = ProductDetail::find($old_product->id);
+                $new_product->quantity = $quantity;
+                $new_product->save();
+            }
+
+
             foreach ($values as $row) {
                 $input = [
                     'size' => $row['size'],
@@ -119,24 +100,14 @@ class ProductController extends Controller
                 ];
                 $sizes->where('id', $row['id'])->update($input);
             }
+
+            
         } catch (\Exception $err) {
-            /**
-             * Create an error alert with the given message and return back to the previous page.
-             *
-             * @param  string  $message
-             * @param  string  $details
-             * @return \Illuminate\Http\RedirectResponse
-             */
+         
             Alert::error('Not found ', 'cập nhật số lượng sản phẩm ko thành công');
             return back();
         }
-        /**
-         * Flash a success message to the session and redirect back to the previous page.
-         *
-         * @param  string  $message
-         * @param  string|null  $title
-         * @return \Illuminate\Http\RedirectResponse
-         */
+       
         Alert::success(' successfully ', 'cập nhật số lượng sản phẩm thành công');
         return back();
     }

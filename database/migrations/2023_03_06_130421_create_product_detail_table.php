@@ -18,7 +18,7 @@ class CreateProductDetailTable extends Migration
             $table->string('color');
             $table->json('size');
             $table->integer('product_id');
-            $table->string('quantity');
+            $table->integer('quantity')->nullable();
             $table->timestamps();
         });
     }

@@ -31,6 +31,7 @@ class OderDetailController extends Controller
         $count = count($data);
         for ($i = 0; $i < $count; $i++) {
             $data[$i]['products'] =  json_decode($data[$i]['products']);
+            $data[$i]['products'] =  json_decode($data[$i]['products']);
         }
 
         return response()->json([
@@ -175,7 +176,8 @@ class OderDetailController extends Controller
     {
         $data = $this->oder_detail
             ->join('oders', 'oders.id', '=', 'oderdetail.oder_id')
-            ->select()
+            ->join('users', 'users.id', '=', 'oders.user_id')
+            ->select('users.name','oders.*','oderdetail.*')
             ->where([
                 ['oderdetail.status', '=', $status],
                 ['oders.user_id', '=', $user]

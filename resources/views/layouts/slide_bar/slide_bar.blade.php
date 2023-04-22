@@ -12,9 +12,43 @@
             </div>
             <div class="menu-item">
                 <a href="{{ route('product.index') }}" class="menu-link">
+                    <span class="menu-icon"><i class="fa fa-folder"></i></span>
+                    <span class="menu-text">Branch</span>
+                </a>
+            </div>
+            <div class="menu-item">
+                <a href="{{ route('product.index') }}" class="menu-link">
                     <span class="menu-icon"><i class="fa fa-chart-pie"></i></span>
                     <span class="menu-text">Products</span>
                 </a>
+            </div>
+
+            <div class="menu-item has-sub">
+                <a href="#" class="menu-link">
+                    <span class="menu-icon">
+                        <i class="fa fa-desktop"></i>
+                        {{-- <span class="menu-icon-label">6</span> --}}
+                    </span>
+                    <span class="menu-text">Admin</span>
+                    <span class="menu-caret"><b class="caret"></b></span>
+                </a>
+                <div class="menu-submenu">
+                    <div class="menu-item">
+                        <a href="" class="menu-link">
+                            <span class="menu-text">Oder</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a href="" class="menu-link">
+                            <span class="menu-text">User</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a href="email_detail.html" class="menu-link">
+                            <span class="menu-text">Detail</span>
+                        </a>
+                    </div>
+                </div>
             </div>
             
         </div>

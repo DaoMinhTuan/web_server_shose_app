@@ -85,11 +85,11 @@
                     </div>
 
                     <div class="col-xl-3 col-12">
-                        <div class="form-group mb-3">
-                            <label class="form-label" for="exampleFormControlInput1">Quantity</label>
-                            <input type="number" name="quantity" class="form-control is-invalid"
-                                id="exampleFormControlInput1" placeholder="Nhập số lượng sản phẩm">
-                        </div>
+                        {{-- <div class="form-group mb-3">
+                            <label class="form-label"  for="exampleFormControlInput1">Quantity</label>
+                            <input type="number" disabled name="quantity" class="form-control"
+                                id="exampleFormControlInput1" placeholder="số lượng auto cập nhật" >
+                        </div> --}}
 
                         <div class="form-group mb-3">
                             <label class="form-label" for="exampleFormControlInput1">Max size</label>

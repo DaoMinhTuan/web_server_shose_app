@@ -104,4 +104,31 @@ class SizeController extends Controller
             'data' => $data
         ]);
     }
+
+    public function update_quantity(Request $request){
+        $size = new Size();
+        $data = $size->select()
+        ->where([
+            ['product_id','=',$request->product_id],
+            ['size','=',$request->size]
+        ])->first();
+
+        if ($data == null) {
+            return response()->json([
+                'status' => 401,
+                'errors' => 'size not found'
+            ]);
+        }
+
+        $new_quantity = $size->find($data->id);
+        $new_quantity->quantity = $request->quantity;
+        $new_quantity->save();
+        return response()->json([
+            'status' => 201,
+            'message' => 'quantity successfully'
+        ]);
+
+        
+        
+    }
 }
