@@ -24,14 +24,14 @@ class ApiLoginRequest extends FormRequest
     {
         $err = $validator->errors();
         foreach ($err as  $key => $value) {
-             $value;
+            $value;
         }
 
         $json = [
             'result' => false,
             'message' => $err,
         ];
-        $response = response( $json );
+        $response = response($json);
         throw new ValidationException($validator, $response);
     }
 
@@ -56,9 +56,14 @@ class ApiLoginRequest extends FormRequest
                         break;
                     case 'api_register':
                         $rules = [
-                            'name' => 'required', 
+                            'name' => 'required',
                             'email' => 'required|email|unique:users,email',
-                            'password' => 'required', 
+                            'password' => 'required',
+                        ];
+                        break;
+                    case 'send_otp':
+                        $rules = [
+                            'email' => 'required|email',
                         ];
                         break;
                     default:
@@ -71,7 +76,7 @@ class ApiLoginRequest extends FormRequest
         return $rules;
     }
 
-    public function messages() : array
+    public function messages(): array
     {
         return [
             'email.required' => 'Email không được để trống',

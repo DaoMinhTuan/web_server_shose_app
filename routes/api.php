@@ -31,6 +31,7 @@ use App\Http\Controllers\api\ProductDetailController;
 
 
     Route::resource('users', UserController::class)->names('Users');
+    Route::post('send-otp', [UserController::class,"send_otp"])->name('send_otp');
     
     Route::resource('products', ProductController::class)->names('Products');
     Route::get('products/branch/{id}',[ProductController::class,'get_brach_products'])->name('branch_products');

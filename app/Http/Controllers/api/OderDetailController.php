@@ -172,7 +172,7 @@ class OderDetailController extends Controller
 
     }
 
-    public function history_oder($user, $status)
+    public function history_oder($user,$status)
     {
         $data = $this->oder_detail
             ->join('oders', 'oders.id', '=', 'oderdetail.oder_id')
