@@ -62,7 +62,6 @@ class RegisterController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        dd($validated);
         try {
 
             $users = new User;
