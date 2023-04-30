@@ -49,7 +49,7 @@ use App\Http\Controllers\api\ProductDetailController;
     Route::resource('colors', ColorController::class)->names('Colors');
 
     Route::resource('oderdetail', OderDetailController::class)->names('Oderdetail');
-    Route::get('history/{user}-{status}', [OderDetailController::class,'history_oder'])->name('history_oder');
+    Route::get('history/{user}/{status}', [OderDetailController::class,'history_oder'])->name('history_oder');
 
 
 
