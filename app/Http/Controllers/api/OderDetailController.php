@@ -64,8 +64,8 @@ class OderDetailController extends Controller
         $id =  $this->oders->select("id")->orderBy('id', 'desc')->first()->id;
 
         $this->oder_detail->oder_id = $id;
-        $this->oder_detail->products = json_encode($request->products);
         $this->oder_detail->fill($request->all());
+        $this->oder_detail->products = json_encode($request->products);
         $this->oder_detail->save();
 
 
