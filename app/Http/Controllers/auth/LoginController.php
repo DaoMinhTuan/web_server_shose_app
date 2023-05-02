@@ -27,7 +27,7 @@ class LoginController extends Controller
      
         $validated = $request->safe()->only(['email','password']);
         
-        if (Auth::attempt(['email' =>$validated['email'], 'password' => $validated['password']])) {
+        if (Auth::attempt(['email' =>$validated['email'],'password' => $validated['password']])) {
             $data = Auth::user();
             if (Auth::user()->role_id == 2) {
                 return response()->json([

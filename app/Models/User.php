@@ -13,14 +13,9 @@ class User extends Authenticatable
     protected $table = 'users';
     protected $fillable = [
         'name', 'address_id', 'phoneNumber', 'email', 'password', 'avatar',
-        'role_id', 'status', 'token'
+        'role_id', 'status', 'token','filebase_id'
     ];
 
 
-    public function get_user($id)
-    {
-        $query = DB::table($this->table)->where('id', $id)->select($this->fillable);
-        $user = $query->first();
-        return $user;
-    }
+    
 }
