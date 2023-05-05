@@ -62,7 +62,7 @@ class RatingController extends Controller
         $ratings = new Rating();
         $data = $ratings
         ->join('users', 'users.id', '=', 'ratings.user_id')
-        ->select('ratings.*','users.name')
+        ->select('users.name as username','users.avatar','ratings.*',)
         ->where([['ratings.product_id', '=', $id]])
         ->get();
 
