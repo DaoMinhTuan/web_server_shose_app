@@ -16,6 +16,7 @@ use App\Http\Controllers\api\ProductController;
 use App\Http\Controllers\auth\RegisterController;
 use App\Http\Controllers\api\OderDetailController;
 use App\Http\Controllers\api\ProductDetailController;
+use App\Http\Controllers\api\RatingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,13 +41,14 @@ use App\Http\Controllers\api\ProductDetailController;
     
     Route::resource('sizes', SizeController::class)->names('Sizes');
     Route::get('sizes/product/{id}',[SizeController::class,'size_product'])->name('size_product');
-    Route::put('sizes',[SizeController::class,'update_quantity'])->name('update_quantity');
+    Route::put('sizes/quantity',[SizeController::class,'update_quantity'])->name('update_quantity');
 
     Route::resource('brands', BrandController::class)->names('Brands');
     Route::resource('product_detail', ProductDetailController::class)->names('Product_Detail');
     Route::resource('oders', OderController::class)->names('Oders');
     Route::resource('roles', RoleController::class)->names('Roles');
     Route::resource('colors', ColorController::class)->names('Colors');
+    Route::resource('ratings', RatingController::class)->names('ratings');
 
     Route::resource('oderdetail', OderDetailController::class)->names('Oderdetail');
     Route::get('history/{user}/{status}', [OderDetailController::class,'history_oder'])->name('history_oder');

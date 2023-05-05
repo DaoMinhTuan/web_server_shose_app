@@ -55,7 +55,7 @@ class RegisterController extends Controller
 
         $validated = $request->safe()->merge([
             'address_id' => 0,
-            'role_id' => 1,
+            'role_id' => 2,
             'status' => 0,
             'token' => md5(uniqid(rand(), true)),
             'avatar' => " no avatar available",

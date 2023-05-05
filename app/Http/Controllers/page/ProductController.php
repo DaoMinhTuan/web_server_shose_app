@@ -39,7 +39,6 @@ class ProductController extends Controller
 
         
       
-        // // return $data;
         return view('page.products.list',[
             'data' => $data
         ]);

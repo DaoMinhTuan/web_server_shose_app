@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Rating extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'user_id','product_id','star','image','content'
+    ];
 }
