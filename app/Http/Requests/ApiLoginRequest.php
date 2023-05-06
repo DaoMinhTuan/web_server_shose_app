@@ -44,7 +44,7 @@ class ApiLoginRequest extends FormRequest
     {
         $rules = [];
         $currentAction = $this->route()->getActionMethod();
-
+        // dd($currentAction);
         switch ($this->method()):
             case 'POST':
                 switch ($currentAction) {
@@ -66,6 +66,11 @@ class ApiLoginRequest extends FormRequest
                             'email' => 'required|email',
                         ];
                         break;
+                    case 'store':
+                        $rules = [
+                            'content' => 'required',
+                        ];
+                        break;
                     default:
                         break;
                 }
@@ -83,7 +88,8 @@ class ApiLoginRequest extends FormRequest
             'email.email' => 'Email chưa đúng định dạng',
             'email.unique' => 'Email đã tồn tại ',
             'password.required' => 'password không được để trống',
-            'name.required' => 'Tên không được để trống'
+            'name.required' => 'Tên không được để trống',
+            'content.required' => ' không được để trống nội dung'
         ];
     }
 }

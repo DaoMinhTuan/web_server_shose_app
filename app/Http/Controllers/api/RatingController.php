@@ -37,12 +37,23 @@ class RatingController extends Controller
     public function store(Request $request)
     {
         $ratings = new Rating();
+        $files = [];
 
-        $url = asset('uploads');
-        $name = $url . "/" . time() . rand(1, 100) . '.' . $request->image->extension();
-        $request->image->move(public_path('/uploads'), $name);
+        if ($request->hasfile('file_image')) {
+            $id = 0;
+            foreach ($request->file('file_image') as $file) {
+                $url = asset('uploads');
+                $name = $url . "/" . time() . rand(1, 100) . '.' . $file->extension();
+                $file->move(public_path('uploads'), $name);
+                $files['image'.$id+1]['name'] =  $name;
+                $files['image'.$id+1]['id'] = $id += 1;
+            }
+        }
+
+       
         $ratings->fill($request->all());
-        $ratings->image = $name;
+        $ratings->image = json_encode(array($files));
+        
         $ratings->save();
         
         return response()->json([
