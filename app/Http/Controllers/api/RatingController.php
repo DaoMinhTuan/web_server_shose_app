@@ -39,9 +39,9 @@ class RatingController extends Controller
         $ratings = new Rating();
         $files = [];
 
-        if ($request->hasfile('file_image')) {
+        if ($request->hasfile('image')) {
             $id = 0;
-            foreach ($request->file('file_image') as $file) {
+            foreach ($request->file('image') as $file) {
                 $url = asset('uploads');
                 $name = $url . "/" . time() . rand(1, 100) . '.' . $file->extension();
                 $file->move(public_path('uploads'), $name);
