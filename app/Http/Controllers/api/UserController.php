@@ -113,7 +113,11 @@ class UserController extends Controller
     }
 
     $users->fill($request->all());
-    $users->password = Hash::make($request->password);
+    
+    if($request->password != null){
+      $users->password = Hash::make($request->password);
+    }
+
     $users->save();
 
     return response()->json([
@@ -162,7 +166,6 @@ class UserController extends Controller
 
     $user = new User();
     $get_user = $user->where('email', $validated['email'])->first();
-    // dd($get_user);
 
     if ($get_user == null) {
       return response()->json([

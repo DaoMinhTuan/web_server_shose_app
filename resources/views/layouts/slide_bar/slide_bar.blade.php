@@ -12,12 +12,6 @@
             </div>
             <div class="menu-item">
                 <a href="{{ route('product.index') }}" class="menu-link">
-                    <span class="menu-icon"><i class="fa fa-folder"></i></span>
-                    <span class="menu-text">Branch</span>
-                </a>
-            </div>
-            <div class="menu-item">
-                <a href="{{ route('product.index') }}" class="menu-link">
                     <span class="menu-icon"><i class="fa fa-chart-pie"></i></span>
                     <span class="menu-text">Products</span>
                 </a>

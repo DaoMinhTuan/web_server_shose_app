@@ -43,7 +43,7 @@ use App\Http\Controllers\api\RatingController;
     Route::get('sizes/product/{id}',[SizeController::class,'size_product'])->name('size_product');
     Route::put('sizes/quantity',[SizeController::class,'update_quantity'])->name('update_quantity');
 
-    Route::resource('brands', BrandController::class)->names('Brands');
+    
     Route::resource('product_detail', ProductDetailController::class)->names('Product_Detail');
     Route::resource('oders', OderController::class)->names('Oders');
     Route::resource('roles', RoleController::class)->names('Roles');
