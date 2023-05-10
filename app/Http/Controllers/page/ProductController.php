@@ -53,6 +53,7 @@ class ProductController extends Controller
             
         ]);
     }
+
     public function update_size(Request $request)
     {
         $sizes = new Size();
@@ -267,7 +268,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+       return view('page.products.list_update',[
+        'id' => $id,
+       ]);
     }
 
     /**

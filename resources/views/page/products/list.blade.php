@@ -129,7 +129,7 @@
                                             </div>
                                         </td>
                                         <td class="align-middle">{{ $item->quantity }} in stock for
-                                            {{ count(get_object_vars($item->size[0])) }} Sizes</td>
+                                            {{ count(get_object_vars($item->size[0])) }}  Sizes</td>
                                         <td class="align-middle">{{ $item->color }}</td>
                                         <td class="align-middle">
                                             @if ($item->status == 1)
@@ -139,7 +139,7 @@
                                             @endif
                                         </td>
                                         <td class="align-middle">
-                                            <a href="" class="btn btn-primary">cập nhật</a>
+                                            <a href="{{ route('product.edit',$item->id) }}" class="btn btn-primary">cập nhật</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -149,43 +149,7 @@
                         </table>
                     </div>
 
-                    {{-- <div class="modal fade" id="modalSm">
-                        <div class="modal-dialog modal-sm">
-
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Modal title</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                </div>
-
-                                <div class="modal-body">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">Name</th>
-                                                <th scope="col">Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>product</td>
-                                                <td><a href="" class="btn btn-primary">update</a></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td> image product</td>
-                                                <td><a href="" class="btn btn-primary">update</a></td>
-                                            </tr>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div> --}}
+                   
                 </div>
                 
                 <div class="d-md-flex align-items-center">
