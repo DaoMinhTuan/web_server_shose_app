@@ -60,7 +60,6 @@ class RegisterController extends Controller
             'token' => md5(uniqid(rand(), true)),
             'avatar' => " no avatar available",
             'password' => Hash::make($request->password),
-            'filebase_id'=> md5(uniqid(rand(), true))
         ]);
 
         try {

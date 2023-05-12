@@ -23,13 +23,13 @@ class ProductController extends Controller
     public function index()
     {
         $products = new Product();
-        
+
         $data = $products
-        ->join('product_detail', 'products.id', '=', 'product_detail.product_id')
-        ->join('brands', 'products.brandID', '=', 'brands.id')
-        ->select('products.*', 'product_detail.color', 'product_detail.size', 'product_detail.quantity', 'brands.brandName as branch')
-        ->where([['products.status', '=', 1]])
-        ->paginate(5);
+            ->join('product_detail', 'products.id', '=', 'product_detail.product_id')
+            ->join('brands', 'products.brandID', '=', 'brands.id')
+            ->select('products.*', 'product_detail.color', 'product_detail.size', 'product_detail.quantity', 'brands.brandName as branch')
+            ->where([['products.status', '=', 1]])
+            ->paginate(5);
 
         $count = count($data);
         for ($i = 0; $i < $count; $i++) {
@@ -37,9 +37,9 @@ class ProductController extends Controller
             $data[$i]['size'] =  json_decode($data[$i]['size']);
         }
 
-        
-      
-        return view('page.products.list',[
+
+
+        return view('page.products.list', [
             'data' => $data
         ]);
     }
@@ -50,7 +50,7 @@ class ProductController extends Controller
         $data = $sizes->select()->where("product_id", $id)->get();
         return view('page.products.sizes', [
             'size' => $data
-            
+
         ]);
     }
 
@@ -67,7 +67,7 @@ class ProductController extends Controller
                 $size[] = $s;
             };
 
-            
+
             foreach ($request->id as $value) {
                 $id[] = $value;
             }
@@ -79,14 +79,13 @@ class ProductController extends Controller
                     'quantity' => $q
                 ];
                 $quantity += $q;
-                
             }
 
             $pro_id = $sizes->where('id', $request->id)->first()->product_id;
-            
+
             $old_product = ProductDetail::where('product_id', $pro_id)->first();
 
-            if($old_product != null){
+            if ($old_product != null) {
                 $new_product = ProductDetail::find($old_product->id);
                 $new_product->quantity = $quantity;
                 $new_product->save();
@@ -100,14 +99,12 @@ class ProductController extends Controller
                 ];
                 $sizes->where('id', $row['id'])->update($input);
             }
-
-            
         } catch (\Exception $err) {
-         
+
             Alert::error('Not found ', 'cập nhật số lượng sản phẩm ko thành công');
             return back();
         }
-       
+
         Alert::success(' successfully ', 'cập nhật số lượng sản phẩm thành công');
         return back();
     }
@@ -157,6 +154,7 @@ class ProductController extends Controller
         $products = new Product();
         $product_detali = new ProductDetail();
         $sizes_product = new Size();
+
         try {
             /**
              * Initialize empty arrays for files and sizes, and a dictionary for sizes.
@@ -182,10 +180,11 @@ class ProductController extends Controller
                     $url = asset('uploads');
                     $name = $url . "/" . time() . rand(1, 100) . '.' . $file->extension();
                     $file->move(public_path('uploads'), $name);
-                    $files['image'.$id+1]['name'] =  $name;
-                    $files['image'.$id+1]['id'] = $id += 1;
+                    $files['image' . $id + 1]['name'] =  $name;
+                    $files['image' . $id + 1]['id'] = $id += 1;
                 }
             }
+
             $products->image = json_encode(array($files));
             // dd(json_decode($products->image));
             /**
@@ -213,12 +212,12 @@ class ProductController extends Controller
              * @return array
              */
 
-             
+
             if ($request->misize != 0 and $request->msize != 0) {
                 $ids = 0;
                 for ($i = $request->misize; $i <= $request->msize; $i++) {
-                    $sizes['size_'.$i]["size"] = $i;
-                    $sizes['size_'.$i]["id"] = $ids += 1;
+                    $sizes['size_' . $i]["size"] = $i;
+                    $sizes['size_' . $i]["id"] = $ids += 1;
                     $sizes_table[] = [
                         'size' => $i,
                         'product_id' => $id
@@ -257,7 +256,6 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        
     }
 
     /**
@@ -268,9 +266,26 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-       return view('page.products.list_update',[
-        'id' => $id,
-       ]);
+        $sizes_product = new Size();
+        $products = new Product();
+        $size = $sizes_product->where([['product_id', '=', $id]])->get();
+
+        $branch = Brand::all();
+        $data = $products
+            ->join('product_detail', 'products.id', '=', 'product_detail.product_id')
+            ->join('brands', 'products.brandID', '=', 'brands.id')
+            ->select('products.*', 'product_detail.color')
+            ->where([['products.status', '=', 1], ['products.id', '=', $id]])
+            ->first();
+
+
+
+        return view('page.products.list_update', [
+            'id' => $id,
+            'size' => $size,
+            'product' => $data,
+            'branch' => $branch
+        ]);
     }
 
     /**
@@ -282,7 +297,98 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $sizes = new Size();
+        $products = Product::find($id);
+        $old_prDetai = ProductDetail::where('product_id', $id);
+
+        if ($request->role == "image") {
+            $files = [];
+            if ($request->hasfile('file_image')) {
+                $id = 0;
+                foreach ($request->file('file_image') as $file) {
+                    $url = asset('uploads');
+                    $name = $url . "/" . time() . rand(1, 100) . '.' . $file->extension();
+                    $file->move(public_path('uploads'), $name);
+                    $files['image' . $id + 1]['name'] =  $name;
+                    $files['image' . $id + 1]['id'] = $id += 1;
+                }
+            }
+            $products->image = json_encode(array($files));
+
+            try {
+                $products->save();
+            } catch (\Exception $err) {
+                Alert::error('Update Product not successfuly', 'Cập nhật sản phẩm ko thành công');
+                return back();
+            }
+
+            Alert::success('Update Product successfuly', 'Cập nhật sản phẩm thành công');
+            return back();
+        }
+
+        if ($request->role == 'product') {
+            $data = $products->fill($request->all());
+            $new_product = ProductDetail::find($old_prDetai->first()->id);
+            $new_product->color = $request->color;
+
+            try {
+                $data->save();
+                $new_product->save();
+            } catch (\Exception $err) {
+                Alert::error('Update Product not successfuly', 'Cập nhật sản phẩm ko thành công');
+                return back();
+            }
+
+            Alert::success('Update Product successfuly ', 'Cập nhật sản phẩm thành công');
+            return back();
+        }
+
+
+        if ($request->role == 'size') {
+            $PSID = [];
+            $size = [];
+            $PS = [];
+            $values =  [];
+            $quantity = 0;
+            foreach ($request->size as $key => $s) {
+                $size[] = $s;
+            };
+            foreach ($request->PSID as $key => $s) {
+                $PSID[] = $s;
+            };
+            foreach ($request->quantity as $key => $q) {
+                $values[] =  [
+                    'id' => $PSID[$key],
+                    'size' => $size[$key],
+                    'quantity' => $q
+                ];
+
+                $PS['size' . $key + 1] = [
+                    'size' => $size[$key],
+                    'id' => $key + 1
+                ];
+
+                $quantity += $q;
+            }
+
+
+            if ($old_prDetai != null) {
+                $new_product = ProductDetail::find($old_prDetai->first()->id);
+                $new_product->quantity = $quantity;
+                $new_product->size =  json_encode(array($PS));
+                $new_product->save();
+            }
+
+            foreach ($values as $row) {
+                $input = [
+                    'size' => $row['size'],
+                    'quantity' => $row['quantity']
+                ];
+                $sizes->where('id', $row['id'])->update($input);
+            }
+        }
+        Alert::success('Update Product successfuly ', 'Cập nhật sản phẩm thành công');
+        return back();
     }
 
     /**

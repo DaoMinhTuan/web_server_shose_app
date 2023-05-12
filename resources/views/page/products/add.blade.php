@@ -101,8 +101,6 @@
                             <label class="form-label" for="defaultFile">Image Products</label>
                             <input type="file" name="file_image[]" class="form-control" multiple id="multipleFile" />
                         </div>
-                       
-
                     </div>
 
                     <div class="col-xl-6 col-12">

@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('token')->nullable();
             $table->integer('status');
             $table->string('filebase_id')->nullable();
+           
             $table->timestamps();
         });
     }
