@@ -51,21 +51,36 @@ class RegisterController extends Controller
     }
 
     public function api_register(ApiLoginRequest $request)
-    {
+    {   
+        if($request->role == 'admin' ){
+            $validated = $request->safe()->merge([
+                'address_id' => 0,
+                'role_id' => 1,
+                'status' => 0,
+                'token' => md5(uniqid(rand(), true)),
+                'avatar' => " no avatar available",
+                'password' => Hash::make($request->password),
+            ]);
+        }
 
-        $validated = $request->safe()->merge([
-            'address_id' => 0,
-            'role_id' => 2,
-            'status' => 0,
-            'token' => md5(uniqid(rand(), true)),
-            'avatar' => " no avatar available",
-            'password' => Hash::make($request->password),
-        ]);
-
+        if($request->role == null){
+            $validated = $request->safe()->merge([
+                'address_id' => 0,
+                'role_id' => 2,
+                'status' => 0,
+                'token' => md5(uniqid(rand(), true)),
+                'avatar' => " no avatar available",
+                'password' => Hash::make($request->password),
+            ]);
+        }
+        
+        
         try {
 
             $users = new User;
             $users->fill($validated->all());
+
+            
             $users->save();
 
             $data = [
