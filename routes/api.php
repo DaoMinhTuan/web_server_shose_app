@@ -64,5 +64,5 @@ Route::post('/login', [LoginController::class, 'Login'])->name('Login');
 
 Route::get('/register', [RegisterController::class,'get_api_register'])->name('get_api_register');
 Route::post('/register', [RegisterController::class,'api_register'])->name('api_register');
-Route::post('/register/admin', [RegisterController::class,'api_register'])->name('api_admin_register');
+Route::post('/register/admin', [RegisterController::class,'api_admin_register'])->name('api_admin_register');
 Route::get('/confrim_account/{token}',[RegisterController::class, 'confrim_account'])->name('confrim_account');
