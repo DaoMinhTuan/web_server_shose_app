@@ -51,70 +51,67 @@ class RegisterController extends Controller
     }
 
     public function api_register(ApiLoginRequest $request)
-    {   
-       
+    {
+
         $validated = $request->safe()->merge([
-                'address_id' => 0,
-                'role_id' => 1,
-                'status' => 0,
-                'token' => md5(uniqid(rand(), true)),
-                'avatar' => " no avatar available",
-                'password' => Hash::make($request->password),
-            ]);
-        
+            'address_id' => 0,
+            'role_id' => 1,
+            'status' => 0,
+            'token' => md5(uniqid(rand(), true)),
+            'avatar' => " no avatar available",
+            'password' => Hash::make($request->password),
+        ]);
 
-            $users = new User;
-            $users->fill($validated->all());
 
-            
-            $users->save();
+        $users = new User;
+        $users->fill($validated->all());
 
-            $data = [
-                'subject' => 'Shose App',
-                'body' => 'Welcome to Shose App',
-                'token' => $validated['token'],
-            ];
-            Mail::to($validated['email'])->send(new MailNotify($data));
 
-            return response()->json([
-                'status' => '200',
-                'message' => 'created successfully'
-            ]);
-            
-        }
+        $users->save();
+
+        $data = [
+            'subject' => 'Shose App',
+            'body' => 'Welcome to Shose App',
+            'token' => $validated['token'],
+        ];
+        Mail::to($validated['email'])->send(new MailNotify($data));
+
+        return response()->json([
+            'status' => '200',
+            'message' => 'created successfully'
+        ]);
+    }
 
     public function api_admin_register(ApiLoginRequest $request)
-    {   
-       
+    {
+
         $validated = $request->safe()->merge([
-                'address_id' => 0,
-                'role_id' => 2,
-                'status' => 0,
-                'token' => md5(uniqid(rand(), true)),
-                'avatar' => " no avatar available",
-                'password' => Hash::make($request->password),
+            'address_id' => 0,
+            'role_id' => 2,
+            'status' => 0,
+            'token' => md5(uniqid(rand(), true)),
+            'avatar' => " no avatar available",
+            'password' => Hash::make($request->password),
         ]);
-        
-        
 
-            $users = new User;
-            $users->fill($validated->all());
 
-            
-            $users->save();
 
-            $data = [
-                'subject' => 'Shose App',
-                'body' => 'Welcome to Shose App',
-                'token' => $validated['token'],
-            ];
-            Mail::to($validated['email'])->send(new MailNotify($data));
+        $users = new User;
+        $users->fill($validated->all());
 
-            return response()->json([
-                'status' => '200',
-                'message' => 'created successfully'
-            ]);
-            
-       
+
+        $users->save();
+
+        $data = [
+            'subject' => 'Shose App',
+            'body' => 'Welcome to Shose App',
+            'token' => $validated['token'],
+        ];
+        Mail::to($validated['email'])->send(new MailNotify($data));
+
+        return response()->json([
+            'status' => '200',
+            'message' => 'created successfully'
+        ]);
     }
 }

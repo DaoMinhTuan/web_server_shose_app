@@ -54,14 +54,21 @@ class ApiLoginRequest extends FormRequest
                             'password' => 'required',
                         ];
                         break;
-                   
+
                     case 'api_admin_register':
-                            $rules = [
-                                'name' => 'required',
-                                'email' => 'required|email|unique:users,email',
-                                'password' => 'required',
-                            ];
-                            break;
+                        $rules = [
+                            'name' => 'required',
+                            'email' => 'required|email|unique:users,email',
+                            'password' => 'required',
+                        ];
+                        break;
+                    case 'api_register':
+                        $rules = [
+                            'name' => 'required',
+                            'email' => 'required|email|unique:users,email',
+                            'password' => 'required',
+                        ];
+                        break;
                     case 'send_otp':
                         $rules = [
                             'email' => 'required|email',
