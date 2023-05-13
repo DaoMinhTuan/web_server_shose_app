@@ -62,9 +62,6 @@ class RegisterController extends Controller
                 'password' => Hash::make($request->password),
             ]);
         
-        
-        
-        try {
 
             $users = new User;
             $users->fill($validated->all());
@@ -84,13 +81,7 @@ class RegisterController extends Controller
                 'message' => 'created successfully'
             ]);
             
-        } catch (\Exception $err) {
-            return response()->json([
-                'status' => '400',
-                'message' => "creat at user not successfully"
-            ]);
         }
-    }
 
     public function api_admin_register(ApiLoginRequest $request)
     {   
@@ -104,7 +95,7 @@ class RegisterController extends Controller
                 'password' => Hash::make($request->password),
         ]);
         
-        try {
+        
 
             $users = new User;
             $users->fill($validated->all());
@@ -124,11 +115,6 @@ class RegisterController extends Controller
                 'message' => 'created successfully'
             ]);
             
-        } catch (\Exception $err) {
-            return response()->json([
-                'status' => '400',
-                'message' => "creat at user not successfully"
-            ]);
-        }
+       
     }
 }
