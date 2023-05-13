@@ -52,8 +52,8 @@ class RegisterController extends Controller
 
     public function api_register(ApiLoginRequest $request)
     {   
-        if($request->role == 'admin' ){
-            $validated = $request->safe()->merge([
+       
+        $validated = $request->safe()->merge([
                 'address_id' => 0,
                 'role_id' => 1,
                 'status' => 0,
@@ -61,10 +61,41 @@ class RegisterController extends Controller
                 'avatar' => " no avatar available",
                 'password' => Hash::make($request->password),
             ]);
-        }
+        
+        
+        
+        try {
 
-        if($request->role == null){
-            $validated = $request->safe()->merge([
+            $users = new User;
+            $users->fill($validated->all());
+
+            
+            $users->save();
+
+            $data = [
+                'subject' => 'Shose App',
+                'body' => 'Welcome to Shose App',
+                'token' => $validated['token'],
+            ];
+            Mail::to($validated['email'])->send(new MailNotify($data));
+
+            return response()->json([
+                'status' => '200',
+                'message' => 'created successfully'
+            ]);
+            
+        } catch (\Exception $err) {
+            return response()->json([
+                'status' => '400',
+                'message' => "creat at user not successfully"
+            ]);
+        }
+    }
+
+    public function api_admin_register(ApiLoginRequest $request)
+    {   
+       
+        $validated = $request->safe()->merge([
                 'address_id' => 0,
                 'role_id' => 2,
                 'status' => 0,
@@ -72,7 +103,7 @@ class RegisterController extends Controller
                 'avatar' => " no avatar available",
                 'password' => Hash::make($request->password),
             ]);
-        }
+        
         
         
         try {

@@ -29,7 +29,7 @@ class LoginController extends Controller
         
         if (Auth::attempt(['email' =>$validated['email'],'password' => $validated['password']])) {
             $data = Auth::user();
-            if (Auth::user()->role_id == 1 or Auth::user()->role_id == 3 ) {
+            if (Auth::user()->role_id == 2 or Auth::user()->role_id == 3 ) {
                 return response()->json([
                     'status' => '200',
                     'message' => " admin login successfully",
@@ -68,7 +68,7 @@ class LoginController extends Controller
     {  
       
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password ])) {
-            if (Auth::user()->role_id != 2) {
+            if (Auth::user()->role_id == 2) {
                 if (Auth::user()->status == 1){
                     Alert::success('login successfully', 'tài khoản đăng nhập thành công');
                     return view('page.dashboard');

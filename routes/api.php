@@ -43,7 +43,6 @@ use App\Http\Controllers\api\RatingController;
     Route::get('sizes/product/{id}',[SizeController::class,'size_product'])->name('size_product');
     Route::put('sizes/quantity',[SizeController::class,'update_quantity'])->name('update_quantity');
 
-    
     Route::resource('product_detail', ProductDetailController::class)->names('Product_Detail');
     Route::resource('oders', OderController::class)->names('Oders');
     Route::resource('roles', RoleController::class)->names('Roles');
@@ -53,10 +52,7 @@ use App\Http\Controllers\api\RatingController;
     Route::resource('oderdetail', OderDetailController::class)->names('Oderdetail');
     Route::get('history/{user}/{status}', [OderDetailController::class,'history_oder'])->name('history_oder');
 
-
-
     Route::resource('address', AddressController::class)->names('Address');
-
     Route::resource('carts', cartController::class)->names('carts');
     Route::get('get-cars/{user}',[cartController::class,'get_cart_user'])->name('get_carts');
 
@@ -68,4 +64,5 @@ Route::post('/login', [LoginController::class, 'Login'])->name('Login');
 
 Route::get('/register', [RegisterController::class,'get_api_register'])->name('get_api_register');
 Route::post('/register', [RegisterController::class,'api_register'])->name('api_register');
+Route::post('/register/admin', [RegisterController::class,'api_register'])->name('api_admin_register');
 Route::get('/confrim_account/{token}',[RegisterController::class, 'confrim_account'])->name('confrim_account');
