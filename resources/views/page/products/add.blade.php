@@ -26,7 +26,7 @@
         </div>
         <div class="card">
 
-            <form class="was-validated m-1 " action="{{ route('product.store') }}" method="POST"
+            <form class=" m-1 " action="{{ route('product.store') }}" method="POST"
                 enctype="multipart/form-data">
                 <div class="row d-flex justify-content-center m-3">
                     @csrf

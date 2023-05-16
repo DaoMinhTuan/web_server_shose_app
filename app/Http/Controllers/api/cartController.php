@@ -46,6 +46,11 @@ class cartController extends Controller
     {
         $this->cart->fill($request->all());
         $this->cart->save();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'add successfully'
+        ]);
     }
 
     /**
@@ -90,7 +95,16 @@ class cartController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data =  $this->cart()->find($id);
+
+        if($data != null){
+            $data->delete();
+        }
+
+        return response()->json([
+            'status' => '200',
+            'message' => 'deleted successfully'
+        ]);
     }
 
     public function get_cart_user($user){

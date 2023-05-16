@@ -195,4 +195,27 @@ class OderDetailController extends Controller
             'data' => $data
         ]);
     }
+
+    public function get_oder_status($status)
+    {
+        $data = $this->oder_detail
+            ->join('oders', 'oders.id', '=', 'oderdetail.oder_id')
+            ->join('users', 'users.id', '=', 'oders.user_id')
+            ->select('users.name','oders.*','oderdetail.*')
+            ->where([
+                ['oderdetail.status', '=', $status],
+            ])
+            ->get();
+
+        $count = count($data);
+        for ($i = 0; $i < $count; $i++) {
+            $data[$i]['products'] =  json_decode($data[$i]['products']);
+            $data[$i]['products'] =  json_decode($data[$i]['products']);
+        }
+
+        return response()->json([
+            'status' => '202',
+            'data' => $data
+        ]);
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\page;
 
+use App\Http\Requests\productRequest;
 use App\Models\Size;
 use App\Models\Brand;
 use App\Models\Product;
@@ -144,7 +145,7 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(productRequest $request)
     {
         /**
          * Creates instances of Product, ProductDetail, and Size classes.

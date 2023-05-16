@@ -52,6 +52,7 @@ use App\Http\Controllers\api\RatingController;
 
     Route::resource('oderdetail', OderDetailController::class)->names('Oderdetail');
     Route::get('history/{user}/{status}', [OderDetailController::class,'history_oder'])->name('history_oder');
+    Route::get('oder_status/{status}', [OderDetailController::class,'get_oder_status'])->name('get_oder_status');
 
     Route::resource('address', AddressController::class)->names('Address');
     Route::resource('carts', cartController::class)->names('carts');
