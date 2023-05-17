@@ -29,7 +29,7 @@ class ProductController extends Controller
             ->join('product_detail', 'products.id', '=', 'product_detail.product_id')
             ->join('brands', 'products.brandID', '=', 'brands.id')
             ->select('products.*', 'product_detail.color', 'product_detail.size', 'product_detail.quantity', 'brands.brandName as branch')
-            ->where([['products.status', '=', 1]])
+            ->orderBy('id','desc')
             ->paginate(5);
 
         $count = count($data);
@@ -276,7 +276,7 @@ class ProductController extends Controller
             ->join('product_detail', 'products.id', '=', 'product_detail.product_id')
             ->join('brands', 'products.brandID', '=', 'brands.id')
             ->select('products.*', 'product_detail.color')
-            ->where([['products.status', '=', 1], ['products.id', '=', $id]])
+            ->where([['products.id', '=', $id]])
             ->first();
 
 
