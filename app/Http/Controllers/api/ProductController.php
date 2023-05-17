@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\api;
 
+use App\Http\Requests\ApiProductRequest;
+use App\Http\Requests\productRequest;
 use App\Models\Size;
 use App\Models\Brand;
 use App\Models\Product;
@@ -53,13 +55,12 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store( ApiProductRequest $request)
     {
         $products = new Product();
         $product_detali = new ProductDetail();
         $sizes_product = new Size();
 
-        // try {
             /**
              * Initialize empty arrays for files and sizes, and a dictionary for sizes.
              *
@@ -139,17 +140,19 @@ class ProductController extends Controller
              * @param  Illuminate\Http\Request  $request
              * @return void
              */
+            try {
+
             $sizes_product->insert($sizes_table);
             $product_detali->product_id = $id;
             $product_detali->size =  json_encode(array($sizes));
             $product_detali->fill($request->all());
             $product_detali->save();
-        // } catch (\Exception $err) {
-        //     return response()->json([
-        //         'status' => '401',
-        //         'message' => "creat not product successfully",
-        //     ]);
-        // }
+        } catch (\Exception $err) {
+            return response()->json([
+                'status' => '401',
+                'message' => "creat not product successfully",
+            ]);
+        }
         return response()->json([
             'id' => $id,
             'status' => '200',
@@ -215,8 +218,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ApiProductRequest $request, $id)
     {
+        dd('hello world');
         $sizes = new Size();
         $products = Product::find($id);
         $old_prDetai = ProductDetail::where('product_id', $id);
