@@ -28,7 +28,7 @@
                 </a>
                 <div class="menu-submenu">
                     <div class="menu-item">
-                        <a href="" class="menu-link">
+                        <a href="{{ route('list_oder') }}" class="menu-link">
                             <span class="menu-text">Oder</span>
                         </a>
                     </div>

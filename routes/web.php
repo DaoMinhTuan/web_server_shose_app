@@ -6,6 +6,7 @@ use App\Http\Controllers\mail\Mailcontroller;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\RegisterController;
 use App\Http\Controllers\page\ProductController as pageProduct;
+use App\Http\Controllers\page\OderController as pageOder;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('Products', pageProduct::class)->names('product');
     Route::resource('brands', pageBranch::class)->names('brands');
+    Route::get('/list_oder',[pageOder::class,'index'])->name('list_oder');
     Route::get('/get_sizes/{id}',[pageProduct::class,'get_size'])->name('get_sizes');
     Route::post('/get_sizes',[pageProduct::class,'update_size'])->name('update_size');
     

@@ -29,21 +29,24 @@ class LoginController extends Controller
         
         if (Auth::attempt(['email' =>$validated['email'],'password' => $validated['password']])) {
             $data = Auth::user();
-            if (Auth::user()->role_id == 2 or Auth::user()->role_id == 3 ) {
-                return response()->json([
-                    'status' => '200',
-                    'message' => " admin login successfully",
-                    'data' => $data
-                ]);
-            } else {
-                $data = Auth::user();
-                return response()->json([
-                    'status' => '202',
-                    'message' => " user login succsetfully",
-                    'data' => $data
-
-                ]);
+            if(Auth::user()->status == 1){
+                if (Auth::user()->role_id == 2 or Auth::user()->role_id == 3 ) {
+                    return response()->json([
+                        'status' => '200',
+                        'message' => " admin login successfully",
+                        'data' => $data
+                    ]);
+                } else {
+                    $data = Auth::user();
+                    return response()->json([
+                        'status' => '202',
+                        'message' => " user login succsetfully",
+                        'data' => $data
+    
+                    ]);
+                }
             }
+            
         } else {
             return response()->json([
                 'status' => '203',

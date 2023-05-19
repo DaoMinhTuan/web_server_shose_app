@@ -17,6 +17,7 @@ use App\Http\Controllers\auth\RegisterController;
 use App\Http\Controllers\api\OderDetailController;
 use App\Http\Controllers\api\ProductDetailController;
 use App\Http\Controllers\api\RatingController;
+use App\Http\Controllers\api\statisticalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +59,9 @@ use App\Http\Controllers\api\RatingController;
     Route::resource('address', AddressController::class)->names('Address');
     Route::resource('carts', cartController::class)->names('carts');
     Route::get('get-cars/{user}',[cartController::class,'get_cart_user'])->name('get_carts');
+
+    Route::get('charts_oder',[statisticalController::class,'oder'])->name('charts_oder');
+    Route::get('charts_price',[statisticalController::class,'price'])->name('charts_price');
 
 // //login and register
 
