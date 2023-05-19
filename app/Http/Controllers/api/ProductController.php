@@ -55,7 +55,7 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store( ApiProductRequest $request)
+    public function store( Request $request)
     {
         $products = new Product();
         $product_detali = new ProductDetail();
@@ -218,9 +218,8 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ApiProductRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        dd('hello world');
         $sizes = new Size();
         $products = Product::find($id);
         $old_prDetai = ProductDetail::where('product_id', $id);
@@ -361,6 +360,17 @@ class ProductController extends Controller
         return response()->json([
             'status' => '202',
             'message' => 'get product branch successfully',
+            'data' => $data
+        ]);
+    }
+
+    public function get_size_api($id)
+    {
+        $sizes = new Size();
+        $data = $sizes->select()->where("product_id", $id)->get();
+        return response()->json([
+            'status' => '202',
+            'message' => 'get size successfully',
             'data' => $data
         ]);
     }
