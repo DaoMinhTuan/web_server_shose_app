@@ -55,7 +55,7 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store( Request $request)
+    public function store( ApiProductRequest $request)
     {
         $products = new Product();
         $product_detali = new ProductDetail();
@@ -272,6 +272,49 @@ class ProductController extends Controller
                 'message' => "update product successfully",
             ]);
 
+        }
+
+        
+        if ($request->role == "image") {
+            $files = [];
+            if ($request->hasfile('file_image')) {
+                $id = 0;
+                foreach ($request->file('file_image') as $file) {
+                    $url = asset('uploads');
+                    $name = $url . "/" . time() . rand(1, 100) . '.' . $file->extension();
+                    $file->move(public_path('uploads'), $name);
+                    $files['image' . $id + 1]['name'] =  $name;
+                    $files['image' . $id + 1]['id'] = $id += 1;
+                }
+            }
+            $products->image = json_encode(array($files));
+
+            try {
+                $products->save();
+            } catch (\Exception $err) {
+                Alert::error('Update Product not successfuly', 'Cập nhật sản phẩm ko thành công');
+                return back();
+            }
+
+            Alert::success('Update Product successfuly', 'Cập nhật sản phẩm thành công');
+            return back();
+        }
+
+        if ($request->role == 'product') {
+            $data = $products->fill($request->all());
+            $new_product = ProductDetail::find($old_prDetai->first()->id);
+            $new_product->color = $request->color;
+
+            try {
+                $data->save();
+                $new_product->save();
+            } catch (\Exception $err) {
+                Alert::error('Update Product not successfuly', 'Cập nhật sản phẩm ko thành công');
+                return back();
+            }
+
+            Alert::success('Update Product successfuly ', 'Cập nhật sản phẩm thành công');
+            return back();
         }
        
         
