@@ -27,7 +27,7 @@ class ProductController extends Controller
             ->join('product_detail', 'products.id', '=', 'product_detail.product_id')
             ->join('brands', 'products.brandID', '=', 'brands.id')
             ->select('products.*', 'product_detail.color', 'product_detail.size', 'product_detail.quantity', 'brands.brandName as branch')
-            ->orderBy('id','desc')
+            ->orderBy('id', 'desc')
             ->get();
 
         $count = count($data);
@@ -55,92 +55,92 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store( ApiProductRequest $request)
+    public function store(ApiProductRequest $request)
     {
         $products = new Product();
         $product_detali = new ProductDetail();
         $sizes_product = new Size();
 
-            /**
-             * Initialize empty arrays for files and sizes, and a dictionary for sizes.
-             *
-             * @var array $files
-             * @var array $sizes
-             * @var array $sizes_table
-             */
-            $files = [];
-            $sizes = [];
-            $sizes_table = [];
+        /**
+         * Initialize empty arrays for files and sizes, and a dictionary for sizes.
+         *
+         * @var array $files
+         * @var array $sizes
+         * @var array $sizes_table
+         */
+        $files = [];
+        $sizes = [];
+        $sizes_table = [];
 
-            /**
-             * Store the uploaded image files and set the image attribute of the product to the file path.
-             *
-             * @param  \Illuminate\Http\Request  $request
-             * @param  \App\Product  $products
-             * @return void
-             */
-            if ($request->hasfile('file_image')) {
-                $id = 0;
-                foreach ($request->file('file_image') as $file) {
-                    $url = asset('uploads');
-                    $name = $url . "/" . time() . rand(1, 100) . '.' . $file->extension();
-                    $file->move(public_path('uploads'), $name);
-                    $files['image' . $id + 1]['name'] =  $name;
-                    $files['image' . $id + 1]['id'] = $id += 1;
-                }
+        /**
+         * Store the uploaded image files and set the image attribute of the product to the file path.
+         *
+         * @param  \Illuminate\Http\Request  $request
+         * @param  \App\Product  $products
+         * @return void
+         */
+        if ($request->hasfile('file_image')) {
+            $id = 0;
+            foreach ($request->file('file_image') as $file) {
+                $url = asset('uploads');
+                $name = $url . "/" . time() . rand(1, 100) . '.' . $file->extension();
+                $file->move(public_path('uploads'), $name);
+                $files['image' . $id + 1]['name'] =  $name;
+                $files['image' . $id + 1]['id'] = $id += 1;
             }
+        }
 
-            $products->image = json_encode(array($files));
-            // dd(json_decode($products->image));
-            /**
-             * Fill the model with an array of attributes, then save it to the database.
-             *
-             * @param  array  $attributes
-             * @return void
-             */
-            $products->fill($request->all());
-            $products->save();
-            /**
-             * Creates a new size for a product and returns the ID of the product.
-             *
-             * @param  Request  $request
-             * @param  Collection  $products
-             * @return int
-             */
-            $id =  $products->select("id")->orderBy('id', 'desc')->first()->id;
+        $products->image = json_encode(array($files));
+        // dd(json_decode($products->image));
+        /**
+         * Fill the model with an array of attributes, then save it to the database.
+         *
+         * @param  array  $attributes
+         * @return void
+         */
+        $products->fill($request->all());
+        $products->save();
+        /**
+         * Creates a new size for a product and returns the ID of the product.
+         *
+         * @param  Request  $request
+         * @param  Collection  $products
+         * @return int
+         */
+        $id =  $products->select("id")->orderBy('id', 'desc')->first()->id;
 
-            /**
-             * Generates an array of sizes and their corresponding IDs for a given product ID, based on the minimum and maximum sizes provided in the request.
-             *
-             * @param  Request  $request
-             * @param  int  $id
-             * @return array
-             */
+        /**
+         * Generates an array of sizes and their corresponding IDs for a given product ID, based on the minimum and maximum sizes provided in the request.
+         *
+         * @param  Request  $request
+         * @param  int  $id
+         * @return array
+         */
 
 
-            if ($request->misize != 0 and $request->msize != 0) {
-                $ids = 0;
-                for ($i = $request->misize; $i <= $request->msize; $i++) {
-                    $sizes['size_' . $i]["size"] = $i;
-                    $sizes['size_' . $i]["id"] = $ids += 1;
-                    $sizes_table[] = [
-                        'size' => $i,
-                        'product_id' => $id
-                    ];
-                }
+        if ($request->misize != 0 and $request->msize != 0) {
+            $ids = 0;
+            for ($i = $request->misize; $i <= $request->msize; $i++) {
+                $sizes['size_' . $i]["size"] = $i;
+                $sizes['size_' . $i]["id"] = $ids += 1;
+                $sizes_table[] = [
+                    'size' => $i,
+                    'product_id' => $id
+                ];
             }
+        }
 
-            // dd($sizes_table);
-            /**
-             * Inserts the sizes table into the sizes_product table, and saves the product details.
-             *
-             * @param  array  $sizes_table
-             * @param  int  $id
-             * @param  array  $sizes
-             * @param  Illuminate\Http\Request  $request
-             * @return void
-             */
-            try {
+        // dd($sizes_table);
+        /**
+         * Inserts the sizes table into the sizes_product table, and saves the product details.
+         *
+         * @param  array  $sizes_table
+         * @param  int  $id
+         * @param  array  $sizes
+         * @param  Illuminate\Http\Request  $request
+         * @return void
+         */
+        try {
 
             $sizes_product->insert($sizes_table);
             $product_detali->product_id = $id;
@@ -225,32 +225,52 @@ class ProductController extends Controller
         $old_prDetai = ProductDetail::where('product_id', $id);
 
         if ($request->role == 'size') {
+            $Old_ps = $sizes->where('product_id', $id)->get();
             $PSID = [];
             $size = [];
             $PS = [];
             $values =  [];
             $quantity = 0;
 
+
             foreach ($request->size as $key => $s) {
                 $size[] = $s;
             };
+
             foreach ($request->PSID as $key => $s) {
                 $PSID[] = $s;
             };
+
             foreach ($request->quantity as $key => $q) {
                 $values[] =  [
                     'id' => $PSID[$key],
                     'size' => $size[$key],
                     'quantity' => $q
                 ];
-
-                $PS['size' . $key + 1] = [
-                    'size' => $size[$key],
-                    'id' => $key + 1
-                ];
-
                 $quantity += $q;
             }
+
+            $count = count($Old_ps);
+            foreach ($values as $row) {
+                $input = [
+                    'size' => $row['size'],
+                    'quantity' => $row['quantity']
+                ];
+
+                for ($i = 0; $i < $count; $i++) {
+                    if ($Old_ps[$i]['id'] ==  $row['id']) {
+                        $Old_ps[$i]['size'] = (Int) $row['size'];
+                    }
+                }
+
+                $sizes->where('id', $row['id'])->update($input);
+            }
+
+            foreach ($Old_ps as $key => $item){
+                $PS['size_' . $key]["id"] = $key;
+                $PS['size_' . $key]["size"] = $item->size;
+            }
+
 
 
             if ($old_prDetai != null) {
@@ -258,23 +278,15 @@ class ProductController extends Controller
                 $new_product->quantity = $quantity;
                 $new_product->size =  json_encode(array($PS));
                 $new_product->save();
+                return response()->json([
+                    'status' => '200',
+                    'message' => "update product successfully",
+                ]);
             }
-
-            foreach ($values as $row) {
-                $input = [
-                    'size' => $row['size'],
-                    'quantity' => $row['quantity']
-                ];
-                $sizes->where('id', $row['id'])->update($input);
-            }
-            return response()->json([
-                'status' => '200',
-                'message' => "update product successfully",
-            ]);
-
+           
         }
 
-        
+
         if ($request->role == "image") {
             $files = [];
             if ($request->hasfile('file_image')) {
@@ -316,8 +328,6 @@ class ProductController extends Controller
             Alert::success('Update Product successfuly ', 'Cập nhật sản phẩm thành công');
             return back();
         }
-       
-        
     }
 
     /**
