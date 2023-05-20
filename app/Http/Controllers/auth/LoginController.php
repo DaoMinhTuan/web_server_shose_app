@@ -45,6 +45,12 @@ class LoginController extends Controller
     
                     ]);
                 }
+            }else{
+                return response()->json([
+                    'status' => '204',
+                    'message' => "account not active "
+    
+                ]);
             }
             
         } else {
