@@ -247,7 +247,6 @@ class ProductController extends Controller
                     'size' => $size[$key],
                     'quantity' => $q
                 ];
-                $quantity += $q;
             }
 
             $count = count($Old_ps);
@@ -270,11 +269,13 @@ class ProductController extends Controller
             foreach ($Old_ps as $key => $item){
                 $PS['size_' . $key]["id"] = $key;
                 $PS['size_' . $key]["size"] = $item->size;
-                
+
                 $quantity += $item->quantity;
             }
 
+            dd($quantity);
 
+  
 
             if ($old_prDetai != null) {
                 $new_product = ProductDetail::find($old_prDetai->first()->id);
