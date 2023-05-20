@@ -273,7 +273,7 @@ class ProductController extends Controller
                 $quantity += $item->quantity;
             }
 
-            dd($quantity);
+            
 
   
 
