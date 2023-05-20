@@ -260,6 +260,7 @@ class ProductController extends Controller
                 for ($i = 0; $i < $count; $i++) {
                     if ($Old_ps[$i]['id'] ==  $row['id']) {
                         $Old_ps[$i]['size'] = (Int) $row['size'];
+                        $Old_ps[$i]['quantity'] = (Int) $row['quantity'];
                     }
                 }
 
@@ -269,6 +270,8 @@ class ProductController extends Controller
             foreach ($Old_ps as $key => $item){
                 $PS['size_' . $key]["id"] = $key;
                 $PS['size_' . $key]["size"] = $item->size;
+                
+                $quantity += $item->quantity;
             }
 
 
