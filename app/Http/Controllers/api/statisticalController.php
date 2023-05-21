@@ -78,15 +78,18 @@ class statisticalController extends Controller
 
         return response()->json([
             'status' => '201',
-            'told' => number_format($price, 0, '', ','),
-            'sale' => number_format($sale, 0, '', ',')
+            'price' => [
+                'told_price' => number_format($price, 0, '', ','),
+                'told_sale' => number_format($sale, 0, '', ',')
+            ],
         ]);
     }
 
-    public function price_date($month, $year){
+    public function price_date($month, $year)
+    {
         $data = $this->oder_detail
             ->join('oders', 'oders.id', '=', 'oderdetail.oder_id')
-            ->select('products','')->where([
+            ->select('products', '')->where([
                 ['oders.status', 3]
             ])
             ->get();
