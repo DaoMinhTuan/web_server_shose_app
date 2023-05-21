@@ -18,7 +18,8 @@ class statisticalController extends Controller
     }
 
     public function oder()
-    {
+    { 
+        $oder_list = [];
         $data_1 = count($this->oder_detail
             ->join('oders', 'oders.id', '=', 'oderdetail.oder_id')
             ->select()->get());
@@ -35,12 +36,14 @@ class statisticalController extends Controller
                 ['oders.status', 3]
             ])->get());
 
-
-        return response()->json([
-            'status' => '202',
+        $oder_list[] = [
             'oder_told' => $data_1,
             'oder_unsuccessful ' => $data_2,
             'oder_successful' => $data_3
+        ];
+        return response()->json([
+            'status' => '202',
+            'oder' => $oder_list
         ]);
     }
 
