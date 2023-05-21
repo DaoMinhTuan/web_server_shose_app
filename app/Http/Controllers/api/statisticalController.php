@@ -59,6 +59,7 @@ class statisticalController extends Controller
             $data[$i]['products'] =  json_decode($data[$i]['products']);
         }
 
+        $told = [];
         $price = 0;
         $sale = 0;
 
@@ -66,22 +67,20 @@ class statisticalController extends Controller
             foreach ($data as $item) {
                 foreach ($item->products as $p) {
                     $sale += $p->sale * $p->quantity;
-                }
-            }
-
-            foreach ($data as $item) {
-                foreach ($item->products as $p) {
                     $price += $p->price * $p->quantity;
+
+                   
                 }
             }
         }
+        $told[] = [
+            'sale' => $p->sale,
+            'price' => $p->price,
+        ];
 
         return response()->json([
             'status' => '201',
-            'price' => [
-                'told_price' => number_format($price, 0, '', ','),
-                'told_sale' => number_format($sale, 0, '', ',')
-            ],
+            'told' => $told
         ]);
     }
 
