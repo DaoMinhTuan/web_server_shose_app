@@ -75,9 +75,9 @@
                                 data-cfemail="">{{ Auth::user()->email ?? 'tài khoản người dùng' }}</span>
                         </div>
                     </a>
-{{--                     
+                   
                     <div class="dropdown-menu dropdown-menu-right me-lg-3">
-                        <a class="dropdown-item d-flex align-items-center" href="profile.html">Edit Profile <i
+                        {{-- <a class="dropdown-item d-flex align-items-center" href="profile.html">Edit Profile <i
                                 class="fa fa-user-circle fa-fw ms-auto text-dark text-opacity-50"></i></a>
                         <a class="dropdown-item d-flex align-items-center" href="email_inbox.html">Inbox <i
                                 class="fa fa-envelope fa-fw ms-auto text-dark text-opacity-50"></i></a>
@@ -85,10 +85,10 @@
                                 class="fa fa-calendar-alt fa-fw ms-auto text-dark text-opacity-50"></i></a>
                         <a class="dropdown-item d-flex align-items-center" href="settings.html">Setting <i
                                 class="fa fa-wrench fa-fw ms-auto text-dark text-opacity-50"></i></a>
-                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-divider"></div> --}}
                         <a class="dropdown-item d-flex align-items-center" href="{{ route('logout') }}">Log Out <i
                                 class="fa fa-toggle-off fa-fw ms-auto text-dark text-opacity-50"></i></a>
-                    </div> --}}
+                    </div> 
                 </div>
             </div>
 

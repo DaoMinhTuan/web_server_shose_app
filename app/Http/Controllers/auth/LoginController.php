@@ -80,7 +80,7 @@ class LoginController extends Controller
             if (Auth::user()->role_id == 2) {
                 if (Auth::user()->status == 1){
                     Alert::success('login successfully', 'tài khoản đăng nhập thành công');
-                    return view('page.dashboard');
+                    return redirect('dashboard');
                 }
                 Alert::error('Acccount not active ', 'tài khoản chưa được kích hoạt');
                 return back();
