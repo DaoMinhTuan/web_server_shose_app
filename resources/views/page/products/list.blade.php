@@ -18,21 +18,21 @@
 
         <div class="d-flex align-items-center mb-3">
             <div>
-                <h1 class="page-header mb-0">Products</h1>
+                <h1 class="page-header mb-0">Danh sách các sản phẩm</h1>
             </div>
 
             <div class="ms-auto">
                 <a href="{{ route('product.create') }}" class="btn btn-primary"><i class="fa fa-plus-circle fa-fw me-1"></i>
-                    Add Product</a>
+                   Thêm sản phẩm</a>
                 <button type="button" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#modalLg"><i
                         class="fa fa-plus-circle fa-fw me-1"></i>
-                    Add Branchs</button>
+                    Thêm Hãng</button>
             </div>
             <div class="modal fade" id="modalLg">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Branchs</h5>
+                            <h5 class="modal-title">Hãng</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                         </div>
                         <div class="modal-body">
@@ -43,7 +43,7 @@
 
                                     <div class="col-12">
                                         <div class="form-group mb-3">
-                                            <label class="form-label" for="">Name</label>
+                                            <label class="form-label" for="">Tên</label>
                                             <input type="text" name="brandName" class="form-control " id=""
                                                 placeholder="Nhập tên hãng">
                                         </div>
@@ -52,7 +52,7 @@
                                     {{-- image and branch --}}
                                     <div class="col-12">
                                         <div class="mb-3">
-                                            <label class="form-label" for="defaultFile">Image Products</label>
+                                            <label class="form-label" for="defaultFile">Sản phẩm hình ảnh</label>
                                             <input type="file" name="image" class="form-control" multiple
                                                 id="multipleFile" />
                                         </div>
@@ -61,20 +61,20 @@
                                     {{-- text arena --}}
                                     <div class="col-12">
                                         <div class="form-group mb-3">
-                                            <label class="form-label" for="exampleFormControlInput1">Conten</label>
+                                            <label class="form-label" for="exampleFormControlInput1">Nội dung</label>
                                             <textarea name="desc" class="summernote" id="contents" title="Contents"></textarea>
                                         </div>
                                     </div>
 
                                     <div>
-                                        <button type="submit" class="btn btn-primary"> Add </button>
+                                        <button type="submit" class="btn btn-primary"> Thêm vào </button>
                                     </div>
                                 </div>
 
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-default" data-bs-dismiss="modal">Đóng</button>
                         </div>
                     </div>
                 </div>
@@ -88,7 +88,7 @@
         <div class="card">
             
             <ul class="nav nav-tabs nav-tabs-v2 px-4">
-                <li class="nav-item me-3"><a href="#allTab" class="nav-link active px-2" data-bs-toggle="tab">All</a>
+                <li class="nav-item me-3"><a href="#allTab" class="nav-link active px-2" data-bs-toggle="tab">Tất cả</a>
                 </li>
             </ul>
 
@@ -99,12 +99,11 @@
                         <table class="table table-hover text-nowrap">
                             <thead>
                                 <tr>
-                                    <th class="pt-0 pb-2"></th>
-                                    <th class="pt-0 pb-2">Product</th>
-                                    <th class="pt-0 pb-2">Inventory</th>
-                                    <th class="pt-0 pb-2">Color</th>
-                                    <th class="pt-0 pb-2">Status</th>
-                                    <th class="pt-0 pb-2">Action</th>
+                                    <th class="pt-0 pb-2">Sản phẩm</th>
+                                    <th class="pt-0 pb-2">Hàng tồn kho</th>
+                                    <th class="pt-0 pb-2">Màu sắc</th>
+                                    <th class="pt-0 pb-2">Trạng thái</th>
+                                    <th class="pt-0 pb-2">Hoạt động</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -123,8 +122,8 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="align-middle">{{ $item->quantity }} in stock for
-                                            {{ count(get_object_vars($item->size[0])) }}  Sizes</td>
+                                        <td class="align-middle">{{ $item->quantity }}trong kho cho
+                                            {{ count(get_object_vars($item->size[0])) }}  Kích thước</td>
                                         <td class="align-middle">{{ $item->color }}</td>
                                         <td class="align-middle">
                                             @if ($item->status == 1)
@@ -148,9 +147,6 @@
                 </div>
                 
                 <div class="d-md-flex align-items-center">
-                    <div class="me-md-auto text-md-left text-center mb-2 mb-md-0">
-                        Showing 1 to 10 of 57 entries
-                    </div>
                     <ul class="pagination mb-0 justify-content-center">
                         {{ $data->links() }}
                     </ul>

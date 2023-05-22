@@ -5,6 +5,7 @@ namespace App\Http\Controllers\page;
 use App\Http\Requests\productRequest;
 use App\Models\Size;
 use App\Models\Brand;
+use App\Models\OderDetail;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\ProductDetail;
@@ -20,7 +21,13 @@ class ProductController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     *
      */
+    protected $oder_detail;
+    public function __construct()
+    {
+        $this->oder_detail = new OderDetail();
+    }
     public function index()
     {
         $products = new Product();
@@ -449,5 +456,96 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function dashboard(){
+        
+        $products = new Product();
+
+        $data_1 = count($this->oder_detail
+            ->join('oders', 'oders.id', '=', 'oderdetail.oder_id')
+            ->select()->get());
+
+        $data_2 = count($this->oder_detail
+            ->join('oders', 'oders.id', '=', 'oderdetail.oder_id')
+            ->select()->where([
+                ['oders.status', 4]
+            ])->get());
+            
+
+        $data_3 = count($this->oder_detail
+            ->join('oders', 'oders.id', '=', 'oderdetail.oder_id')
+            ->select()->where([
+                ['oders.status', 3]
+            ])->get());
+
+          $data_4 = count($this->oder_detail
+            ->join('oders', 'oders.id', '=', 'oderdetail.oder_id')
+            ->select()->where([
+                ['oders.status', 1]
+            ])->get());
+
+          $data_5 = count($this->oder_detail
+            ->join('oders', 'oders.id', '=', 'oderdetail.oder_id')
+            ->select()->where([
+                ['oders.status', 2]
+            ])->get()); 
+            
+            
+            $oder_price = $this->oder_detail
+            ->join('oders', 'oders.id', '=', 'oderdetail.oder_id')
+            ->select('products')->where([
+                ['oders.status', 3]
+            ])->get();
+
+        $count = count($oder_price);
+        for ($i = 0; $i < $count; $i++) {
+            $oder_price[$i]['products'] =  json_decode($oder_price[$i]['products']);
+            $oder_price[$i]['products'] =  json_decode($oder_price[$i]['products']);
+        }
+
+        $price = 0;
+        $o_price = 0;
+        $sale = 0;
+
+        if ($oder_price !== null) {
+            foreach ($oder_price as $item) {
+                foreach ($item->products as $p) {
+                    $sale += $p->sale * $p->quantity;
+                    $price += $p->price * $p->quantity;
+                }
+            }
+        }
+
+        
+
+        $out_price = $products
+            ->join('product_detail', 'products.id', '=', 'product_detail.product_id')
+            ->join('brands', 'products.brandID', '=', 'brands.id')
+            ->select('products.*', 'product_detail.color', 'product_detail.size', 'product_detail.quantity', 'brands.brandName as branch')
+            ->orderBy('id', 'desc')->get();
+
+            if ($out_price !== null) {
+                foreach ($out_price as $item) {
+                   
+                        $o_price += $p->price * $p->quantity;
+                    
+                }
+            }
+
+
+        
+        return view('page.dashboard',[
+            'status' => '202',
+            'oder_told' => $data_1,
+            'oder_unsuccessful' => $data_2,
+            'oder_successful' => $data_3,
+            'successful' => $data_4,
+            'delivering' => $data_5,
+            'told_price' => $sale,
+            'out_price' => $o_price,
+       
+        ]);
+            
     }
 }

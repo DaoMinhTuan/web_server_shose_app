@@ -7,21 +7,20 @@
             <div class="menu-item active">
                 <a href="{{ route('dashboard') }}" class="menu-link">
                     <span class="menu-icon"><i class="fa fa-laptop"></i></span>
-                    <span class="menu-text">Dashboard</span>
+                    <span class="menu-text">Bảng điều khiển</span>
                 </a>
             </div>
             <div class="menu-item">
                 <a href="{{ route('product.index') }}" class="menu-link">
                     <span class="menu-icon"><i class="fa fa-chart-pie"></i></span>
-                    <span class="menu-text">Products</span>
+                    <span class="menu-text">Các sản phẩm</span>
                 </a>
             </div>
 
-            <div class="menu-item has-sub">
+            {{-- <div class="menu-item has-sub">
                 <a href="#" class="menu-link">
                     <span class="menu-icon">
                         <i class="fa fa-desktop"></i>
-                        {{-- <span class="menu-icon-label">6</span> --}}
                     </span>
                     <span class="menu-text">Admin</span>
                     <span class="menu-caret"><b class="caret"></b></span>
@@ -43,7 +42,7 @@
                         </a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             
         </div>
 

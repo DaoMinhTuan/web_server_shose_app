@@ -62,25 +62,10 @@
 
         <div class="d-flex align-items-center mb-3">
             <div>
-                <h1 class="page-header mb-0">Products</h1>
+                <h1 class="page-header mb-0">Thêm các sản phẩm</h1>
             </div>
         </div>
-        <div class="mb-sm-4 mb-3 d-sm-flex">
-            <div class="mt-sm-0 mt-2"><a href="#" class="text-dark text-decoration-none"><i
-                        class="fa fa-download fa-fw me-1 text-muted"></i> Export</a></div>
-            <div class="ms-sm-4 mt-sm-0 mt-2"><a href="#" class="text-dark text-decoration-none"><i
-                        class="fa fa-upload fa-fw me-1 text-muted"></i> Import</a></div>
-            <div class="ms-sm-4 mt-sm-0 mt-2 dropdown-toggle">
-                <a href="#" data-bs-toggle="dropdown" class="text-dark text-decoration-none">More Actions</a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                    <div role="separator" class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Separated link</a>
-                </div>
-            </div>
-        </div>
+       
         <div class="card">
 
             <form class=" m-1 " action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
@@ -89,12 +74,12 @@
 
                     <div class="col-xl-3 col-12">
                         <div class="form-group mb-3">
-                            <label class="form-label" for="">Name</label>
+                            <label class="form-label" for="">Tên sản phẩm</label>
                             <input type="text" name="name" class="form-control @error('name') is-invalid @enderror "
                                 id="" placeholder="Nhập tên sản phẩm" value="{{old('name')}}">
                         </div>
                         <div class="form-group mb-3">
-                            <label class="form-label" for="exampleFormControlInput1">Price</label>
+                            <label class="form-label" for="exampleFormControlInput1">Giá</label>
                             <input type="text" name="price" class="form-control @error('price') is-invalid @enderror"
                                 id="exampleFormControlInput1" placeholder="Nhập giá sản phẩm" value="{{old('price')}}">
                         </div>
@@ -104,13 +89,13 @@
 
                     <div class="col-xl-3 col-12">
                         <div class="form-group mb-3">
-                            <label class="form-label" for="">Sale</label>
+                            <label class="form-label" for="">Doanh thu</label>
                             <input type="text" name="sale" class="form-control @error('sale') is-invalid @enderror"
                                 id="" placeholder="Nhập tên sản phẩm" value="{{old('sale')}}">
                         </div>
                         <div class="form-group mb-3">
                             <div class="form-group mb-3">
-                                <label class="form-label" for="exampleFormControlInput1">Status</label>
+                                <label class="form-label" for="exampleFormControlInput1">Trạng thái</label>
                                 <select class="form-control @error('status') is-invalid @enderror" name="status">
                                     <option value="">Chọn trạng thái sản phẩm</option>
                                     <option value="1">Còn Hàng</option>
@@ -124,7 +109,7 @@
 
                     <div class="col-xl-3 col-12">
                         <div class="form-group mb-3">
-                            <label class="form-label" for="exampleFormControlInput1">Color </label>
+                            <label class="form-label" for="exampleFormControlInput1">Màu sắc </label>
 
                             <input type="text" name="color"
                                 class="form-control  @error('color') is-invalid @enderror" id="exampleFormControlInput1"
@@ -133,7 +118,7 @@
                         </div>
 
                         <div class="form-group mb-3">
-                            <label class="form-label" for="exampleFormControlInput1">Min size</label>
+                            <label class="form-label" for="exampleFormControlInput1">Kích thước tối thiểu</label>
                             <input type="number" name="misize"
                                 class="form-control  @error('misize') is-invalid @enderror" id="exampleFormControlInput1"
                                 placeholder="Nhập kích thước nhỏ nhất" value="{{old('misize')}}">
@@ -147,7 +132,7 @@
 
                     <div class="col-xl-3 col-12">
                         <div class="form-group mb-3">
-                            <label class="form-label" for="exampleFormControlInput1">Max size</label>
+                            <label class="form-label" for="exampleFormControlInput1">Kích thước tối đa</label>
                             <input type="number" name="msize"
                                 class="form-control  @error('msize') is-invalid @enderror" id="exampleFormControlInput1"
                                 placeholder="Nhập kích thước lớn nhất" value="{{old('msize')}}">
@@ -160,7 +145,7 @@
                     {{-- image and branch --}}
                     <div class="col-xl-6 col-12">
                         <div class="mb-3">
-                            <label class="form-label" for="defaultFile">Image Products</label>
+                            <label class="form-label" for="defaultFile">Sản phẩm hình ảnh</label>
                             <input type="file" name="file_image[]"
                                 class="form-control  @error('file_image') is-invalid @enderror" multiple
                                 id="multipleFile" value="{{old('file_image[]')}}" />
@@ -170,7 +155,7 @@
                     <div class="col-xl-6 col-12">
 
                         <div class="mb-3">
-                            <label class="form-label" for="defaultFile">Product Brnach</label>
+                            <label class="form-label" for="defaultFile">Một sản xuất vú</label>
                             <select class="form-control  @error('brandID') is-invalid @enderror" name="brandID">
                                 <option value="">Chọn hãng cho sản phẩm</option>
                                 @foreach ($branch as $item)
@@ -186,21 +171,21 @@
                     {{-- text arena --}}
                     <div class="col-xl-6 col-12">
                         <div class="form-group mb-3">
-                            <label class="form-label" for="exampleFormControlInput1">Content</label>
+                            <label class="form-label" for="exampleFormControlInput1">Nội dung</label>
                             <textarea name="content" class="summernote  " id="contents" title="Contents">{!!old('content')!!}</textarea>
                         </div>
                     </div>
 
                     <div class="col-xl-6 col-12">
                         <div class="form-group mb-3">
-                            <label class="form-label" for="exampleFormControlInput1">description</label>
+                            <label class="form-label" for="exampleFormControlInput1">Mô Tả</label>
                             <textarea name="desc" class="summernote" id="contents" title="Contents">{!!old('desc')!!}</textarea>
                         </div>
                     </div>
 
                     <div>
-                        <button type="submit" class="btn btn-primary"> Add </button>
-                        <a href="{{ route('product.index') }}" class="btn btn-warning"> Back </a>
+                        <button type="submit" class="btn btn-primary"> Thêm vào </button>
+                        <a href="{{ route('product.index') }}" class="btn btn-warning">Trở Lại</a>
                     </div>
                 </div>
 

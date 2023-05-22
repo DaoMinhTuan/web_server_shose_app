@@ -2,7 +2,7 @@
 @section('content')
 <div id="content" class="app-content">
     <h1 class="page-header mb-3">
-        Hi, Sean. <small>here's what's happening with your store today.</small>
+        Hi,{{Auth::user()->name}} <small></small>
     </h1>
 
     <div class="row">
@@ -11,7 +11,6 @@
 
             <div class="card text-white text-opacity-70 h-100 overflow-hidden">
 
-                <div class="card-img-overlay d-block d-lg-none bg-blue rounded"></div>
 
 
                 <div class="card-img-overlay d-none d-md-block bg-blue rounded mb-n1 mx-n1"
@@ -38,13 +37,21 @@
 
                             <div class="d-flex">
                                 <div class="me-auto">
-                                    <h5 class="text-white text-opacity-80 mb-3">Weekly Earning</h5>
-                                    <h3 class="text-white mt-n1 mb-1">$2,999.80</h3>
-                                    <p class="mb-1 text-white text-opacity-60 text-truncate">
-                                        <i class="fa fa-caret-up"></i> <b>32%</b> increase compare to last week
-                                    </p>
+                                    <h5 class="text-white text-opacity-80 mb-3">Tổng tiêu</h5>
+                                    <strong class="text-white mt-n1 mb-1">{{number_format($out_price, 0, '', ',')}}</strong>
+                                </div>
+
+                                <div class="me-auto">
+                                    <h5 class="text-white text-opacity-80 mb-3">Tổng thu</h5>
+                                    <strong class="text-white mt-n1 mb-1">{{number_format($told_price, 0, '', ',')}}</strong>
+                                </div>
+
+                                <div class="me-auto">
+                                    <h5 class="text-white text-opacity-80 mb-3">Tổng Đơn</h5>
+                                    <strong class="text-white mt-n1 mb-1">{{$oder_told}}</strong>
                                 </div>
                             </div>
+
                             <hr class="bg-white bg-opacity-75 mt-3 mb-3" />
 
                             <div class="row">
@@ -54,30 +61,14 @@
                                             class="fa fa-fw fa-shopping-bag fs-28px text-black text-opacity-50"></i>
                                     </div>
                                     <div class="mt-1">
-                                        <div>Store Sales</div>
+                                        <div>Sản Phẩm đã Bán</div>
                                         <div class="fw-600 text-white">$1,629.80</div>
                                     </div>
                                 </div>
-                                <div class="col-6 col-lg-5">
-                                    <div class="mt-1">
-                                        <i class="fa fa-fw fa-retweet fs-28px text-black text-opacity-50"></i>
-                                    </div>
-                                    <div class="mt-1">
-                                        <div>Referral Sales</div>
-                                        <div class="fw-600 text-white">$700.00</div>
-                                    </div>
-                                </div>
+                                
                             </div>
                             <hr class="bg-white bg-opacity-75 mt-3 mb-3" />
-                            <div class="mt-3 mb-2">
-                                <a href="#"
-                                    class="btn btn-yellow btn-rounded btn-sm ps-5 pe-5 pt-2 pb-2 fs-14px fw-600"><i
-                                        class="fa fa-wallet me-2 ms-n2"></i> Withdraw money</a>
-                            </div>
-                            <p class="fs-12px">
-                                It usually takes 3-5 business days for transferring the earning to your bank
-                                account.
-                            </p>
+                           
                         </div>
 
 
@@ -108,19 +99,13 @@
 
 
                         <div class="card-body position-relative">
-                            <h5 class="text-white text-opacity-80 mb-3 fs-16px">New Orders</h5>
-                            <h3 class="text-white mt-n1">56</h3>
+                            <h5 class="text-white text-opacity-80 mb-3 fs-16px">Đơn hàng Hủy</h5>
+                            <h3 class="text-white mt-n1">{{$oder_unsuccessful}}</h3>
                             <div class="progress bg-black bg-opacity-50 mb-2" style="height: 6px">
                                 <div class="progrss-bar progress-bar-striped bg-white" style="width: 80%">
                                 </div>
                             </div>
-                            <div class="text-white text-opacity-80 mb-4"><i class="fa fa-caret-up"></i> 16%
-                                increase <br />compare to last week</div>
-                            <div><a href="#"
-                                    class="text-white d-flex align-items-center text-decoration-none">View
-                                    report <i
-                                        class="fa fa-chevron-right ms-2 text-white text-opacity-50"></i></a>
-                            </div>
+                            
                         </div>
 
                     </div>
@@ -130,24 +115,17 @@
                         style="min-height: 199px;">
 
                         <div class="card-img-overlay mb-n4 me-n4 d-flex" style="bottom: 0; top: auto;">
-                            <img src="assets/img/icon/visitor.svg" alt=""
+                            <img src="assets/img/icon/order.svg" alt=""
                                 class="ms-auto d-block mb-n3" style="max-height: 105px" />
                         </div>
 
 
                         <div class="card-body position-relative">
-                            <h5 class="text-white text-opacity-80 mb-3 fs-16px">Page Visitors</h5>
-                            <h3 class="text-white mt-n1">60.5k</h3>
+                            <h5 class="text-white text-opacity-80 mb-3 fs-16px">Đơn hàng Hoàn thành </h5>
+                            <h3 class="text-white mt-n1">{{$oder_successful}}</h3>
                             <div class="progress bg-black bg-opacity-50 mb-2" style="height: 6px">
-                                <div class="progrss-bar progress-bar-striped bg-white" style="width: 50%">
+                                <div class="progrss-bar progress-bar-striped bg-white" style="width: 80%">
                                 </div>
-                            </div>
-                            <div class="text-white text-opacity-80 mb-4"><i class="fa fa-caret-up"></i> 33%
-                                increase <br />compare to last week</div>
-                            <div><a href="#"
-                                    class="text-white d-flex align-items-center text-decoration-none">View
-                                    report <i
-                                        class="fa fa-chevron-right ms-2 text-white text-opacity-50"></i></a>
                             </div>
                         </div>
 
@@ -162,24 +140,17 @@
                         style="min-height: 199px;">
 
                         <div class="card-img-overlay mb-n4 me-n4 d-flex" style="bottom: 0; top: auto;">
-                            <img src="assets/img/icon/email.svg" alt="" class="ms-auto d-block mb-n3"
+                            <img src="assets/img/icon/order.svg" alt="" class="ms-auto d-block mb-n3"
                                 style="max-height: 105px" />
                         </div>
 
 
                         <div class="card-body position-relative">
-                            <h5 class="text-white text-opacity-80 mb-3 fs-16px">Unread email</h5>
-                            <h3 class="text-white mt-n1">30</h3>
+                            <h5 class="text-white text-opacity-80 mb-3 fs-16px">Đơn hàng chờ xác nhận</h5>
+                            <h3 class="text-white mt-n1">{{$successful}}</h3>
                             <div class="progress bg-black bg-opacity-50 mb-2" style="height: 6px">
                                 <div class="progrss-bar progress-bar-striped bg-white" style="width: 80%">
                                 </div>
-                            </div>
-                            <div class="text-white text-opacity-80 mb-4"><i class="fa fa-caret-down"></i> 5%
-                                decrease <br />compare to last week</div>
-                            <div><a href="#"
-                                    class="text-white d-flex align-items-center text-decoration-none">View
-                                    report <i
-                                        class="fa fa-chevron-right ms-2 text-white text-opacity-50"></i></a>
                             </div>
                         </div>
 
@@ -190,24 +161,17 @@
                         style="min-height: 199px;">
 
                         <div class="card-img-overlay mb-n4 me-n4 d-flex" style="bottom: 0; top: auto;">
-                            <img src="assets/img/icon/browser.svg" alt=""
+                            <img src="assets/img/icon/order.svg" alt=""
                                 class="ms-auto d-block mb-n3" style="max-height: 105px" />
                         </div>
 
 
                         <div class="card-body position-relative">
-                            <h5 class="text-white text-opacity-80 mb-3 fs-16px">Page Views</h5>
-                            <h3 class="text-white mt-n1">320.4k</h3>
+                            <h5 class="text-white text-opacity-80 mb-3 fs-16px">Đơn hàng đang giao</h5>
+                            <h3 class="text-white mt-n1">{{$delivering}}</h3>
                             <div class="progress bg-black bg-opacity-50 mb-2" style="height: 6px">
                                 <div class="progrss-bar progress-bar-striped bg-white" style="width: 80%">
                                 </div>
-                            </div>
-                            <div class="text-white text-opacity-80 mb-4"><i class="fa fa-caret-up"></i> 20%
-                                increase <br />compare to last week</div>
-                            <div><a href="#"
-                                    class="text-white d-flex align-items-center text-decoration-none">View
-                                    report <i
-                                        class="fa fa-chevron-right ms-2 text-white text-opacity-50"></i></a>
                             </div>
                         </div>
 
@@ -220,7 +184,7 @@
         </div>
 
     </div>
-
+{{-- 
 
     <div class="row">
 
@@ -644,7 +608,7 @@
 
         </div>
 
-    </div>
+    </div> --}}
 
 </div>
 @endsection

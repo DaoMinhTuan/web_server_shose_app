@@ -18,24 +18,24 @@
 
         <div class="d-flex align-items-center mb-3">
             <div>
-                <h1 class="page-header mb-0">Products</h1>
+                <h1 class="page-header mb-0">Cập nhật sản phẩm</h1>
             </div>
 
             <div class="ms-auto">
                 <a href="{{ route('product.create') }}" class="btn btn-primary"><i class="fa fa-plus-circle fa-fw me-1"></i>
-                    Add Product</a>
+                    Thêm sản phẩm</a>
                 <button type="button" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#modalLg"><i
                         class="fa fa-plus-circle fa-fw me-1"></i>
-                    Add Branchs</button>
+                   Thêm Hãng</button>
                 <a href="{{ route('product.index') }}"class="btn btn-warning text-white"><i
-                        class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i>Back</a>
+                        class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i>Quay lại</a>
             </div>
 
             <div class="modal fade" id="modalLg">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Branchs</h5>
+                            <h5 class="modal-title">Hãng</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                         </div>
 
@@ -47,7 +47,7 @@
 
                                     <div class="col-12">
                                         <div class="form-group mb-3">
-                                            <label class="form-label" for="">Name</label>
+                                            <label class="form-label" for="">Tên</label>
                                             <input type="text" name="brandName" class="form-control " id=""
                                                 placeholder="Nhập tên hãng">
                                         </div>
@@ -56,7 +56,7 @@
                                     {{-- image and branch --}}
                                     <div class="col-12">
                                         <div class="mb-3">
-                                            <label class="form-label" for="defaultFile">Image Products</label>
+                                            <label class="form-label" for="defaultFile">hình ảnh Sản phẩm </label>
                                             <input type="file" name="image" class="form-control" multiple
                                                 id="multipleFile" />
                                         </div>
@@ -65,13 +65,13 @@
                                     {{-- text arena --}}
                                     <div class="col-12">
                                         <div class="form-group mb-3">
-                                            <label class="form-label" for="exampleFormControlInput1">Conten</label>
+                                            <label class="form-label" for="exampleFormControlInput1">nội dung</label>
                                             <textarea name="desc" class="summernote" id="contents" title="Contents"></textarea>
                                         </div>
                                     </div>
 
                                     <div>
-                                        <button type="submit" class="btn btn-primary"> Add </button>
+                                        <button type="submit" class="btn btn-primary"> Thêm vào </button>
                                     </div>
                                 </div>
 
@@ -89,7 +89,7 @@
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Update product 1</h5>
+                            <h5 class="modal-title">Cập nhật thông số sản phẩm</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                         </div>
                         <div class="modal-body">
@@ -101,7 +101,7 @@
                                     @method('put')
                                     <div class="col-xl-4 col-12">
                                         <div class="form-group mb-3">
-                                            <label class="form-label" for="">Name</label>
+                                            <label class="form-label" for="">Tên sản phẩm</label>
                                             <input type="text" name="name" class="form-control " id=""
                                                 placeholder="Nhập tên sản phẩm" value="{{$product->name}}">
                                         </div>
@@ -116,13 +116,13 @@
 
                                     <div class="col-xl-4 col-12">
                                         <div class="form-group mb-3">
-                                            <label class="form-label" for="">Sale</label>
+                                            <label class="form-label" for="">Giảm Giá</label>
                                             <input type="text" name="sale" class="form-control" value="{{$product->sale}}" id=""
                                                 placeholder="Nhập tên sản phẩm">
                                         </div>
                                         <div class="form-group mb-3">
                                             <div class="form-group mb-3">
-                                                <label class="form-label" for="exampleFormControlInput1">Status</label>
+                                                <label class="form-label" for="exampleFormControlInput1">Trạng thái</label>
                                                 <select class="form-control" name="status">
                                                     <option value="">Chọn trạng thái sản phẩm</option>
                                                     <option {{ $product->status == 1 ? 'selected' : ''; }} value="1">Còn Hàng</option>
@@ -136,12 +136,12 @@
 
                                     <div class="col-xl-4 col-12">
                                         <div class="form-group mb-3">
-                                            <label class="form-label" for="exampleFormControlInput1">Color</label>
+                                            <label class="form-label" for="exampleFormControlInput1">Màu sắc</label>
                                             <input type="text" name="color" class="form-control"
                                                 id="exampleFormControlInput1" value="{{$product->color}}" placeholder="Nhập màu sản phẩm">
                                         </div>
                                         <div class="mb-3">
-                                            <label class="form-label" for="defaultFile">Product Brnach</label>
+                                            <label class="form-label" for="defaultFile">Hãng sản Phẩm</label>
                                             <select class="form-control" name="brandID">
                                                 <option value="">Chọn hãng cho sản phẩm</option>
                                                 @foreach ($branch as $item)
@@ -155,14 +155,14 @@
                                     {{-- text arena --}}
                                     <div class="col-xl-6 col-12">
                                         <div class="form-group mb-3">
-                                            <label class="form-label" for="exampleFormControlInput1">Conten</label>
+                                            <label class="form-label" for="exampleFormControlInput1">Nội dung</label>
                                             <textarea name="content" class="summernote" id="contents" title="Contents">{!! $product->content !!}</textarea>
                                         </div>
                                     </div>
 
                                     <div class="col-xl-6 col-12">
                                         <div class="form-group mb-3">
-                                            <label class="form-label" for="exampleFormControlInput1">description</label>
+                                            <label class="form-label" for="exampleFormControlInput1">Mô tả</label>
                                             <textarea name="desc" class="summernote" id="contents" title="Contents">{!! $product->desc !!}</textarea>
                                         </div>
                                     </div>
@@ -174,14 +174,14 @@
                                     </div>
 
                                     <div>
-                                        <button type="submit" class="btn btn-primary"> Add </button>
+                                        <button type="submit" class="btn btn-primary"> cập nhật </button>
                                     </div>
                                 </div>
 
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-default" data-bs-dismiss="modal">Đóng</button>
                         </div>
                     </div>
                 </div>
@@ -192,7 +192,7 @@
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Update Image</h5>
+                            <h5 class="modal-title">Cập nhật hình ảnh</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                         </div>
                         <div class="modal-body">
@@ -203,7 +203,7 @@
                                     @method('put')
                                     <div class="col-12">
                                         <div class="mb-3">
-                                            <label class="form-label" for="defaultFile">Image Products</label>
+                                            <label class="form-label" for="defaultFile">Sản phẩm hình ảnh</label>
                                             <input type="file" name="file_image[]" class="form-control" multiple
                                                 id="multipleFile" />
                                         </div>
@@ -215,14 +215,14 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <button type="submit" class="btn btn-primary"> Add </button>
+                                        <button type="submit" class="btn btn-primary"> Thêm vào </button>
                                     </div>
                                 </div>
 
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-default" data-bs-dismiss="modal">Đóng</button>
                         </div>
                     </div>
                 </div>
@@ -233,7 +233,7 @@
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Update size</h5>
+                            <h5 class="modal-title">Kích thước cập nhật</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                         </div>
                         <div class="modal-body">
@@ -245,19 +245,19 @@
                                     @foreach ($size as $item)
                                         <div class="col-12 d-flex">
                                             <div class="form-group col-6 mb-3 m-1">
-                                                <label class="form-label" for="">Size</label>
+                                                <label class="form-label" for="">Kích cỡ</label>
                                                 <input type="text" name="size[]" class="form-control "
                                                     id="" placeholder="Nhập size" value="{{ $item->size }}">
                                             </div>
 
                                             <div class="form-group col-6 mb-3 m-1">
-                                                <label class="form-label" for="">Quantiy</label>
+                                                <label class="form-label" for="">Số lượng</label>
                                                 <input type="text" name="quantity[]" class="form-control "
                                                     id="" placeholder="Nhập số lượng"
                                                     value="{{ $item->quantity }}">
                                             </div>
                                             <div class="form-group  mb-3 m-1" hidden>
-                                                <label class="form-label" for="">Quantiy</label>
+                                                <label class="form-label" for=""></label>
                                                 <input type="text" readonly name="PSID[]" class="form-control "
                                                     id="" placeholder="" value="{{ $item->id }}">
                                             </div>
@@ -270,14 +270,14 @@
                                     @endforeach
 
                                     <div>
-                                        <button type="submit" class="btn btn-primary"> Add </button>
+                                        <button type="submit" class="btn btn-primary"> Thêm vào </button>
                                     </div>
                                 </div>
 
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-default" data-bs-dismiss="modal">Đóng</button>
                         </div>
                     </div>
                 </div>
@@ -305,8 +305,8 @@
                             <thead>
                                 <tr>
                                     <th class="pt-0 pb-2"></th>
-                                    <th class="pt-0 pb-2">Name</th>
-                                    <th class="pt-0 pb-2">Action</th>
+                                    <th class="pt-0 pb-2">Tên</th>
+                                    <th class="pt-0 pb-2">Chức Năng</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -329,7 +329,7 @@
                                     <td class="align-middle">
                                         <button type="button" class="btn btn-primary me-2" data-bs-toggle="modal"
                                             data-bs-target="#product_update1"><i class="far fa-lg fa-fw me-2 fa-edit"></i>
-                                            Update</button>
+                                            Cập nhật</button>
                                     </td>
                                 </tr>
 
@@ -353,7 +353,7 @@
                                         <button type="button" class="btn btn-primary me-2" data-bs-toggle="modal"
                                             data-bs-target="#product_update_image"><i
                                                 class="far fa-lg fa-fw me-2 fa-edit"></i>
-                                            Update</button>
+                                            Cập nhật</button>
                                     </td>
                                 </tr>
 
@@ -377,7 +377,7 @@
                                         <button type="button" class="btn btn-primary me-2" data-bs-toggle="modal"
                                             data-bs-target="#product_update_size"><i
                                             class="far fa-lg fa-fw me-2 fa-edit"></i>
-                                            Update</button>
+                                            Cập nhật</button>
                                     </td>
                                 </tr>
 
@@ -388,12 +388,7 @@
 
                 </div>
 
-                <div class="d-md-flex align-items-center">
-                    <div class="me-md-auto text-md-left text-center mb-2 mb-md-0">
-                        Showing 1 to 10 of 57 entries
-                    </div>
-
-                </div>
+                
             </div>
         </div>
     </div>

@@ -22,9 +22,7 @@ use App\Http\Controllers\page\OderController as pageOder;
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/dashboard', function () {
-        return view('page.dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard',[pageProduct::class,'dashboard'])->name('dashboard');
 
     Route::resource('Products', pageProduct::class)->names('product');
     Route::resource('brands', pageBranch::class)->names('brands');
