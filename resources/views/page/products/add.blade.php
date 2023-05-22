@@ -79,7 +79,7 @@
                                 id="" placeholder="Nhập tên sản phẩm" value="{{old('name')}}">
                         </div>
                         <div class="form-group mb-3">
-                            <label class="form-label" for="exampleFormControlInput1">Giá</label>
+                            <label class="form-label" for="exampleFormControlInput1">GIá Ban đầu</label>
                             <input type="text" name="price" class="form-control @error('price') is-invalid @enderror"
                                 id="exampleFormControlInput1" placeholder="Nhập giá sản phẩm" value="{{old('price')}}">
                         </div>
@@ -89,7 +89,7 @@
 
                     <div class="col-xl-3 col-12">
                         <div class="form-group mb-3">
-                            <label class="form-label" for="">Doanh thu</label>
+                            <label class="form-label" for="">Giá Mới</label>
                             <input type="text" name="sale" class="form-control @error('sale') is-invalid @enderror"
                                 id="" placeholder="Nhập tên sản phẩm" value="{{old('sale')}}">
                         </div>
@@ -155,7 +155,7 @@
                     <div class="col-xl-6 col-12">
 
                         <div class="mb-3">
-                            <label class="form-label" for="defaultFile">Một sản xuất vú</label>
+                            <label class="form-label" for="defaultFile">Chọn Hãng Cho sản phẩm</label>
                             <select class="form-control  @error('brandID') is-invalid @enderror" name="brandID">
                                 <option value="">Chọn hãng cho sản phẩm</option>
                                 @foreach ($branch as $item)
