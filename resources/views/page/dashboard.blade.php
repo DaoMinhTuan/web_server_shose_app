@@ -54,7 +54,7 @@
 
                             <hr class="bg-white bg-opacity-75 mt-3 mb-3" />
 
-                            <div class="row">
+                            {{-- <div class="row">
                                 <div class="col-6 col-lg-5">
                                     <div class="mt-1">
                                         <i
@@ -66,7 +66,7 @@
                                     </div>
                                 </div>
                                 
-                            </div>
+                            </div> --}}
                             <hr class="bg-white bg-opacity-75 mt-3 mb-3" />
                            
                         </div>
