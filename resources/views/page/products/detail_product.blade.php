@@ -78,7 +78,7 @@
                                     <p  class="text-break">{!! $data->desc !!}</p>
 
                                     <div class="cart mt-4 align-items-center"> 
-                                        <a href="" class="btn btn-success text-uppercase mr-2 px-4">cập nhật san phẩm</a>
+                                        <a href="{{ route('product.edit',$data->id) }}" class="btn btn-success text-uppercase mr-2 px-4">cập nhật sản phẩm</a>
                                     </div>
                                 </div>
                             </div>
