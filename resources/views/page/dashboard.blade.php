@@ -36,10 +36,7 @@
                         <div class="col-md-8">
 
                             <div class="d-flex">
-                                <div class="me-auto">
-                                    <h5 class="text-white text-opacity-80 mb-3">Tổng tiêu</h5>
-                                    <strong class="text-white mt-n1 mb-1">{{number_format($out_price, 0, '', ',')}}</strong>
-                                </div>
+                                
 
                                 <div class="me-auto">
                                     <h5 class="text-white text-opacity-80 mb-3">Tổng thu</h5>
