@@ -114,7 +114,7 @@ class ProductController extends Controller
         }
 
         Alert::success(' successfully ', 'cập nhật số lượng sản phẩm thành công');
-        return back();
+        return redirect('product.index');
     }
     /**
      * Show the form for creating a new resource.
