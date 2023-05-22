@@ -11,7 +11,7 @@
                                     <div class="text-center p-4"> <img id="main-image"
                                             src="{{ $data->image[0]->image1->name }}" width="250" /> </div>
                                     <div class="thumbnail text-center">
-                                        @for ($i = 0; $i < 3; $i++)
+                                        @for ($i = 0; $i < $count_img; $i++)
                                             <img src="{{ $data->image[0]->{'image' . $i + 1}->name }}" width="70">
                                         @endfor
                                     </div>
