@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+
     <div id="content" class="app-content">
         @error('desc')
             <div class="alert alert-danger mt-3">

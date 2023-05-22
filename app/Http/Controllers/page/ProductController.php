@@ -29,7 +29,7 @@ class ProductController extends Controller
             ->join('product_detail', 'products.id', '=', 'product_detail.product_id')
             ->join('brands', 'products.brandID', '=', 'brands.id')
             ->select('products.*', 'product_detail.color', 'product_detail.size', 'product_detail.quantity', 'brands.brandName as branch')
-            ->orderBy('id','desc')
+            ->orderBy('id', 'desc')
             ->paginate(5);
 
         $count = count($data);
@@ -217,8 +217,9 @@ class ProductController extends Controller
             if ($request->misize != 0 and $request->msize != 0) {
                 $ids = 0;
                 for ($i = $request->misize; $i <= $request->msize; $i++) {
-                    $sizes['size_' . $i]["size"] = $i;
-                    $sizes['size_' . $i]["id"] = $ids += 1;
+                    $ids += 1;
+                    $sizes['size_' . $ids]["size"] = $i;
+                    $sizes['size_' . $ids]["id"] = $ids;
                     $sizes_table[] = [
                         'size' => $i,
                         'product_id' => $id
@@ -257,6 +258,36 @@ class ProductController extends Controller
      */
     public function show($id)
     {
+        $products = new Product();
+        $sizes_product = new Size();
+
+        $data = $products
+            ->join('product_detail', 'products.id', '=', 'product_detail.product_id')
+            ->join('brands', 'products.brandID', '=', 'brands.id')
+            ->select('products.*', 'product_detail.color', 'product_detail.size', 'product_detail.quantity', 'brands.brandName as branch')
+            ->where('products.id', $id)
+            ->first();
+        $size = $sizes_product->where([['product_id', '=', $id]])->get();
+
+
+        if ($data != null) {
+            $data->image = json_decode($data->image);
+            $data->size =  $size;
+
+            $count_image =  count(get_object_vars($data->image[0]));
+             
+
+            $sale_off = ($data->price - $data->sale)/$data->price * 100;
+            return view('page.products.detail_product', [
+                'data' => $data,
+                'count_img' => $count_image,
+                'sale_off' => round($sale_off,3),
+            ]);
+        }
+
+        return view('page.products.detail_product', [
+            'data' => $data,
+        ]);
     }
 
     /**
@@ -346,31 +377,56 @@ class ProductController extends Controller
 
 
         if ($request->role == 'size') {
+            $Old_ps = $sizes->where('product_id', $id)->get();
             $PSID = [];
             $size = [];
             $PS = [];
             $values =  [];
             $quantity = 0;
+
+
             foreach ($request->size as $key => $s) {
                 $size[] = $s;
             };
+
             foreach ($request->PSID as $key => $s) {
                 $PSID[] = $s;
             };
+
             foreach ($request->quantity as $key => $q) {
                 $values[] =  [
                     'id' => $PSID[$key],
                     'size' => $size[$key],
                     'quantity' => $q
                 ];
+            }
 
-                $PS['size' . $key + 1] = [
-                    'size' => $size[$key],
-                    'id' => $key + 1
+            $count = count($Old_ps);
+            foreach ($values as $row) {
+                $input = [
+                    'size' => $row['size'],
+                    'quantity' => $row['quantity']
                 ];
 
-                $quantity += $q;
+                for ($i = 0; $i < $count; $i++) {
+                    if ($Old_ps[$i]['id'] ==  $row['id']) {
+                        $Old_ps[$i]['size'] = (int) $row['size'];
+                        $Old_ps[$i]['quantity'] = (int) $row['quantity'];
+                    }
+                }
+
+                $sizes->where('id', $row['id'])->update($input);
             }
+
+            foreach ($Old_ps as $key => $item) {
+                $PS['size_' . $key]["id"] = $key;
+                $PS['size_' . $key]["size"] = $item->size;
+
+                $quantity += $item->quantity;
+            }
+
+
+
 
 
             if ($old_prDetai != null) {
@@ -378,14 +434,6 @@ class ProductController extends Controller
                 $new_product->quantity = $quantity;
                 $new_product->size =  json_encode(array($PS));
                 $new_product->save();
-            }
-
-            foreach ($values as $row) {
-                $input = [
-                    'size' => $row['size'],
-                    'quantity' => $row['quantity']
-                ];
-                $sizes->where('id', $row['id'])->update($input);
             }
         }
         Alert::success('Update Product successfuly ', 'Cập nhật sản phẩm thành công');

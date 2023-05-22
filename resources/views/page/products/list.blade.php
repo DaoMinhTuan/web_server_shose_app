@@ -110,12 +110,7 @@
                             <tbody>
                                 @foreach ($data as $item)
                                     <tr>
-                                        <td class="w-10px align-middle">
-                                            <div class="form-check">
-                                                <input type="checkbox" class="form-check-input" id="product1">
-                                                <label class="form-check-label" for="product1"></label>
-                                            </div>
-                                        </td>
+                                      
                                         <td>
                                             <div class="d-flex align-items-center">
                                                 <div
@@ -124,7 +119,7 @@
                                                         src="{{ $item->image[0]->image1->name }}" />
                                                 </div>
                                                 <div class="ms-3">
-                                                    <a href="#">{{ $item->name }}</a>
+                                                    <a href="{{route('product.show',$item->id)}}">{{ $item->name }}</a>
                                                 </div>
                                             </div>
                                         </td>
