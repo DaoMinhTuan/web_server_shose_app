@@ -77,9 +77,8 @@
                                     <h5 class="text-uppercase mt-3">Mô Tả</h5>
                                     <p  class="text-break">{!! $data->desc !!}</p>
 
-                                    <div class="cart mt-4 align-items-center"> <button
-                                            class="btn btn-danger text-uppercase mr-2 px-4">Add to cart</button> <i
-                                            class="fa fa-heart text-muted"></i> <i class="fa fa-share-alt text-muted"></i>
+                                    <div class="cart mt-4 align-items-center"> 
+                                        <a href="" class="btn btn-success text-uppercase mr-2 px-4">cập nhật san phẩm</a>
                                     </div>
                                 </div>
                             </div>
