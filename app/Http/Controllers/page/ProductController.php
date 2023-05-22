@@ -531,7 +531,16 @@ class ProductController extends Controller
                 $o_price += $p->price * $p->quantity;
             }
         }
-    
+        // return response()->json([
+        //     'oder_told' => $data_1,
+        //     'oder_unsuccessful' => $data_2,
+        //     'oder_successful' => $data_3,
+        //     'successful' => $data_4,
+        //     'delivering' => $data_5,
+        //     'told_price' => $sale,
+        //     'out_price' => 0,
+        // ]);
+
 
 
         return view('page.dashboard', [
